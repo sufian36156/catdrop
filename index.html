@@ -914,19 +914,33 @@ input:focus {
 .item-actions:empty { display: none; }
 
 .btn-compact {
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-radius: 11px;
   font-size: 0.88rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 .btn-compact svg {
   display: block;
   flex-shrink: 0;
+}
+.btn-compact.icon-only {
+  padding: 8px 10px;
+  min-width: 38px;
+  height: 38px;
+  box-sizing: border-box;
+  justify-content: center;
+  gap: 4px;
+}
+.btn-compact.icon-only.active {
+  background: var(--btn-ghost-hover);
+  border-color: var(--ac);
+  color: var(--ac);
 }
 .btn-compact.primary {
   background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
@@ -2437,18 +2451,28 @@ function transfer(m) {
       drawer.appendChild(listContainer);
       b.u.card.appendChild(drawer);
 
-      // ปุ่มพับ/ขยายรายการไฟล์
+      // ปุ่มพับ/ขยายรายการไฟล์ (ไอคอน SVG กระทัดรัด อยู่แถวเดียวกับปุ่มหลัก)
       const toggleDrawerBtn = document.createElement('button');
-      toggleDrawerBtn.className = 'btn-compact outline';
+      toggleDrawerBtn.className = 'btn-compact outline icon-only';
+      toggleDrawerBtn.title = `รายการไฟล์ (${b.receivedFiles.length})`;
+      toggleDrawerBtn.setAttribute('aria-label', `รายการไฟล์ (${b.receivedFiles.length})`);
       toggleDrawerBtn.innerHTML = `
-        <span>รายการไฟล์ (${b.receivedFiles.length})</span>
-        <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s ease;">
+        <svg class="list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"/>
+          <line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/>
+          <line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s ease;">
           <polyline points="6 9 12 15 18 9"/>
         </svg>
       `;
       toggleDrawerBtn.onclick = () => {
         const isHidden = drawer.hidden;
         drawer.hidden = !isHidden;
+        toggleDrawerBtn.classList.toggle('active', isHidden);
         const chev = toggleDrawerBtn.querySelector('.chevron-icon');
         if (chev) {
           chev.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
