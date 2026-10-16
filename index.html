@@ -2,96 +2,706 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ส่งต่อ · ส่งไฟล์ข้ามเครื่อง</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CatDrop 🐾 · ส่งไฟล์ข้ามเครื่อง</title>
+<meta name="description" content="CatDrop ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code สะดวก รวดเร็ว สไตล์น้องแมว P2P ไม่ผ่านเซิร์ฟเวอร์">
+<meta name="theme-color" content="#7c3aed">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CatDrop">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f2ff;--ink:#1a1745;--mut:#6a6794;--card:#fff;--line:#e1ddf7;--ac:#5b3df5;--acink:#fff;--ok:#1fc99a;--bad:#e5484d;--bl:88%;color-scheme:light}
-@media(prefers-color-scheme:dark){:root{--bg:#0d0b22;--ink:#ecebff;--mut:#9d9ac7;--card:#171436;--line:#2a2658;--ac:#8a73ff;--acink:#0d0b22;--ok:#4de0b6;--bad:#ff7b80;--bl:30%;color-scheme:dark}}
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{margin:0;background:var(--bg) radial-gradient(520px 360px at 90% -8%,color-mix(in srgb,var(--ac) 16%,transparent),transparent) no-repeat;color:var(--ink);font:400 16px/1.55 Prompt,system-ui,sans-serif;min-height:100dvh}
-.wrap{max-width:520px;margin:0 auto;padding:16px 16px 48px}
-.top{display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:600;font-size:1.5rem}
-button{font:inherit;color:inherit;cursor:pointer}
-.me{display:flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 14px 5px 8px}
-.me span:first-child{font-size:1.3rem}
-.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px;margin:20px 0 8px}
-.seg i{position:absolute;inset:4px 50% 4px 4px;background:var(--ac);border-radius:99px;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
-.seg[data-t=qr] i{transform:translateX(100%)}
-.seg button{position:relative;z-index:1;background:none;border:0;font-weight:500;padding:9px;color:var(--mut);transition:color .2s}
-.seg button.on{color:var(--acink)}
-.radar{position:relative;aspect-ratio:1;max-width:400px;margin:8px auto}
-.ring{position:absolute;border:1.5px solid var(--line);border-radius:50%}
-.r1{inset:0}.r2{inset:16%}.r3{inset:32%}
-.pulse{position:absolute;inset:36%;border-radius:50%;border:2px solid var(--ac);opacity:0;animation:pulse 2.8s ease-out infinite}
-.pulse+.pulse{animation-delay:1.4s}
-@keyframes pulse{0%{transform:scale(.7);opacity:.6}100%{transform:scale(2.7);opacity:0}}
-.you{position:absolute;inset:38%;display:grid;place-items:center;font-size:2.2rem;background:var(--card);border:2px solid var(--ac);border-radius:50%;box-shadow:0 6px 24px color-mix(in srgb,var(--ac) 30%,transparent)}
-.bubble{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;width:84px;background:none;border:0;padding:0;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
-.bubble>span{display:grid;justify-items:center;gap:2px;animation:bob 4s ease-in-out infinite}
-.bubble b{display:grid;place-items:center;width:58px;height:58px;font-size:1.9rem;border-radius:50%;background:hsl(var(--h) 80% var(--bl));border:2px solid var(--card);box-shadow:0 4px 14px rgba(40,20,120,.2)}
-.bubble em{font-style:normal;font-size:.8rem;max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bubble.wait b{animation:wig .6s ease-in-out infinite;outline:3px dashed var(--ac);outline-offset:3px}
-@keyframes pop{from{scale:0;opacity:0}}
-@keyframes bob{50%{transform:translateY(-6px)}}
-@keyframes wig{25%{rotate:-8deg}75%{rotate:8deg}}
-.hint{text-align:center;color:var(--mut);margin:4px 16px 0;font-size:.92rem}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:12px}
-.card h2{font-size:1.05rem;font-weight:600;margin:0 0 4px}
-.card p{margin:0 0 14px;color:var(--mut);font-size:.92rem}
-.pri,.sec{width:100%;padding:13px;border-radius:12px;font-weight:500;border:1px solid var(--line);background:var(--card)}
-.pri{background:var(--ac);color:var(--acink);border-color:var(--ac)}
-.pri:active,.sec:active{transform:scale(.97)}
-.or{display:flex;align-items:center;gap:10px;color:var(--mut);margin:16px 0;font-size:.85rem}
-.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
-.join{display:flex;gap:8px}
-input{font:inherit;min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);padding:12px}
-#code{flex:1;text-align:center;letter-spacing:.3em;font-weight:600;font-size:1.2rem;text-transform:uppercase}
-.join .pri{width:auto;padding:0 22px}
-.code{font-size:2.6rem;font-weight:600;letter-spacing:.18em;text-align:center}
-.qr{width:210px;margin:12px auto;background:#fff;padding:12px;border-radius:16px;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
-.qr svg{display:block;width:100%;height:auto}
-.peerbar{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:20px}
-.peerbar>b{font-size:2rem;font-weight:400}
-.peerbar div{flex:1;min-width:0}.peerbar strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.peerbar small{display:flex;align-items:center;gap:6px;color:var(--mut)}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--bad)}.dot.on{background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 25%,transparent)}
-.peerbar button{border:1px solid var(--line);background:none;border-radius:10px;padding:7px 12px;font-size:.85rem}
-.drop{display:grid;place-items:center;gap:4px;text-align:center;margin-top:14px;padding:34px 16px;border:2px dashed var(--ac);border-radius:20px;color:var(--ac);font-weight:500;cursor:pointer;transition:background .2s,scale .2s}
-.drop span{font-size:2.4rem;line-height:1}.drop.over{background:color-mix(in srgb,var(--ac) 12%,transparent);scale:1.02}
-.drop small{color:var(--mut);font-weight:400}
-.item{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px;animation:pop .35s ease both}
-.item>b{grid-row:span 3;font-size:1.4rem;font-weight:400;align-self:center}
-.item .n{display:flex;justify-content:space-between;gap:10px;font-weight:500}.item .n span:first-child{word-break:break-all}
-.item .n span:last-child,.item .st{color:var(--mut);font-size:.85rem;white-space:nowrap}
-.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ac);border-radius:3px;transition:width .15s linear}
-.act{display:flex;gap:8px}.act:empty{display:none}.act>*{padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:inherit;font-size:.9rem}
-.act .y{background:var(--ac);color:var(--acink);border-color:var(--ac)}
-dialog{border:0;border-radius:22px;padding:22px;width:min(88vw,360px);background:var(--card);color:var(--ink);animation:pop .3s cubic-bezier(.3,1.6,.5,1)}
-dialog::backdrop{background:rgba(13,11,34,.55);backdrop-filter:blur(4px)}
-dialog h3{margin:0 0 4px}dialog p{margin:0 0 14px;color:var(--mut)}dialog input{width:100%;margin-bottom:14px}
-dialog .row{display:flex;gap:8px}dialog .row button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card)}
-dialog .row .y{background:var(--ac);color:var(--acink);border-color:var(--ac)}
-#toast{position:fixed;left:50%;bottom:24px;translate:-50% 20px;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:.3s;max-width:90vw;text-align:center;font-size:.92rem}
-#toast.on{opacity:1;translate:-50% 0}
-#fx span{position:fixed;left:50%;bottom:22%;font-size:1.6rem;pointer-events:none;animation:fly 1.2s ease-out forwards}
-@keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(40deg);opacity:0}}
-:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#fx{display:none}}
+:root {
+  --bg: #f5f3ff;
+  --bg-glow: rgba(139, 92, 246, 0.12);
+  --ink: #1e1b4b;
+  --mut: #6b7280;
+  --card: #ffffff;
+  --card-hover: #faf5ff;
+  --line: #e4e4e7;
+  --ac: #7c3aed;
+  --ac-hover: #6d28d9;
+  --ac-light: #ede9fe;
+  --acink: #ffffff;
+  --pink: #ec4899;
+  --ok: #10b981;
+  --ok-bg: #ecfdf5;
+  --bad: #ef4444;
+  --bad-bg: #fef2f2;
+  --bl: 88%;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a1d;
+    --bg-glow: rgba(139, 92, 246, 0.22);
+    --ink: #f3f4f6;
+    --mut: #9ca3af;
+    --card: #171530;
+    --card-hover: #1f1c42;
+    --line: #2d2a54;
+    --ac: #8b5cf6;
+    --ac-hover: #a78bfa;
+    --ac-light: #2e1065;
+    --acink: #ffffff;
+    --pink: #f472b6;
+    --ok: #34d399;
+    --ok-bg: #064e3b;
+    --bad: #f87171;
+    --bad-bg: #450a0a;
+    --bl: 30%;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg) radial-gradient(650px 450px at 90% -10%, var(--bg-glow), transparent) no-repeat;
+  color: var(--ink);
+  font: 400 16px/1.55 'Prompt', system-ui, sans-serif;
+  min-height: 100dvh;
+}
+
+.wrap {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 16px 16px 64px;
+}
+
+/* Header & Logo */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.brand:hover .brand-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.brand-title {
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-size: 1.15rem;
+}
+.btn-icon:active { transform: scale(0.92); }
+
+.btn-pwa {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ac-light);
+  color: var(--ac);
+  border: 1px solid var(--ac);
+  border-radius: 99px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: pulse-slow 3s infinite;
+}
+.btn-pwa:active { transform: scale(0.94); }
+
+.me {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 5px 14px 5px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.me:active { transform: scale(0.96); }
+.me span:first-child { font-size: 1.35rem; }
+.me-name-wrap { font-weight: 500; font-size: 0.95rem; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Tabs / Segment */
+.seg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 4px;
+  margin: 16px 0 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+.seg i {
+  position: absolute;
+  inset: 4px 50% 4px 4px;
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  border-radius: 99px;
+  transition: transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.seg[data-t=qr] i { transform: translateX(100%); }
+.seg button {
+  position: relative;
+  z-index: 1;
+  background: none;
+  font-weight: 600;
+  padding: 10px;
+  color: var(--mut);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.seg button.on { color: var(--acink); }
+
+/* Radar View */
+.radar {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 380px;
+  margin: 12px auto 6px;
+}
+.ring {
+  position: absolute;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.r1 { inset: 0; }
+.r2 { inset: 17%; }
+.r3 { inset: 34%; }
+
+.pulse {
+  position: absolute;
+  inset: 36%;
+  border-radius: 50%;
+  border: 2px solid var(--ac);
+  opacity: 0;
+  animation: pulse-wave 3s ease-out infinite;
+  pointer-events: none;
+}
+.pulse + .pulse { animation-delay: 1.5s; }
+@keyframes pulse-wave {
+  0% { transform: scale(0.7); opacity: 0.65; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+.you {
+  position: absolute;
+  inset: 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: var(--card);
+  border: 3px solid var(--ac);
+  border-radius: 50%;
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.you:hover { transform: scale(1.05); }
+.you-sub { font-size: 0.75rem; font-weight: 600; color: var(--ac); margin-top: -4px; }
+
+/* Peers Bubble */
+.bubble {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  translate: -50% -50%;
+  width: 90px;
+  background: none;
+  border: 0;
+  padding: 0;
+  animation: pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  z-index: 3;
+}
+.bubble > span {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  animation: bob 4s ease-in-out infinite;
+}
+.bubble b {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  font-size: 2rem;
+  border-radius: 50%;
+  background: hsl(var(--h) 85% var(--bl));
+  border: 3px solid var(--card);
+  box-shadow: 0 6px 18px rgba(40, 20, 120, 0.18);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bubble:hover b { transform: scale(1.1); }
+.bubble em {
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 500;
+  max-width: 86px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--card);
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+}
+.bubble.wait b {
+  animation: wig 0.6s ease-in-out infinite;
+  outline: 3px dashed var(--ac);
+  outline-offset: 4px;
+}
+
+@keyframes pop { from { scale: 0; opacity: 0; } }
+@keyframes bob { 50% { transform: translateY(-7px); } }
+@keyframes wig { 25% { rotate: -10deg; } 75% { rotate: 10deg; } }
+
+.hint {
+  text-align: center;
+  color: var(--mut);
+  margin: 12px 16px 0;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Card & Buttons */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px;
+  margin-top: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+.card h2 { font-size: 1.15rem; font-weight: 600; margin: 0 0 6px; }
+.card p { margin: 0 0 16px; color: var(--mut); font-size: 0.93rem; }
+
+.pri, .sec {
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: var(--card);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.pri {
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  color: var(--acink);
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.28);
+}
+.pri:hover { opacity: 0.96; }
+.pri:active, .sec:active { transform: scale(0.98); }
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--mut);
+  margin: 16px 0;
+  font-size: 0.88rem;
+}
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+.join { display: flex; gap: 8px; }
+input {
+  font: inherit;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 12px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input:focus {
+  outline: none;
+  border-color: var(--ac);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+#code {
+  flex: 1;
+  text-align: center;
+  letter-spacing: 0.35em;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+.join .pri { width: auto; padding: 0 24px; white-space: nowrap; }
+.code {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-align: center;
+  color: var(--ac);
+  margin: 10px 0;
+}
+.qr {
+  width: 220px;
+  margin: 12px auto;
+  background: #fff;
+  padding: 14px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  animation: pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.qr svg { display: block; width: 100%; height: auto; }
+
+/* Peer Connected Bar */
+.peerbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 14px 18px;
+  margin-top: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.peerbar > b { font-size: 2.2rem; font-weight: 400; }
+.peerbar div { flex: 1; min-width: 0; }
+.peerbar strong { display: block; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.peerbar small { display: flex; align-items: center; gap: 6px; color: var(--mut); font-size: 0.88rem; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); }
+.dot.on { background: var(--ok); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25); }
+.peerbar button {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.peerbar button:hover { background: var(--bad-bg); color: var(--bad); border-color: var(--bad); }
+
+/* File Drop Area */
+.drop {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  text-align: center;
+  margin-top: 16px;
+  padding: 38px 20px;
+  border: 2px dashed var(--ac);
+  border-radius: 24px;
+  color: var(--ac);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--card);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.drop span { font-size: 2.8rem; line-height: 1; }
+.drop.over {
+  background: var(--ac-light);
+  transform: scale(1.02);
+  border-color: var(--pink);
+}
+.drop small { color: var(--mut); font-weight: 400; font-size: 0.9rem; }
+
+/* Transfer File Items & Previews */
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px;
+  margin-top: 12px;
+  animation: pop 0.35s ease both;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+}
+.item-thumb-box {
+  grid-row: span 3;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  align-self: center;
+  cursor: pointer;
+  position: relative;
+}
+.item-thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+.item-thumb-box:hover img { transform: scale(1.08); }
+.item-thumb-box span { font-size: 2rem; }
+
+.item .n {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.item .n span:first-child {
+  word-break: break-all;
+  max-width: 260px;
+}
+.item .n span:last-child {
+  color: var(--mut);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.item .st { color: var(--mut); font-size: 0.86rem; }
+.bar {
+  height: 7px;
+  border-radius: 99px;
+  background: var(--line);
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--ac) 0%, var(--pink) 100%);
+  border-radius: 99px;
+  transition: width 0.15s linear;
+}
+.act { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.act:empty { display: none; }
+.act > * {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.act .y {
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+}
+.act .btn-pv {
+  background: var(--ac-light);
+  color: var(--ac);
+  border-color: var(--ac);
+}
+
+/* Dialogs */
+dialog {
+  border: 0;
+  border-radius: 24px;
+  padding: 24px;
+  width: min(90vw, 400px);
+  background: var(--card);
+  color: var(--ink);
+  animation: pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+dialog::backdrop {
+  background: rgba(12, 10, 29, 0.65);
+  backdrop-filter: blur(6px);
+}
+dialog h3 { margin: 0 0 6px; font-size: 1.25rem; font-weight: 700; }
+dialog p { margin: 0 0 16px; color: var(--mut); font-size: 0.93rem; }
+dialog input { width: 100%; margin-bottom: 14px; }
+dialog .row { display: flex; gap: 10px; margin-top: 14px; }
+dialog .row button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-weight: 600;
+}
+dialog .row .y {
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Avatar Grid Picker in Dialog */
+.av-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.av-grid button {
+  font-size: 1.8rem;
+  padding: 8px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: var(--bg);
+}
+.av-grid button:hover { background: var(--ac-light); }
+.av-grid button.sel {
+  border-color: var(--ac);
+  background: var(--ac-light);
+  transform: scale(1.08);
+}
+
+/* Lightbox Image Preview Dialog */
+#lightbox {
+  width: min(92vw, 680px);
+  max-height: 90vh;
+  padding: 16px;
+  text-align: center;
+}
+#lightbox-img {
+  max-width: 100%;
+  max-height: 65vh;
+  border-radius: 16px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+#lightbox-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 14px;
+  word-break: break-all;
+}
+
+/* Toast & Effects */
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  translate: -50% 20px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 11px 20px;
+  border-radius: 99px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 90vw;
+  text-align: center;
+  font-size: 0.94rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+#toast.on { opacity: 1; translate: -50% 0; }
+
+#fx span {
+  position: fixed;
+  left: 50%;
+  bottom: 25%;
+  font-size: 1.8rem;
+  pointer-events: none;
+  animation: fly 1.2s ease-out forwards;
+  z-index: 99;
+}
+@keyframes fly {
+  to { transform: translate(var(--dx), var(--dy)) rotate(45deg); opacity: 0; }
+}
+
+:focus-visible { outline: 3px solid var(--ac); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  #fx { display: none; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="logo">ส่งต่อ</div>
-    <button class="me" id="me" aria-label="เปลี่ยนชื่อเครื่องนี้"><span id="me-av"></span><span id="me-name"></span></button>
+    <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop Logo" width="38" height="38">
+      <span class="brand-title">CatDrop</span>
+    </a>
+    <div class="top-actions">
+      <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป CatDrop">📲 ติดตั้ง</button>
+      <button class="btn-icon" id="b-sound" title="เปิด/ปิดเสียง" aria-label="เปิดหรือปิดเสียงแจ้งเตือน">🔔</button>
+      <button class="me" id="me" aria-label="เปลี่ยนชื่อและอวาตาร์แมว">
+        <span id="me-av">🐱</span>
+        <span class="me-name-wrap" id="me-name"></span>
+      </button>
+    </div>
   </header>
 
   <nav class="seg" id="seg" data-t="near">
-    <i></i><button data-t="near" class="on">ใกล้ฉัน</button><button data-t="qr">QR Code</button>
+    <i></i>
+    <button data-t="near" class="on">🐾 ใกล้ฉัน (Wi-Fi)</button>
+    <button data-t="qr">⚡ QR Code / รหัส</button>
   </nav>
 
   <!-- จับคู่ใน Wi-Fi เดียวกัน -->
@@ -99,52 +709,88 @@ dialog .row .y{background:var(--ac);color:var(--acink);border-color:var(--ac)}
     <div class="radar">
       <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
       <div class="pulse"></div><div class="pulse"></div>
-      <div class="you" id="you"></div>
+      <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
+        <span id="you-av">🐱</span>
+        <span class="you-sub">เครื่องนี้</span>
+      </div>
       <div id="peers"></div>
     </div>
-    <p class="hint" id="near-msg" aria-live="polite"></p>
+    <p class="hint" id="near-msg" aria-live="polite">กำลังค้นหาอุปกรณ์ใน Wi-Fi เดียวกัน…</p>
   </section>
 
   <!-- QR Code / รหัสห้อง -->
   <section id="v-qr" hidden>
     <div class="card" id="qr-home">
-      <h2>ใช้ได้ทุกเครือข่าย</h2>
-      <p>เหมาะเมื่อสองเครื่องอยู่คนละ Wi-Fi หรือมือถือใช้เน็ตเครือข่ายมือถือ</p>
-      <button class="pri" id="b-host">สร้างห้องและแสดง QR</button>
-      <div class="or">หรือ</div>
+      <h2>🌐 ส่งข้ามทุกเครือข่าย</h2>
+      <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ 4G/5G</p>
+      <button class="pri" id="b-host">📱 สร้างห้องและแสดง QR Code</button>
+      <div class="or">หรือกรอกรหัสจากอีกเครื่อง</div>
       <div class="join">
-        <input id="code" maxlength="6" placeholder="รหัส 6 ตัว" autocomplete="off" autocapitalize="characters" aria-label="รหัสห้อง">
+        <input id="code" maxlength="6" placeholder="รหัส 6 หลัก" autocomplete="off" autocapitalize="characters" aria-label="รหัสห้อง">
         <button class="pri" id="b-join">เข้าร่วม</button>
       </div>
     </div>
     <div class="card" id="qr-host" hidden>
-      <h2>ให้อีกเครื่องสแกน QR นี้</h2>
+      <h2>📲 ให้อีกเครื่องสแกน QR นี้</h2>
       <p>หรือเปิดเว็บนี้บนอีกเครื่องแล้วกรอกรหัสด้านล่าง</p>
       <div class="qr" id="h-qr"></div>
       <div class="code" id="h-code"></div>
+      <button class="sec" id="b-copy-link" style="margin-top: 10px;">📋 คัดลอกลิงก์ส่งต่อให้เพื่อน</button>
     </div>
   </section>
 
-  <!-- ส่งไฟล์ -->
+  <!-- ส่งไฟล์ (Peer Connected) -->
   <section id="v-link" hidden>
     <div class="peerbar">
-      <b id="l-av"></b>
-      <div><strong id="l-name"></strong><small><i class="dot" id="l-dot"></i><span id="l-st"></span></small></div>
+      <b id="l-av">🐱</b>
+      <div>
+        <strong id="l-name">อีกเครื่อง</strong>
+        <small><i class="dot" id="l-dot"></i><span id="l-st">เชื่อมต่อแล้ว</span></small>
+      </div>
       <button id="bye">ตัดการเชื่อมต่อ</button>
     </div>
+
     <label class="drop" id="drop" tabindex="0">
-      <span>📤</span>แตะเพื่อเลือกไฟล์ หรือลากมาวาง
-      <small>ส่งได้หลายไฟล์พร้อมกัน</small>
+      <span>🐱 📤</span>
+      <div>แตะเพื่อเลือกไฟล์ หรือลากไฟล์มาวางที่นี่</div>
+      <small>ส่งรูปภาพ วิดีโอ หรือเอกสารได้ไม่จำกัดขนาด</small>
       <input type="file" id="file" multiple hidden>
     </label>
+
     <div id="list"></div>
   </section>
 </div>
 
+<!-- Modal เปลี่ยนชื่อ & อวาตาร์แมว -->
+<dialog id="dlg-me">
+  <form method="dialog">
+    <h3>🐾 แต่งตัวน้องแมวของคุณ</h3>
+    <p>เลือกอวาตาร์แมวและตั้งชื่อเครื่องสำหรับส่งไฟล์</p>
+    <div class="av-grid" id="av-grid"></div>
+    <input id="me-input" maxlength="20" placeholder="ชื่อน้องแมวของคุณ" aria-label="ชื่อน้องแมว">
+    <div class="row">
+      <button value="n" type="button" id="dlg-me-cancel">ยกเลิก</button>
+      <button value="y" class="y" id="dlg-me-save">บันทึก</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Modal ยืนยันทั่วไป -->
 <dialog id="dlg"><form method="dialog">
   <h3 id="d-t"></h3><p id="d-p"></p><input id="d-i" maxlength="20">
   <div class="row"><button value="n" id="d-no"></button><button value="y" id="d-yes" class="y"></button></div>
 </form></dialog>
+
+<!-- Lightbox Modal พรีวิวรูปภาพ -->
+<dialog id="lightbox">
+  <img id="lightbox-img" src="" alt="ภาพพรีวิว">
+  <div id="lightbox-name"></div>
+  <div class="row">
+    <button type="button" id="lightbox-close">ปิด</button>
+    <a id="lightbox-dl" class="y pri" download>💾 บันทึกรูปภาพ</a>
+  </div>
+</dialog>
+
 <div id="toast" role="status"></div>
 <div id="fx" aria-hidden="true"></div>
 
@@ -153,55 +799,312 @@ dialog .row .y{background:var(--ac);color:var(--acink);border-color:var(--ac)}
 <script>
 (() => {
 "use strict";
-const $ = s => document.querySelector(s), SLOTS = 8, CHUNK = 65536, MAXBUF = 4194304;
-const AV = ['🦊','🐼','🐙','🦄','🐸','🐯','🦉','🐳','🐧','🦋'];
-const NM = ['แมวส้ม','หมีน้อย','ปลาวาฬ','กระต่าย','นกฮูก','เพนกวิน','จิ้งจอก','แพนด้า'];
+
+const $ = s => document.querySelector(s);
+const SLOTS = 8, CHUNK = 65536, MAXBUF = 4194304;
+const CAT_AVATARS = ['🐱', '😸', '😹', '😻', '😼', '😽', '🙀', '🐈‍⬛', '🐾', '🦁'];
+const CAT_NAMES = [
+  'แมวส้มจอมซน', 'แมวสามสีนำโชค', 'แมวขาวมณี', 'แมวดำตาหวาน', 
+  'สก็อตติชขี้อ้อน', 'เปอร์เซียขนฟู', 'วิเชียรมาศสุดเท่', 'แร็กดอลล์นุ่มนิ่ม', 
+  'ชินชิลล่าตัวกลม', 'แมวจรยอดนักสู้'
+];
 const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
 const rnd = a => a[Math.random() * a.length | 0];
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const hue = s => Math.abs([...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7)) % 360;
 const fmt = n => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : n < 1073741824 ? (n / 1048576).toFixed(1) + ' MB' : (n / 1073741824).toFixed(2) + ' GB';
 
-let me = {};
-try { me = JSON.parse(localStorage.getItem('me')) || {}; } catch {}
-if (!me.name) { me = { name: rnd(NM) + (10 + Math.random() * 90 | 0), av: rnd(AV) }; save(); }
-function save() { try { localStorage.setItem('me', JSON.stringify(me)); } catch {} }
-function paintMe() { $('#me-av').textContent = $('#you').textContent = me.av; $('#me-name').textContent = me.name; }
+/* ---------- เสียงสังเคราะห์ (Web Audio API Synthesizer) ---------- */
+let soundEnabled = localStorage.getItem('catdrop_sound') !== 'off';
+let audioCtx = null;
 
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    if (type === 'meow' || type === 'offer') {
+      // เสียงเหมียวน่ารักเวลามีไฟล์เข้ามา
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(560, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(620, now + 0.35);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    } else if (type === 'success') {
+      // เสียงกริ๊งยินดีเมื่อส่งเสร็จ
+      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'triangle';
+        o.frequency.value = freq;
+        o.connect(g);
+        g.connect(ctx.destination);
+        const t = now + i * 0.08;
+        g.gain.setValueAtTime(0.001, t);
+        g.gain.linearRampToValueAtTime(0.18, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+        o.start(t);
+        o.stop(t + 0.35);
+      });
+    } else if (type === 'pop') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(750, now);
+      osc.frequency.exponentialRampToValueAtTime(280, now + 0.08);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      osc.start(now);
+      osc.stop(now + 0.09);
+    }
+  } catch (e) {}
+}
+
+function updateSoundButton() {
+  $('#b-sound').textContent = soundEnabled ? '🔔' : '🔕';
+}
+$('#b-sound').onclick = () => {
+  soundEnabled = !soundEnabled;
+  localStorage.setItem('catdrop_sound', soundEnabled ? 'on' : 'off');
+  updateSoundButton();
+  toast(soundEnabled ? 'เปิดเสียงแจ้งเตือนแล้ว 🐾' : 'ปิดเสียงแจ้งเตือนแล้ว');
+  if (soundEnabled) playSound('pop');
+};
+updateSoundButton();
+
+/* ---------- การแจ้งเตือนเบราว์เซอร์ (System Notification) ---------- */
+function notifyUser(title, body) {
+  if (document.hidden && 'Notification' in window && Notification.permission === 'granted') {
+    try {
+      new Notification(title, {
+        body,
+        icon: '/icons/icon-192.png',
+        badge: '/icons/icon-192.png'
+      });
+    } catch (e) {}
+  }
+}
+
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+
+/* ---------- ข้อมูลเครื่องและชื่อน้องแมว ---------- */
+let me = {};
+try { me = JSON.parse(localStorage.getItem('catdrop_me')) || {}; } catch {}
+if (!me.name || !me.av) {
+  me = { name: rnd(CAT_NAMES) + ' ' + (10 + Math.random() * 90 | 0), av: rnd(CAT_AVATARS) };
+  saveMe();
+}
+
+function saveMe() {
+  try { localStorage.setItem('catdrop_me', JSON.stringify(me)); } catch {}
+}
+
+function paintMe() {
+  $('#me-av').textContent = me.av;
+  $('#you-av').textContent = me.av;
+  $('#me-name').textContent = me.name;
+}
+
+/* Custom Avatar & Name Picker Dialog */
+let selectedAv = me.av;
+function openMeDialog() {
+  selectedAv = me.av;
+  const grid = $('#av-grid');
+  grid.innerHTML = '';
+  CAT_AVATARS.forEach(emoji => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = emoji;
+    if (emoji === selectedAv) btn.classList.add('sel');
+    btn.onclick = () => {
+      grid.querySelectorAll('button').forEach(b => b.classList.remove('sel'));
+      btn.classList.add('sel');
+      selectedAv = emoji;
+      playSound('pop');
+    };
+    grid.append(btn);
+  });
+  $('#me-input').value = me.name;
+  $('#dlg-me').showModal();
+}
+
+$('#dlg-me-cancel').onclick = () => $('#dlg-me').close();
+$('#dlg-me-save').onclick = (e) => {
+  e.preventDefault();
+  const newName = $('#me-input').value.trim();
+  if (newName) me.name = newName.slice(0, 24);
+  me.av = selectedAv;
+  saveMe();
+  paintMe();
+  $('#dlg-me').close();
+  toast('บันทึกข้อมูลน้องแมวแล้ว 🐾');
+  playSound('pop');
+  if (peer && !peer.destroyed) {
+    // รีสตาร์ตการค้นหาเพื่อกระจายชื่อใหม่
+    if (mode === 'near') near();
+  }
+};
+$('#me').onclick = openMeDialog;
+$('#you').onclick = openMeDialog;
+
+/* ---------- PWA Setup & Install Prompt ---------- */
+let deferredPrompt = null;
+const installBtn = $('#b-install');
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.hidden = false;
+});
+
+installBtn.onclick = async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') {
+    toast('กำลังติดตั้ง CatDrop… ขอบคุณครับ! 🐾');
+  }
+  deferredPrompt = null;
+  installBtn.hidden = true;
+};
+
+window.addEventListener('appinstalled', () => {
+  toast('ติดตั้ง CatDrop เรียบร้อยแล้ว! 🐾');
+  installBtn.hidden = true;
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(e => console.warn('SW err:', e));
+  });
+}
+
+/* ---------- State & Helper Functions ---------- */
 let mode = '', peer = null, active = null, slot = 0, scanT = 0, pre = '', hostConn = null, wl = null;
 const peers = {}, conns = {}, out = {}, inc = {};
 
-/* ---------- UI ตัวช่วย ---------- */
-const show = v => { ['near', 'qr', 'link'].forEach(x => $('#v-' + x).hidden = x !== v); $('#seg').hidden = v === 'link'; };
+const show = v => {
+  ['near', 'qr', 'link'].forEach(x => $('#v-' + x).hidden = x !== v);
+  $('#seg').hidden = v === 'link';
+};
+
 let tt = 0;
-function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 3200); }
+function toast(m) {
+  const t = $('#toast');
+  t.textContent = m;
+  t.classList.add('on');
+  clearTimeout(tt);
+  tt = setTimeout(() => t.classList.remove('on'), 3400);
+}
+
 const msg = t => $('#near-msg').textContent = t;
+
 function burst() {
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < 18; i++) {
     const s = document.createElement('span');
-    s.textContent = rnd(['🎉', '✨', '💜', '⭐', '🟣']);
-    s.style.setProperty('--dx', (Math.random() * 260 - 130) + 'px');
-    s.style.setProperty('--dy', -(120 + Math.random() * 200) + 'px');
-    s.style.animationDelay = Math.random() * .15 + 's';
-    $('#fx').append(s); setTimeout(() => s.remove(), 1500);
+    s.textContent = rnd(['🐾', '🐱', '✨', '💜', '🐟', '🧶', '💖']);
+    s.style.setProperty('--dx', (Math.random() * 280 - 140) + 'px');
+    s.style.setProperty('--dy', -(120 + Math.random() * 220) + 'px');
+    s.style.animationDelay = Math.random() * 0.15 + 's';
+    $('#fx').append(s);
+    setTimeout(() => s.remove(), 1600);
   }
 }
+
 function ask(t, p, yes, no, inp) {
   const d = $('#dlg');
   if (d.open) return Promise.resolve(false);
   return new Promise(r => {
-    $('#d-t').textContent = t; $('#d-p').textContent = p || '';
-    const i = $('#d-i'); i.hidden = inp == null; i.value = inp || '';
+    $('#d-t').textContent = t;
+    $('#d-p').textContent = p || '';
+    const i = $('#d-i');
+    i.hidden = inp == null;
+    i.value = inp || '';
     i.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); d.close('y'); } };
-    const n = $('#d-no'); n.hidden = !no; n.textContent = no || ''; $('#d-yes').textContent = yes;
+    const n = $('#d-no');
+    n.hidden = !no;
+    n.textContent = no || '';
+    $('#d-yes').textContent = yes;
     d.onclose = () => r(d.returnValue === 'y' ? (inp != null ? i.value.trim() : true) : false);
     d.showModal();
   });
 }
-async function keepAwake() { try { if (navigator.wakeLock) wl = await navigator.wakeLock.request('screen'); } catch {} }
+
+async function keepAwake() {
+  try { if (navigator.wakeLock) wl = await navigator.wakeLock.request('screen'); } catch {}
+}
 document.addEventListener('visibilitychange', () => { if (!document.hidden && active) keepAwake(); });
 
-/* ---------- เริ่ม/หยุด ---------- */
+/* ---------- Helper พรีวิวไฟล์ & ประเภทไฟล์ ---------- */
+function getFileCat(mime, name) {
+  if (mime.startsWith('image/')) return { icon: '🖼️', type: 'image' };
+  if (mime.startsWith('video/')) return { icon: '🎬', type: 'video' };
+  if (mime.startsWith('audio/')) return { icon: '🎵', type: 'audio' };
+  if (mime.includes('pdf')) return { icon: '📄', type: 'pdf' };
+  if (mime.includes('zip') || mime.includes('rar') || mime.includes('tar') || mime.includes('7z')) return { icon: '📦', type: 'archive' };
+  if (/\.(docx?|xlsx?|pptx?|txt|md|csv)$/i.test(name)) return { icon: '📝', type: 'doc' };
+  return { icon: '📁', type: 'file' };
+}
+
+function makeThumb(file) {
+  return new Promise(resolve => {
+    if (!file.type.startsWith('image/')) return resolve(null);
+    if (file.size > 25 * 1024 * 1024) return resolve(null);
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const max = 160;
+        let w = img.width, h = img.height;
+        if (w > h) {
+          if (w > max) { h = Math.round(h * max / w); w = max; }
+        } else {
+          if (h > max) { w = Math.round(w * max / h); h = max; }
+        }
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.65));
+      };
+      img.onerror = () => resolve(null);
+      img.src = e.target.result;
+    };
+    reader.onerror = () => resolve(null);
+    reader.readAsDataURL(file);
+  });
+}
+
+function openLightbox(src, name, blobUrl) {
+  const lb = $('#lightbox');
+  $('#lightbox-img').src = src;
+  $('#lightbox-name').textContent = name;
+  const dl = $('#lightbox-dl');
+  dl.href = blobUrl || src;
+  dl.download = name;
+  lb.showModal();
+}
+$('#lightbox-close').onclick = () => $('#lightbox').close();
+
+/* ---------- เริ่ม / หยุด โหมด ---------- */
 function stop() {
   clearInterval(scanT);
   Object.keys(peers).forEach(k => { peers[k].el.remove(); delete peers[k]; });
@@ -209,28 +1112,38 @@ function stop() {
   if (peer) { try { peer.destroy(); } catch {} peer = null; }
   mode = ''; hostConn = null;
 }
+
 function tab(t) {
-  stop(); $('#seg').dataset.t = t;
+  stop();
+  $('#seg').dataset.t = t;
   document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
-  show(t); $('#qr-home').hidden = false; $('#qr-host').hidden = true;
+  show(t);
+  $('#qr-home').hidden = false;
+  $('#qr-host').hidden = true;
   if (t === 'near') near();
 }
 
-/* ---------- โหมด "ใกล้ฉัน" (Wi-Fi เดียวกัน) ---------- */
+/* ---------- โหมด 1: Wi-Fi เดียวกัน (Nearby) ---------- */
 async function near() {
-  mode = 'near'; msg('กำลังค้นหาอุปกรณ์…');
+  mode = 'near';
+  msg('กำลังค้นหาอุปกรณ์ใน Wi-Fi เดียวกัน…');
   let key;
   try {
     const ip = (await (await fetch('/api/ip', { cache: 'no-store' })).json()).ip;
-    const net = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') : ip; // IPv6 ใช้เฉพาะส่วนเครือข่าย
-    const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('songto|' + net));
+    const net = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') : ip;
+    const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('catdrop|' + net));
     key = [...new Uint8Array(h)].slice(0, 6).map(b => b.toString(16).padStart(2, '0')).join('');
-  } catch { if (mode === 'near') msg('โหมดนี้ต้อง deploy บน Vercel (มี /api/ip) จึงจะใช้ได้'); return; }
+  } catch {
+    if (mode === 'near') msg('โหมดนี้ต้อง deploy บน Vercel (มี /api/ip) จึงจะจัดกลุ่ม Wi-Fi ได้');
+    return;
+  }
   if (mode !== 'near') return;
-  pre = 'lan-' + key + '-'; claim(0);
+  pre = 'cat-' + key + '-';
+  claim(0);
 }
+
 function claim(i) {
-  if (i >= SLOTS) { msg('มีอุปกรณ์ในเครือข่ายนี้เต็มแล้ว'); return; }
+  if (i >= SLOTS) { msg('มีอุปกรณ์ในเครือข่ายนี้เต็มช่องสัญญาณแล้ว'); return; }
   const p = new Peer(pre + i);
   p.on('open', () => {
     if (mode !== 'near') { p.destroy(); return; }
@@ -239,175 +1152,354 @@ function claim(i) {
   p.on('connection', wire);
   p.on('error', e => {
     if (e.type === 'unavailable-id') { p.destroy(); if (mode === 'near') claim(i + 1); }
-    else if (e.type !== 'peer-unavailable') toast('ผิดพลาด: ' + e.type);
+    else if (e.type !== 'peer-unavailable') toast('เกิดข้อผิดพลาด: ' + e.type);
   });
 }
-function scan() { // เชื่อมต่อไปยังช่องที่ใหญ่กว่าเรา แต่ละคู่จึงมีการเชื่อมต่อเดียว
+
+function scan() {
   if (!peer || active) return;
   for (let j = slot + 1; j < SLOTS; j++) {
     const o = conns[j];
     if (o && (o.open || Date.now() - o._t < 6000)) continue;
     if (o) try { o.close(); } catch {}
-    const c = peer.connect(pre + j, { reliable: true }); c._t = Date.now(); conns[j] = c; wire(c);
+    const c = peer.connect(pre + j, { reliable: true });
+    c._t = Date.now();
+    conns[j] = c;
+    wire(c);
   }
 }
+
 function addBubble(c) {
   if (peers[c.peer]) peers[c.peer].el.remove();
-  const el = document.createElement('button'); el.className = 'bubble'; el.style.setProperty('--h', hue(c.info.name));
+  const el = document.createElement('button');
+  el.className = 'bubble';
+  el.style.setProperty('--h', hue(c.info.name));
   el.innerHTML = '<span><b></b><em></em></span>';
-  el.querySelector('b').textContent = c.info.av; el.querySelector('em').textContent = c.info.name;
+  el.querySelector('b').textContent = c.info.av;
+  el.querySelector('em').textContent = c.info.name;
   el.onclick = () => {
     if (el.classList.contains('wait')) return;
-    el.classList.add('wait'); c.send({ type: 'pair' }); toast('ส่งคำขอไปที่ ' + c.info.name + ' แล้ว');
+    el.classList.add('wait');
+    c.send({ type: 'pair' });
+    playSound('pop');
+    toast('ส่งคำขอจับคู่ไปที่ ' + c.info.name + ' แล้ว 🐾');
     setTimeout(() => el.classList.remove('wait'), 30000);
   };
-  $('#peers').append(el); peers[c.peer] = { c, el }; lay();
+  $('#peers').append(el);
+  peers[c.peer] = { c, el };
+  lay();
 }
+
 function lay() {
   const k = Object.values(peers);
   k.forEach((p, i) => {
     const a = i / k.length * 2 * Math.PI - Math.PI / 2;
-    p.el.style.setProperty('--x', 50 + 38 * Math.cos(a) + '%'); p.el.style.setProperty('--y', 50 + 38 * Math.sin(a) + '%');
+    p.el.style.setProperty('--x', 50 + 38 * Math.cos(a) + '%');
+    p.el.style.setProperty('--y', 50 + 38 * Math.sin(a) + '%');
     p.el.style.animationDelay = p.el.firstChild.style.animationDelay = (i * -0.7) + 's';
   });
-  if (mode === 'near' && peer) msg(k.length ? 'แตะที่เพื่อนเพื่อขอเชื่อมต่อ' : 'ยังไม่พบใคร เปิดหน้านี้บนอีกเครื่องที่ใช้ Wi-Fi เดียวกัน');
+  if (mode === 'near' && peer) {
+    msg(k.length ? 'แตะที่น้องแมวของเพื่อนเพื่อเชื่อมต่อและส่งไฟล์ 🐾' : 'ยังไม่พบใคร เปิดเว็บนี้บนอีกเครื่องที่ต่อ Wi-Fi เดียวกัน');
+  }
 }
 
-/* ---------- โหมด QR Code ---------- */
+/* ---------- โหมด 2: QR Code / ข้ามเครือข่าย ---------- */
 function host() {
-  stop(); mode = 'qrhost';
+  stop();
+  mode = 'qrhost';
   const code = Array.from(crypto.getRandomValues(new Uint8Array(6)), x => ALPHA[x % ALPHA.length]).join('');
-  const p = peer = new Peer('pxfer-v2-' + code);
+  const p = peer = new Peer('catdrop-v2-' + code);
   p.on('open', () => {
-    const q = qrcode(0, 'M'); q.addData(location.origin + location.pathname + '?room=' + code); q.make();
+    const roomUrl = location.origin + location.pathname + '?room=' + code;
+    const q = qrcode(0, 'M');
+    q.addData(roomUrl);
+    q.make();
     $('#h-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 0, scalable: true });
-    $('#h-code').textContent = code; $('#qr-home').hidden = true; $('#qr-host').hidden = false;
+    $('#h-code').textContent = code;
+    $('#qr-home').hidden = true;
+    $('#qr-host').hidden = false;
+    $('#b-copy-link').onclick = () => {
+      navigator.clipboard.writeText(roomUrl).then(() => toast('คัดลอกลิงก์ห้องแล้ว! 🐾'));
+    };
   });
   p.on('connection', c => {
     if (active || (hostConn && hostConn.open)) { c.on('open', () => c.close()); return; }
-    hostConn = c; wire(c);
+    hostConn = c;
+    wire(c);
   });
-  p.on('error', e => e.type === 'unavailable-id' ? host() : toast('ผิดพลาด: ' + e.type));
+  p.on('error', e => e.type === 'unavailable-id' ? host() : toast('เกิดข้อผิดพลาด: ' + e.type));
 }
+
 function join(code) {
   code = (code || '').trim().toUpperCase();
   if (code.length !== 6) { toast('รหัสห้องต้องมี 6 ตัวอักษร'); return; }
-  stop(); mode = 'qrjoin';
+  stop();
+  mode = 'qrjoin';
   const p = peer = new Peer();
-  p.on('open', () => wire(p.connect('pxfer-v2-' + code, { reliable: true })));
-  p.on('error', e => toast(e.type === 'peer-unavailable' ? 'ไม่พบห้องนี้ ตรวจรหัสอีกครั้ง' : 'ผิดพลาด: ' + e.type));
+  p.on('open', () => wire(p.connect('catdrop-v2-' + code, { reliable: true })));
+  p.on('error', e => toast(e.type === 'peer-unavailable' ? 'ไม่พบห้องนี้ กรุณาตรวจสอบรหัสอีกครั้ง' : 'เกิดข้อผิดพลาด: ' + e.type));
 }
 
-/* ---------- การเชื่อมต่อ ---------- */
+/* ---------- การเชื่อมต่อ Peer ---------- */
 function wire(c) {
   c.on('open', () => c.send({ type: 'hello', name: me.name, av: me.av }));
   c.on('data', m => onData(c, m));
-  c.on('close', () => gone(c)); c.on('error', () => gone(c));
+  c.on('close', () => gone(c));
+  c.on('error', () => gone(c));
 }
+
 function gone(c) {
   const p = peers[c.peer];
   if (p && p.c === c) { p.el.remove(); delete peers[c.peer]; lay(); }
-  if (c === active) { $('#l-dot').classList.remove('on'); $('#l-st').textContent = 'การเชื่อมต่อหลุด'; toast('การเชื่อมต่อหลุด'); }
+  if (c === active) {
+    $('#l-dot').classList.remove('on');
+    $('#l-st').textContent = 'การเชื่อมต่อหลุด';
+    toast('การเชื่อมต่อหลุดจากอีกเครื่อง 😿');
+  }
 }
+
 function onData(c, m) {
   if (!m || !m.type) return;
+
   if (m.type === 'hello') {
-    c.info = { name: String(m.name || 'อุปกรณ์').slice(0, 24), av: String(m.av || '📱').slice(0, 4) };
-    if (mode === 'qrhost' && !active) { c.send({ type: 'paired' }); enter(c); }
-    else if (mode === 'near' && !active) addBubble(c);
+    c.info = { name: String(m.name || 'น้องแมว').slice(0, 24), av: String(m.av || '🐱').slice(0, 4) };
+    if (mode === 'qrhost' && !active) {
+      c.send({ type: 'paired' });
+      enter(c);
+    } else if (mode === 'near' && !active) {
+      addBubble(c);
+    }
   } else if (m.type === 'pair') {
     if (mode !== 'near' || active || !c.info) return;
-    ask(c.info.av + ' ' + c.info.name, 'ต้องการเชื่อมต่อเพื่อส่งไฟล์กับเครื่องนี้', 'รับ', 'ไม่รับ').then(ok => {
-      if (ok && !active) { c.send({ type: 'paired' }); enter(c); } else c.send({ type: 'declined' });
+    playSound('meow');
+    notifyUser('CatDrop 🐾 มีคำขอเชื่อมต่อ', c.info.name + ' ต้องการส่งไฟล์กับคุณ');
+    ask(c.info.av + ' ' + c.info.name, 'ต้องการเชื่อมต่อเพื่อส่งไฟล์กับเครื่องนี้ไหม?', 'รับเชื่อมต่อ 🐾', 'ปฏิเสธ').then(ok => {
+      if (ok && !active) {
+        c.send({ type: 'paired' });
+        enter(c);
+      } else {
+        c.send({ type: 'declined' });
+      }
     });
-  } else if (m.type === 'paired') { if (!active) enter(c); }
-  else if (m.type === 'declined') { const p = peers[c.peer]; if (p) p.el.classList.remove('wait'); toast('อีกเครื่องไม่รับการเชื่อมต่อ'); }
-  else if (c === active) transfer(m);
-}
-function enter(c) {
-  active = c; clearInterval(scanT);
-  Object.values(conns).concat(Object.values(peers).map(p => p.c)).forEach(x => { if (x !== c) try { x.close(); } catch {} });
-  c.info = c.info || { name: 'อีกเครื่อง', av: '📱' };
-  $('#l-av').textContent = c.info.av; $('#l-name').textContent = c.info.name;
-  $('#l-dot').classList.add('on'); $('#l-st').textContent = 'เชื่อมต่อแล้ว';
-  show('link'); keepAwake(); burst();
+  } else if (m.type === 'paired') {
+    if (!active) enter(c);
+  } else if (m.type === 'declined') {
+    const p = peers[c.peer];
+    if (p) p.el.classList.remove('wait');
+    toast('อีกเครื่องปฏิเสธการเชื่อมต่อ');
+  } else if (c === active) {
+    transfer(m);
+  }
 }
 
-/* ---------- ส่ง/รับไฟล์ ---------- */
-function item(icon, name, size, text) {
-  const d = document.createElement('div'); d.className = 'item';
-  d.innerHTML = '<b></b><div class="n"><span></span><span></span></div><div class="bar"><i></i></div><div class="st"></div><div class="act"></div>';
-  d.children[0].textContent = icon; const n = d.querySelectorAll('.n span'); n[0].textContent = name; n[1].textContent = size;
-  d.querySelector('.st').textContent = text; $('#list').prepend(d);
-  return { fill: d.querySelector('i'), st: d.querySelector('.st'), act: d.querySelector('.act') };
+function enter(c) {
+  active = c;
+  clearInterval(scanT);
+  requestNotificationPermission();
+  Object.values(conns).concat(Object.values(peers).map(p => p.c)).forEach(x => {
+    if (x !== c) try { x.close(); } catch {}
+  });
+  c.info = c.info || { name: 'อีกเครื่อง', av: '🐱' };
+  $('#l-av').textContent = c.info.av;
+  $('#l-name').textContent = c.info.name;
+  $('#l-dot').classList.add('on');
+  $('#l-st').textContent = 'เชื่อมต่อสำเร็จ';
+  show('link');
+  keepAwake();
+  burst();
+  playSound('success');
+  toast('เชื่อมต่อกับ ' + c.info.name + ' แล้ว! 🐾');
 }
-const prog = (u, r, t) => { if (r != null) u.fill.style.width = Math.round(r * 100) + '%'; u.st.textContent = t; };
+
+/* ---------- การส่งไฟล์ และระบบพรีวิว (File Transfer & Preview) ---------- */
+function renderItemCard(icon, name, size, text, thumb) {
+  const d = document.createElement('div');
+  d.className = 'item';
+  
+  let thumbHtml = '';
+  if (thumb) {
+    thumbHtml = `<div class="item-thumb-box" title="คลิกเพื่อขยายดูพรีวิว"><img src="${thumb}" alt="${name}"></div>`;
+  } else {
+    thumbHtml = `<div class="item-thumb-box"><span>${icon}</span></div>`;
+  }
+
+  d.innerHTML = `
+    ${thumbHtml}
+    <div class="n"><span>${name}</span><span>${size}</span></div>
+    <div class="bar"><i></i></div>
+    <div class="st">${text}</div>
+    <div class="act"></div>
+  `;
+
+  if (thumb) {
+    d.querySelector('.item-thumb-box').onclick = () => openLightbox(thumb, name);
+  }
+
+  $('#list').prepend(d);
+  return {
+    fill: d.querySelector('.bar i'),
+    st: d.querySelector('.st'),
+    act: d.querySelector('.act'),
+    thumbBox: d.querySelector('.item-thumb-box')
+  };
+}
+
+const prog = (u, r, t) => {
+  if (r != null) u.fill.style.width = Math.round(r * 100) + '%';
+  u.st.textContent = t;
+};
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
-function queue(files) {
-  if (!active || !active.open) { toast('ยังไม่ได้เชื่อมต่อ'); return; }
-  [...files].forEach(f => {
-    const id = uid(); out[id] = { f, u: item('⬆️', f.name, fmt(f.size), 'รออีกเครื่องกดรับ…') };
-    active.send({ type: 'offer', id, name: f.name, size: f.size });
-  });
+async function queue(files) {
+  if (!active || !active.open) { toast('ยังไม่ได้เชื่อมต่อกับอีกเครื่อง'); return; }
+  
+  for (const f of files) {
+    const id = uid();
+    const cat = getFileCat(f.type, f.name);
+    const thumb = await makeThumb(f);
+    
+    out[id] = {
+      f,
+      thumb,
+      u: renderItemCard(cat.icon, f.name, fmt(f.size), 'รออีกเครื่องกดรับไฟล์…', thumb)
+    };
+    
+    active.send({
+      type: 'offer',
+      id,
+      name: f.name,
+      size: f.size,
+      mime: f.type,
+      thumb: thumb
+    });
+  }
 }
+
 async function stream(id) {
-  const o = out[id]; if (!o) return; let off = 0;
+  const o = out[id];
+  if (!o) return;
+  let off = 0;
   try {
     while (off < o.f.size) {
       if (!active.open) throw 0;
       const buf = await o.f.slice(off, off + CHUNK).arrayBuffer();
       while (active.dataChannel && active.dataChannel.bufferedAmount > MAXBUF) await sleep(25);
-      active.send({ type: 'chunk', id, data: buf }); off += buf.byteLength;
+      active.send({ type: 'chunk', id, data: buf });
+      off += buf.byteLength;
       prog(o.u, off / o.f.size, 'กำลังส่ง ' + Math.round(off / o.f.size * 100) + '%');
     }
-    active.send({ type: 'done', id }); prog(o.u, 1, 'ส่งเสร็จแล้ว ✓'); burst();
-  } catch { prog(o.u, null, 'ส่งไม่สำเร็จ'); }
-}
-function transfer(m) {
-  if (m.type === 'offer') {
-    const u = item('⬇️', m.name, fmt(m.size), 'มีไฟล์ส่งมา ต้องการรับไหม?');
-    inc[m.id] = { name: m.name, size: m.size, parts: [], got: 0, u };
-    const y = document.createElement('button'), n = document.createElement('button');
-    y.className = 'y'; y.textContent = 'รับไฟล์'; n.textContent = 'ไม่รับ';
-    y.onclick = () => { u.act.textContent = ''; prog(u, 0, 'กำลังรับ 0%'); active.send({ type: 'accept', id: m.id }); };
-    n.onclick = () => { u.act.textContent = ''; prog(u, null, 'ไม่รับไฟล์นี้'); delete inc[m.id]; active.send({ type: 'decline', id: m.id }); };
-    u.act.append(y, n);
-  } else if (m.type === 'accept') stream(m.id);
-  else if (m.type === 'decline') { if (out[m.id]) prog(out[m.id].u, null, 'อีกเครื่องไม่รับไฟล์นี้'); }
-  else if (m.type === 'chunk') {
-    const r = inc[m.id]; if (!r) return;
-    r.parts.push(m.data); r.got += m.data.byteLength;
-    prog(r.u, r.got / r.size, 'กำลังรับ ' + Math.round(r.got / r.size * 100) + '%');
-  } else if (m.type === 'done') {
-    const r = inc[m.id]; if (!r) return;
-    const a = document.createElement('a'); a.className = 'y'; a.textContent = 'บันทึกไฟล์'; a.download = r.name;
-    a.href = URL.createObjectURL(new Blob(r.parts)); r.parts = []; r.u.act.append(a);
-    prog(r.u, 1, 'รับเสร็จแล้ว ✓'); burst();
+    active.send({ type: 'done', id });
+    prog(o.u, 1, 'ส่งเสร็จเรียบร้อยแล้ว ✓');
+    playSound('success');
+    burst();
+  } catch {
+    prog(o.u, null, 'ส่งไม่สำเร็จ');
   }
 }
 
-/* ---------- ผูกเหตุการณ์ ---------- */
+function transfer(m) {
+  if (m.type === 'offer') {
+    const cat = getFileCat(m.mime || '', m.name);
+    playSound('offer');
+    notifyUser('CatDrop 🐾 มีไฟล์ส่งมา', `${m.name} (${fmt(m.size)})`);
+
+    const u = renderItemCard(cat.icon, m.name, fmt(m.size), 'มีไฟล์ส่งมา ต้องการรับไหม?', m.thumb);
+    inc[m.id] = { name: m.name, size: m.size, mime: m.mime, thumb: m.thumb, parts: [], got: 0, u };
+
+    const y = document.createElement('button');
+    const n = document.createElement('button');
+    y.className = 'y';
+    y.textContent = 'รับไฟล์ 🐾';
+    n.textContent = 'ไม่รับ';
+
+    y.onclick = () => {
+      u.act.textContent = '';
+      prog(u, 0, 'กำลังรับ 0%');
+      active.send({ type: 'accept', id: m.id });
+      playSound('pop');
+    };
+    n.onclick = () => {
+      u.act.textContent = '';
+      prog(u, null, 'ปฏิเสธไฟล์นี้แล้ว');
+      delete inc[m.id];
+      active.send({ type: 'decline', id: m.id });
+    };
+
+    u.act.append(y, n);
+
+  } else if (m.type === 'accept') {
+    stream(m.id);
+  } else if (m.type === 'decline') {
+    if (out[m.id]) prog(out[m.id].u, null, 'อีกเครื่องปฏิเสธไม่รับไฟล์นี้');
+  } else if (m.type === 'chunk') {
+    const r = inc[m.id];
+    if (!r) return;
+    r.parts.push(m.data);
+    r.got += m.data.byteLength;
+    prog(r.u, r.got / r.size, 'กำลังรับ ' + Math.round(r.got / r.size * 100) + '%');
+  } else if (m.type === 'done') {
+    const r = inc[m.id];
+    if (!r) return;
+
+    const blob = new Blob(r.parts, { type: r.mime || 'application/octet-stream' });
+    const blobUrl = URL.createObjectURL(blob);
+    r.parts = [];
+
+    // อัปเดตการแสดงผลเมื่อรับเสร็จ
+    const dlBtn = document.createElement('a');
+    dlBtn.className = 'y';
+    dlBtn.textContent = '💾 บันทึกไฟล์';
+    dlBtn.download = r.name;
+    dlBtn.href = blobUrl;
+    r.u.act.append(dlBtn);
+
+    // หากเป็นรูปภาพ เพิ่มปุ่มพรีวิวรูปภาพขยายเต็มตา
+    if ((r.mime && r.mime.startsWith('image/')) || /\.(jpe?g|png|gif|webp|svg|bmp)$/i.test(r.name)) {
+      const pvBtn = document.createElement('button');
+      pvBtn.className = 'btn-pv';
+      pvBtn.textContent = '👁️ พรีวิวรูปภาพ';
+      pvBtn.onclick = () => openLightbox(blobUrl, r.name, blobUrl);
+      r.u.act.append(pvBtn);
+      // เปลี่ยนกล่อง thumbnail ให้กดดู lightbox ภาพเต็มได้ทันที
+      r.u.thumbBox.innerHTML = `<img src="${blobUrl}" alt="${r.name}">`;
+      r.u.thumbBox.onclick = () => openLightbox(blobUrl, r.name, blobUrl);
+    }
+
+    prog(r.u, 1, 'รับเสร็จสมบูรณ์แล้ว ✓');
+    playSound('success');
+    burst();
+    notifyUser('CatDrop 🐾 ดาวน์โหลดเสร็จแล้ว', `รับไฟล์ ${r.name} สำเร็จแล้ว`);
+  }
+}
+
+/* ---------- ผูกเหตุการณ์ต่าง ๆ (Event Listeners) ---------- */
 document.querySelectorAll('#seg button').forEach(b => b.onclick = () => tab(b.dataset.t));
 $('#b-host').onclick = host;
 $('#b-join').onclick = () => join($('#code').value);
 $('#code').onkeydown = e => { if (e.key === 'Enter') join(e.target.value); };
 $('#bye').onclick = () => { try { active.close(); } catch {} location.href = location.pathname; };
-$('#me').onclick = async () => {
-  const v = await ask('ชื่อเครื่องนี้', 'อีกเครื่องจะเห็นชื่อนี้ในหน้า "ใกล้ฉัน"', 'บันทึก', 'ยกเลิก', me.name);
-  if (v) { me.name = v.slice(0, 20); save(); paintMe(); }
-};
+
 const drop = $('#drop'), fi = $('#file');
 fi.onchange = () => { queue(fi.files); fi.value = ''; };
 drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fi.click(); } };
 ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
 ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
 drop.addEventListener('drop', e => queue(e.dataTransfer.files));
-addEventListener('beforeunload', e => { if (active && active.open) { e.preventDefault(); e.returnValue = ''; } });
 
+addEventListener('beforeunload', e => {
+  if (active && active.open) { e.preventDefault(); e.returnValue = ''; }
+});
+
+/* Init */
 paintMe();
 const room = new URLSearchParams(location.search).get('room');
-if (room) { tab('qr'); join(room); } else tab('near');
+if (room) {
+  tab('qr');
+  join(room);
+} else {
+  tab('near');
+}
+
 })();
 </script>
 </body>

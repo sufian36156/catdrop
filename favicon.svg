@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="catGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3f4f6"/>
+    </linearGradient>
+    <linearGradient id="earPink" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  <!-- Signal Waves -->
+  <g stroke="#ffffff" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.6">
+    <path d="M 160 90 A 130 130 0 0 1 352 90" />
+    <path d="M 120 50 A 180 180 0 0 1 392 50" />
+  </g>
+  <!-- Cat Ears -->
+  <path d="M 140 250 L 120 140 C 120 130 135 125 145 135 L 210 200 Z" fill="url(#catGrad)"/>
+  <path d="M 145 230 L 132 152 C 132 147 141 144 146 149 L 195 198 Z" fill="url(#earPink)"/>
+  <path d="M 372 250 L 392 140 C 392 130 377 125 367 135 L 302 200 Z" fill="url(#catGrad)"/>
+  <path d="M 367 230 L 380 152 C 380 147 371 144 366 149 L 317 198 Z" fill="url(#earPink)"/>
+  <!-- Cat Head -->
+  <ellipse cx="256" cy="275" rx="140" ry="115" fill="url(#catGrad)"/>
+  <path d="M 150 360 Q 256 340 362 360 L 385 450 Q 256 465 127 450 Z" fill="url(#catGrad)"/>
+  <!-- Eyes -->
+  <g fill="#1e1b4b">
+    <ellipse cx="195" cy="255" rx="18" ry="24"/>
+    <ellipse cx="317" cy="255" rx="18" ry="24"/>
+  </g>
+  <g fill="#ffffff">
+    <ellipse cx="190" cy="247" rx="7" ry="9"/>
+    <ellipse cx="312" cy="247" rx="7" ry="9"/>
+  </g>
+  <!-- Blush -->
+  <ellipse cx="160" cy="285" rx="18" ry="10" fill="#fca5a5" opacity="0.6"/>
+  <ellipse cx="352" cy="285" rx="18" ry="10" fill="#fca5a5" opacity="0.6"/>
+  <!-- Nose & Mouth -->
+  <path d="M 256 276 L 246 265 C 243 262 269 262 266 265 Z" fill="#f43f5e"/>
+  <path d="M 246 280 Q 256 288 256 283 Q 256 288 266 280" stroke="#f43f5e" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Cat Paw -->
+  <g transform="translate(256, 395) scale(0.9)">
+    <circle cx="0" cy="0" r="38" fill="#7c3aed"/>
+    <ellipse cx="0" cy="8" rx="18" ry="14" fill="#ffffff"/>
+    <ellipse cx="-16" cy="-10" rx="6" ry="8" fill="#ffffff" transform="rotate(-15, -16, -10)"/>
+    <ellipse cx="-6" cy="-18" rx="6.5" ry="9" fill="#ffffff" transform="rotate(-5, -6, -18)"/>
+    <ellipse cx="6" cy="-18" rx="6.5" ry="9" fill="#ffffff" transform="rotate(5, 6, -18)"/>
+    <ellipse cx="16" cy="-10" rx="6" ry="8" fill="#ffffff" transform="rotate(15, 16, -10)"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+{
+  "name": "CatDrop - ส่งไฟล์ข้ามเครื่อง",
+  "short_name": "CatDrop",
+  "description": "ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code สะดวก รวดเร็ว สไตล์น้องแมว 🐾",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f3ff",
+  "theme_color": "#7c3aed",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
