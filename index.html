@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <title>CatDrop · ส่งไฟล์ข้ามเครื่อง</title>
-<meta name="description" content="CatDrop ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code เรียบง่าย รวดเร็ว ปลอดภัย">
-<meta name="theme-color" content="#4f46e5">
+<meta name="description" content="CatDrop ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code สะดวก รวดเร็ว สไตล์น้องแมว 🐾">
+<meta name="theme-color" content="#7c3aed" id="meta-theme-color">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -16,55 +16,72 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  (function() {
+    const saved = localStorage.getItem('catdrop_theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = saved || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <style>
+/* ==========================================
+   THEME DEFINITIONS: LIGHT & DARK
+   ========================================== */
 :root {
-  --bg: #f8fafc;
-  --ink: #0f172a;
-  --mut: #64748b;
+  --theme: light;
+  --bg: #f7f6fc;
+  --bg-glow: radial-gradient(circle at 85% -10%, rgba(124, 58, 237, 0.08), transparent 450px);
+  --ink: #1e1b4b;
+  --mut: #6b7280;
   --card: #ffffff;
-  --card-hover: #f1f5f9;
-  --line: #e2e8f0;
-  --line-subtle: #f1f5f9;
-  --ac: #4f46e5;
-  --ac-hover: #4338ca;
-  --ac-subtle: #eef2ff;
+  --card-hover: #faf9fd;
+  --line: #e5e2f3;
+  --line-subtle: #f0edf9;
+  --ac: #7c3aed;
+  --ac-hover: #6d28d9;
+  --ac-subtle: #ede9fe;
   --ac-ink: #ffffff;
+  --pink: #ec4899;
   --ok: #10b981;
   --ok-subtle: #ecfdf5;
   --bad: #ef4444;
   --bad-subtle: #fef2f2;
-  --btn-ghost: #f1f5f9;
-  --btn-ghost-hover: #e2e8f0;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+  --btn-ghost: #f1eff9;
+  --btn-ghost-hover: #e5e1f5;
+  --shadow-sm: 0 1px 3px rgba(30, 27, 75, 0.05);
+  --shadow-md: 0 4px 16px rgba(124, 58, 237, 0.08);
+  --shadow-lg: 0 12px 32px rgba(124, 58, 237, 0.12);
+  --radar-glow: rgba(124, 58, 237, 0.18);
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b0f19;
-    --ink: #f8fafc;
-    --mut: #94a3b8;
-    --card: #141c2e;
-    --card-hover: #1b253b;
-    --line: #1e293b;
-    --line-subtle: #172033;
-    --ac: #6366f1;
-    --ac-hover: #818cf8;
-    --ac-subtle: #1e1b4b;
-    --ac-ink: #ffffff;
-    --ok: #34d399;
-    --ok-subtle: #064e3b;
-    --bad: #f87171;
-    --bad-subtle: #450a0a;
-    --btn-ghost: #1e293b;
-    --btn-ghost-hover: #2d3b55;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-    --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
-    --shadow-lg: 0 10px 30px rgba(0,0,0,0.6);
-    color-scheme: dark;
-  }
+[data-theme="dark"] {
+  --theme: dark;
+  --bg: #0c0a1e;
+  --bg-glow: radial-gradient(circle at 85% -10%, rgba(139, 92, 246, 0.22), transparent 500px);
+  --ink: #f3f4f6;
+  --mut: #9ca3af;
+  --card: #161334;
+  --card-hover: #1e1a44;
+  --line: #2a2556;
+  --line-subtle: #201c44;
+  --ac: #8b5cf6;
+  --ac-hover: #a78bfa;
+  --ac-subtle: #271f54;
+  --ac-ink: #ffffff;
+  --pink: #f472b6;
+  --ok: #34d399;
+  --ok-subtle: #064e3b;
+  --bad: #f87171;
+  --bad-subtle: #450a0a;
+  --btn-ghost: #231e4a;
+  --btn-ghost-hover: #2f2863;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.65);
+  --radar-glow: rgba(139, 92, 246, 0.35);
+  color-scheme: dark;
 }
 
 * {
@@ -78,15 +95,17 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
-  background: var(--bg);
+  background: var(--bg) var(--bg-glow) no-repeat;
   color: var(--ink);
-  font: 400 15px/1.5 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font: 400 15px/1.55 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100dvh;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* App Container (Web App Polish) */
 .wrap {
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   margin: 0 auto;
   padding: 12px 16px 40px;
   display: flex;
@@ -94,13 +113,13 @@ html, body {
   min-height: 100dvh;
 }
 
-/* Header */
+/* Header & Brand with Vibrant CatDrop Gradient */
 .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  padding: 4px 0 10px;
+  padding: 6px 0 12px;
 }
 
 .brand {
@@ -109,28 +128,27 @@ html, body {
   gap: 8px;
   text-decoration: none;
   color: inherit;
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
 }
 
 .brand-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.brand:hover .brand-icon {
+  transform: rotate(-6deg) scale(1.06);
 }
 
 .brand-title {
-  color: var(--ink);
-}
-.brand-badge {
-  font-size: 0.72rem;
-  font-weight: 600;
-  background: var(--ac-subtle);
-  color: var(--ac);
-  padding: 2px 7px;
-  border-radius: 99px;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .top-actions {
@@ -146,20 +164,22 @@ button {
   cursor: pointer;
   border: 0;
   background: none;
-  transition: transform 0.1s ease, background 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
 }
-button:active { transform: scale(0.96); }
+button:active { transform: scale(0.95); }
 
 .btn-icon {
   display: grid;
   place-items: center;
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 11px;
   background: var(--card);
   border: 1px solid var(--line);
   font-size: 1rem;
+  box-shadow: var(--shadow-sm);
 }
+.btn-icon:hover { background: var(--card-hover); }
 
 .btn-pwa {
   display: inline-flex;
@@ -171,6 +191,7 @@ button:active { transform: scale(0.96); }
   padding: 5px 11px;
   font-size: 0.8rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
 }
 
 .me {
@@ -182,9 +203,9 @@ button:active { transform: scale(0.96); }
   border-radius: 99px;
   padding: 4px 10px 4px 6px;
   box-shadow: var(--shadow-sm);
-  max-width: 130px;
+  max-width: 120px;
 }
-.me span:first-child { font-size: 1.2rem; line-height: 1; }
+.me span:first-child { font-size: 1.25rem; line-height: 1; }
 .me-name-wrap {
   font-weight: 500;
   font-size: 0.88rem;
@@ -200,31 +221,32 @@ button:active { transform: scale(0.96); }
   grid-template-columns: 1fr 1fr;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 3px;
-  margin: 12px 0 10px;
+  border-radius: 14px;
+  padding: 4px;
+  margin: 10px 0 12px;
   box-shadow: var(--shadow-sm);
 }
 .seg i {
   position: absolute;
-  inset: 3px 50% 3px 3px;
-  background: var(--ac);
-  border-radius: 9px;
+  inset: 4px 50% 4px 4px;
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  border-radius: 10px;
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
 }
 .seg[data-t=qr] i { transform: translateX(100%); }
 .seg button {
   position: relative;
   z-index: 1;
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 8px;
+  font-size: 0.92rem;
+  padding: 9px;
   color: var(--mut);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border-radius: 9px;
+  border-radius: 10px;
 }
 .seg button.on { color: var(--ac-ink); }
 
@@ -239,7 +261,7 @@ button:active { transform: scale(0.96); }
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 10px 0 6px;
+  padding: 12px 0 8px;
 }
 
 .radar {
@@ -264,14 +286,14 @@ button:active { transform: scale(0.96); }
   position: absolute;
   inset: 40%;
   border-radius: 50%;
-  border: 1.5px solid var(--ac);
+  border: 2px solid var(--ac);
   opacity: 0;
   animation: pulse-wave 3.2s ease-out infinite;
   pointer-events: none;
 }
 .pulse + .pulse { animation-delay: 1.6s; }
 @keyframes pulse-wave {
-  0% { transform: scale(0.6); opacity: 0.6; }
+  0% { transform: scale(0.6); opacity: 0.65; }
   100% { transform: scale(2.6); opacity: 0; }
 }
 
@@ -282,16 +304,18 @@ button:active { transform: scale(0.96); }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.9rem;
+  font-size: 2rem;
   background: var(--card);
-  border: 2px solid var(--ac);
+  border: 2.5px solid var(--ac);
   border-radius: 50%;
-  box-shadow: 0 4px 18px rgba(79, 70, 229, 0.2);
+  box-shadow: 0 6px 20px var(--radar-glow);
   z-index: 2;
   cursor: pointer;
+  transition: transform 0.15s ease;
 }
+.you:hover { transform: scale(1.05); }
 .you-sub {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--ac);
   margin-top: -3px;
@@ -303,7 +327,7 @@ button:active { transform: scale(0.96); }
   left: var(--x);
   top: var(--y);
   translate: -50% -50%;
-  width: 70px;
+  width: 72px;
   background: none;
   border: 0;
   padding: 0;
@@ -319,9 +343,9 @@ button:active { transform: scale(0.96); }
 .bubble b {
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
-  font-size: 1.7rem;
+  width: 54px;
+  height: 54px;
+  font-size: 1.8rem;
   border-radius: 50%;
   background: var(--card);
   border: 2px solid var(--ac);
@@ -333,14 +357,15 @@ button:active { transform: scale(0.96); }
   font-style: normal;
   font-size: 0.78rem;
   font-weight: 500;
-  max-width: 70px;
+  max-width: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   background: var(--card);
-  padding: 1px 6px;
+  padding: 1px 7px;
   border-radius: 99px;
   border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 }
 .bubble.wait b {
   animation: wig 0.6s ease-in-out infinite;
@@ -365,20 +390,20 @@ button:active { transform: scale(0.96); }
 .card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 20px;
   margin-top: 10px;
   box-shadow: var(--shadow-sm);
 }
-.card h2 { font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; }
-.card p { margin: 0 0 14px; color: var(--mut); font-size: 0.88rem; }
+.card h2 { font-size: 1.1rem; font-weight: 600; margin: 0 0 4px; }
+.card p { margin: 0 0 16px; color: var(--mut); font-size: 0.9rem; }
 
 .pri, .sec, .ghost {
   width: 100%;
-  padding: 11px 16px;
-  border-radius: 12px;
+  padding: 12px 18px;
+  border-radius: 13px;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.93rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -386,11 +411,11 @@ button:active { transform: scale(0.96); }
   border: 1px solid transparent;
 }
 .pri {
-  background: var(--ac);
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
   color: var(--ac-ink);
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.28);
 }
-.pri:hover { background: var(--ac-hover); }
+.pri:hover { opacity: 0.95; }
 
 .sec {
   background: var(--ac-subtle);
@@ -420,10 +445,10 @@ input {
   font: inherit;
   min-width: 0;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 13px;
   background: var(--bg);
   color: var(--ink);
-  padding: 10px 14px;
+  padding: 11px 15px;
 }
 input:focus {
   outline: none;
@@ -438,22 +463,22 @@ input:focus {
   font-size: 1.15rem;
   text-transform: uppercase;
 }
-.join .pri { width: auto; padding: 0 18px; white-space: nowrap; }
+.join .pri { width: auto; padding: 0 20px; white-space: nowrap; }
 
 .code {
-  font-size: clamp(1.8rem, 7vw, 2.3rem);
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
   font-weight: 700;
   letter-spacing: 0.18em;
   text-align: center;
   color: var(--ac);
-  margin: 8px 0;
+  margin: 10px 0;
 }
 .qr {
-  width: min(200px, 60vw);
-  margin: 8px auto;
+  width: min(210px, 60vw);
+  margin: 10px auto;
   background: #fff;
-  padding: 10px;
-  border-radius: 14px;
+  padding: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow-sm);
 }
 .qr svg { display: block; width: 100%; height: auto; }
@@ -462,26 +487,26 @@ input:focus {
 .peerbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 12px 14px;
+  border-radius: 18px;
+  padding: 12px 16px;
   margin-top: 8px;
   box-shadow: var(--shadow-sm);
 }
-.peerbar > b { font-size: 1.9rem; line-height: 1; }
+.peerbar > b { font-size: 2rem; line-height: 1; }
 .peerbar div { flex: 1; min-width: 0; }
-.peerbar strong { display: block; font-size: 0.98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.peerbar small { display: flex; align-items: center; gap: 6px; color: var(--mut); font-size: 0.82rem; }
+.peerbar strong { display: block; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.peerbar small { display: flex; align-items: center; gap: 6px; color: var(--mut); font-size: 0.84rem; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); }
 .dot.on { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-subtle); }
 .peerbar button {
   border: 1px solid var(--line);
   background: var(--btn-ghost);
-  border-radius: 10px;
-  padding: 6px 11px;
-  font-size: 0.82rem;
+  border-radius: 11px;
+  padding: 7px 12px;
+  font-size: 0.84rem;
   font-weight: 500;
 }
 .peerbar button:hover { color: var(--bad); }
@@ -494,28 +519,28 @@ input:focus {
   justify-content: center;
   gap: 6px;
   text-align: center;
-  margin-top: 12px;
-  padding: 28px 16px;
+  margin-top: 14px;
+  padding: 30px 18px;
   border: 2px dashed var(--line);
-  border-radius: 18px;
+  border-radius: 20px;
   background: var(--card);
   color: var(--ink);
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  box-shadow: var(--shadow-sm);
 }
-.drop-icon { font-size: 2.2rem; line-height: 1; margin-bottom: 2px; }
-.drop-title { font-weight: 600; font-size: 0.98rem; }
-.drop small { color: var(--mut); font-size: 0.82rem; }
+.drop-icon { font-size: 2.3rem; line-height: 1; margin-bottom: 2px; }
+.drop-title { font-weight: 600; font-size: 1rem; }
+.drop small { color: var(--mut); font-size: 0.84rem; }
 .drop:hover, .drop.over {
   border-color: var(--ac);
   background: var(--ac-subtle);
+  transform: scale(1.01);
 }
 
 /* ====================================================
-   NEW MODERN AIRDROP-STYLE UX FOR INCOMING & TRANSFERS
+   AIRDROP-STYLE FLOATING REQUEST SHEET
    ==================================================== */
-
-/* Floating Request Sheet (Connection or File Offer) */
 .request-sheet {
   position: fixed;
   left: 50%;
@@ -524,7 +549,7 @@ input:focus {
   width: min(92vw, 420px);
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 18px;
   box-shadow: var(--shadow-lg);
   z-index: 999;
@@ -540,17 +565,17 @@ input:focus {
 .req-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .req-av {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--ac-subtle);
   border: 1px solid var(--line);
   display: grid;
   place-items: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   flex-shrink: 0;
 }
 .req-info {
@@ -563,36 +588,36 @@ input:focus {
   font-weight: 600;
   color: var(--ac);
   background: var(--ac-subtle);
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 99px;
   margin-bottom: 2px;
 }
 .req-sender {
   font-weight: 600;
-  font-size: 0.96rem;
+  font-size: 0.98rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .req-sub {
-  font-size: 0.82rem;
+  font-size: 0.83rem;
   color: var(--mut);
 }
 
-/* Preview Box inside Sheet or Card */
+/* Preview Box inside Sheet */
 .req-preview-box {
   background: var(--bg);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 10px;
+  border-radius: 15px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 .req-preview-media {
-  width: 54px;
-  height: 54px;
-  border-radius: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
   background: var(--card);
   border: 1px solid var(--line);
   overflow: hidden;
@@ -613,14 +638,14 @@ input:focus {
 }
 .req-file-name {
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .req-file-size {
   display: inline-block;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: var(--mut);
   background: var(--card);
   border: 1px solid var(--line);
@@ -640,8 +665,8 @@ input:focus {
 .item-card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 12px 14px;
+  border-radius: 18px;
+  padding: 13px 15px;
   margin-top: 10px;
   box-shadow: var(--shadow-sm);
   display: flex;
@@ -653,19 +678,19 @@ input:focus {
 .item-main {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .item-thumb {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
   background: var(--bg);
   border: 1px solid var(--line);
   overflow: hidden;
   display: grid;
   place-items: center;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   flex-shrink: 0;
   cursor: pointer;
 }
@@ -681,7 +706,7 @@ input:focus {
 }
 .item-name {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -690,7 +715,7 @@ input:focus {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--mut);
   margin-top: 2px;
 }
@@ -704,7 +729,7 @@ input:focus {
 .item-progress-bar {
   height: 100%;
   width: 0;
-  background: var(--ac);
+  background: linear-gradient(90deg, var(--ac) 0%, var(--pink) 100%);
   border-radius: 99px;
   transition: width 0.15s linear;
 }
@@ -725,9 +750,9 @@ input:focus {
 }
 .item-actions:empty { display: none; }
 .btn-compact {
-  padding: 6px 13px;
-  border-radius: 9px;
-  font-size: 0.83rem;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -735,8 +760,9 @@ input:focus {
   text-decoration: none;
 }
 .btn-compact.primary {
-  background: var(--ac);
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
   color: var(--ac-ink);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
 }
 .btn-compact.outline {
   background: var(--btn-ghost);
@@ -747,16 +773,16 @@ input:focus {
 /* Dialogs & Lightbox */
 dialog {
   border: 0;
-  border-radius: 20px;
-  padding: 20px;
-  width: min(90vw, 360px);
+  border-radius: 22px;
+  padding: 22px;
+  width: min(90vw, 380px);
   background: var(--card);
   color: var(--ink);
   box-shadow: var(--shadow-lg);
   margin: auto;
 }
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
 }
 dialog h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 4px; }
@@ -765,42 +791,51 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 .av-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 .av-grid button {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   padding: 6px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 2px solid transparent;
   background: var(--bg);
 }
 .av-grid button.sel {
   border-color: var(--ac);
   background: var(--ac-subtle);
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 #lightbox {
-  width: min(92vw, 560px);
+  width: min(92vw, 580px);
   max-height: 85vh;
-  padding: 14px;
+  padding: 16px;
 }
 #lightbox-img {
   width: 100%;
   max-height: 60vh;
-  border-radius: 12px;
+  border-radius: 14px;
   object-fit: contain;
   display: block;
-  margin: 0 auto 10px;
+  margin: 0 auto 12px;
   background: #000;
 }
 #lightbox-name {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-align: center;
   word-break: break-all;
+}
+
+/* Web Footer Note */
+.web-footer {
+  text-align: center;
+  color: var(--mut);
+  font-size: 0.78rem;
+  margin-top: auto;
+  padding-top: 24px;
 }
 
 /* Toast */
@@ -811,7 +846,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   translate: -50% 20px;
   background: var(--ink);
   color: var(--bg);
-  padding: 8px 16px;
+  padding: 9px 18px;
   border-radius: 99px;
   opacity: 0;
   pointer-events: none;
@@ -827,15 +862,15 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 </head>
 <body>
 <div class="wrap">
-  <!-- Minimal Clean Header -->
+  <!-- Header Bar -->
   <header class="top">
     <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
-      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="32" height="32">
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="34" height="34">
       <span class="brand-title">CatDrop</span>
-      <span class="brand-badge">P2P</span>
     </a>
     <div class="top-actions">
       <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป">📲 ติดตั้ง</button>
+      <button class="btn-icon" id="b-theme" title="สลับโหมดมืด/สว่าง" aria-label="สลับโหมดมืดหรือสว่าง">🌙</button>
       <button class="btn-icon" id="b-sound" title="เปิด/ปิดเสียง" aria-label="เปิดหรือปิดเสียงแจ้งเตือน">🔔</button>
       <button class="me" id="me" aria-label="เปลี่ยนชื่อและอวาตาร์แมว">
         <span id="me-av">🐱</span>
@@ -844,7 +879,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     </div>
   </header>
 
-  <!-- Clean Segment Switcher -->
+  <!-- Segment Switcher -->
   <nav class="seg" id="seg" data-t="near">
     <i></i>
     <button data-t="near" class="on">🐾 Wi-Fi เดียวกัน</button>
@@ -870,9 +905,9 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   <!-- QR Code Section -->
   <section id="v-qr" hidden>
     <div class="card" id="qr-home">
-      <h2>ส่งข้ามเครือข่าย</h2>
-      <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ</p>
-      <button class="pri" id="b-host">แสดง QR Code เชื่อมต่อ</button>
+      <h2>ส่งข้ามทุกเครือข่าย</h2>
+      <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ 4G/5G</p>
+      <button class="pri" id="b-host">📱 แสดง QR Code เชื่อมต่อ</button>
       <div class="or">หรือกรอกรหัสจากอีกเครื่อง</div>
       <div class="join">
         <input id="code" maxlength="6" placeholder="รหัส 6 หลัก" autocomplete="off" autocapitalize="characters" aria-label="รหัสห้อง">
@@ -900,18 +935,22 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     </div>
 
     <label class="drop" id="drop" tabindex="0">
-      <span class="drop-icon">📤</span>
+      <span class="drop-icon">🐱 📤</span>
       <div class="drop-title">แตะเพื่อเลือกไฟล์ หรือลากมาวาง</div>
-      <small>ส่งรูปภาพ วิดีโอ หรือเอกสารได้ทุกขนาด</small>
+      <small>ส่งรูปภาพ วิดีโอ หรือเอกสารข้ามเครื่องได้ไม่จำกัด</small>
       <input type="file" id="file" multiple hidden>
     </label>
 
     <div id="list"></div>
   </section>
+
+  <footer class="web-footer">
+    <span>🐾 CatDrop · ส่งไฟล์ P2P โดยตรงระหว่างอุปกรณ์</span>
+  </footer>
 </div>
 
 <!-- ==========================================================
-     AIRDROP-STYLE FLOATING REQUEST SHEET (MODERN & INTUITIVE)
+     AIRDROP-STYLE FLOATING REQUEST SHEET
      ========================================================== -->
 <div id="request-sheet" class="request-sheet" role="dialog" aria-modal="true" aria-labelledby="req-sender">
   <div class="req-header">
@@ -984,7 +1023,29 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const hue = s => Math.abs([...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7)) % 360;
 const fmt = n => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : n < 1073741824 ? (n / 1048576).toFixed(1) + ' MB' : (n / 1073741824).toFixed(2) + ' GB';
 
-/* ---------- ระบบเสียงแบบนุ่มนวล เรียบหรู (Apple/iOS Style Haptic Tones) ---------- */
+/* ---------- Theme Switcher (Light / Dark) ---------- */
+function getActiveTheme() {
+  return document.documentElement.getAttribute('data-theme') || 'light';
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('catdrop_theme', theme);
+  $('#b-theme').textContent = theme === 'dark' ? '☀️' : '🌙';
+  $('#meta-theme-color').setAttribute('content', theme === 'dark' ? '#0c0a1e' : '#7c3aed');
+}
+
+$('#b-theme').onclick = () => {
+  const current = getActiveTheme();
+  const next = current === 'dark' ? 'light' : 'dark';
+  setTheme(next);
+  playTone('tap');
+  toast(next === 'dark' ? 'เปลี่ยนเป็นโหมดมืด 🌙' : 'เปลี่ยนเป็นโหมดสว่าง ☀️');
+};
+// ตั้งค่าไอคอนปุ่มธีมเริ่มต้น
+$('#b-theme').textContent = getActiveTheme() === 'dark' ? '☀️' : '🌙';
+
+/* ---------- ระบบเสียงสังเคราะห์ละมุนหู (Apple/iOS Style Haptic Tones) ---------- */
 let soundEnabled = localStorage.getItem('catdrop_sound') !== 'off';
 let audioCtx = null;
 
@@ -1001,7 +1062,6 @@ function playTone(type) {
     const now = ctx.currentTime;
 
     if (type === 'incoming') {
-      // Soft, elegant double chime (AirDrop style ping)
       [740, 932].forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -1016,7 +1076,6 @@ function playTone(type) {
         osc.stop(now + idx * 0.1 + 0.3);
       });
     } else if (type === 'success') {
-      // Gentle satisfaction chime
       [1046.5, 1318.5].forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -1031,7 +1090,6 @@ function playTone(type) {
         osc.stop(now + idx * 0.09 + 0.36);
       });
     } else if (type === 'tap') {
-      // Subtle haptic click
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
@@ -1243,7 +1301,7 @@ function openLightbox(src, name, blobUrl) {
 $('#lightbox-close').onclick = () => $('#lightbox').close();
 
 /* ========================================================
-   AIRDROP-STYLE REQUEST SHEET CONTROLLER (CONNECTION & FILE)
+   AIRDROP-STYLE REQUEST SHEET CONTROLLER
    ======================================================== */
 let activeRequestResolve = null;
 
@@ -1376,12 +1434,10 @@ function addBubble(c) {
   lay();
 }
 
-/* คำนวณตำแหน่ง Bubble ให้พอดีกับหน้าจอมือถือ ไม่ล้นขอบเด็ดขาด */
 function lay() {
   const k = Object.values(peers);
   k.forEach((p, i) => {
     const a = i / k.length * 2 * Math.PI - Math.PI / 2;
-    // ใช้รัศมี 33% เพื่อให้อยู่ข้างในกรอบ Radar เสมอ
     p.el.style.setProperty('--x', (50 + 33 * Math.cos(a)) + '%');
     p.el.style.setProperty('--y', (50 + 33 * Math.sin(a)) + '%');
   });
@@ -1460,7 +1516,6 @@ function onData(c, m) {
     if (mode !== 'near' || active || !c.info) return;
     notifyUser('CatDrop มีคำขอเชื่อมต่อ', c.info.name + ' ต้องการเชื่อมต่อกับคุณ');
 
-    // เรียกใช้ Sheet ยอมรับการเชื่อมต่อดีไซน์ใหม่สไตล์ AirDrop
     promptRequestSheet({
       avatar: c.info.av,
       name: c.info.name,
@@ -1604,7 +1659,6 @@ function transfer(m) {
     const cat = getFileCat(m.mime || '', m.name);
     notifyUser('มีไฟล์ส่งมา', `${m.name} (${fmt(m.size)})`);
 
-    // แสดง AirDrop-Style Request Sheet ที่ด้านล่างจอ สวยงาม ชัดเจน และใช้งานง่าย
     promptRequestSheet({
       avatar: active && active.info ? active.info.av : '🐱',
       name: active && active.info ? active.info.name : 'อีกเครื่อง',
@@ -1646,7 +1700,6 @@ function transfer(m) {
     const blobUrl = URL.createObjectURL(blob);
     r.parts = [];
 
-    // ปุ่ม Action หลังรับเสร็จ: สะอาด ชัดเจน ไม่เกะกะ
     const dlBtn = document.createElement('a');
     dlBtn.className = 'btn-compact primary';
     dlBtn.textContent = '💾 บันทึกไฟล์';
