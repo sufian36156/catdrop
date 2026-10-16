@@ -2,13 +2,13 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CatDrop 🐾 · ส่งไฟล์ข้ามเครื่อง</title>
-<meta name="description" content="CatDrop ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code สะดวก รวดเร็ว สไตล์น้องแมว P2P ไม่ผ่านเซิร์ฟเวอร์">
-<meta name="theme-color" content="#7c3aed">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>CatDrop · ส่งไฟล์ข้ามเครื่อง</title>
+<meta name="description" content="CatDrop ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code เรียบง่าย รวดเร็ว ปลอดภัย">
+<meta name="theme-color" content="#4f46e5">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="CatDrop">
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -18,107 +18,126 @@
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f5f3ff;
-  --bg-glow: rgba(139, 92, 246, 0.12);
-  --ink: #1e1b4b;
-  --mut: #6b7280;
+  --bg: #f8fafc;
+  --ink: #0f172a;
+  --mut: #64748b;
   --card: #ffffff;
-  --card-hover: #faf5ff;
-  --line: #e4e4e7;
-  --ac: #7c3aed;
-  --ac-hover: #6d28d9;
-  --ac-light: #ede9fe;
-  --acink: #ffffff;
-  --pink: #ec4899;
+  --card-hover: #f1f5f9;
+  --line: #e2e8f0;
+  --line-subtle: #f1f5f9;
+  --ac: #4f46e5;
+  --ac-hover: #4338ca;
+  --ac-subtle: #eef2ff;
+  --ac-ink: #ffffff;
   --ok: #10b981;
-  --ok-bg: #ecfdf5;
+  --ok-subtle: #ecfdf5;
   --bad: #ef4444;
-  --bad-bg: #fef2f2;
-  --bl: 88%;
+  --bad-subtle: #fef2f2;
+  --btn-ghost: #f1f5f9;
+  --btn-ghost-hover: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0c0a1d;
-    --bg-glow: rgba(139, 92, 246, 0.22);
-    --ink: #f3f4f6;
-    --mut: #9ca3af;
-    --card: #171530;
-    --card-hover: #1f1c42;
-    --line: #2d2a54;
-    --ac: #8b5cf6;
-    --ac-hover: #a78bfa;
-    --ac-light: #2e1065;
-    --acink: #ffffff;
-    --pink: #f472b6;
+    --bg: #0b0f19;
+    --ink: #f8fafc;
+    --mut: #94a3b8;
+    --card: #141c2e;
+    --card-hover: #1b253b;
+    --line: #1e293b;
+    --line-subtle: #172033;
+    --ac: #6366f1;
+    --ac-hover: #818cf8;
+    --ac-subtle: #1e1b4b;
+    --ac-ink: #ffffff;
     --ok: #34d399;
-    --ok-bg: #064e3b;
+    --ok-subtle: #064e3b;
     --bad: #f87171;
-    --bad-bg: #450a0a;
-    --bl: 30%;
+    --bad-subtle: #450a0a;
+    --btn-ghost: #1e293b;
+    --btn-ghost-hover: #2d3b55;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.6);
     color-scheme: dark;
   }
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
 [hidden] { display: none !important; }
 
-body {
-  margin: 0;
-  background: var(--bg) radial-gradient(650px 450px at 90% -10%, var(--bg-glow), transparent) no-repeat;
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--bg);
   color: var(--ink);
-  font: 400 16px/1.55 'Prompt', system-ui, sans-serif;
+  font: 400 15px/1.5 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100dvh;
 }
 
 .wrap {
-  max-width: 540px;
+  width: 100%;
+  max-width: 460px;
   margin: 0 auto;
-  padding: 16px 16px 64px;
+  padding: 12px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
-/* Header & Logo */
+/* Header */
 .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  padding: 4px 0 12px;
+  gap: 8px;
+  padding: 4px 0 10px;
 }
 
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
   color: inherit;
   font-weight: 700;
-  font-size: 1.45rem;
-  letter-spacing: -0.01em;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
 }
 
 .brand-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.brand:hover .brand-icon {
-  transform: rotate(-8deg) scale(1.08);
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  flex-shrink: 0;
 }
 
 .brand-title {
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ink);
+}
+.brand-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--ac-subtle);
+  color: var(--ac);
+  padding: 2px 7px;
+  border-radius: 99px;
 }
 
 .top-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 button {
@@ -127,119 +146,133 @@ button {
   cursor: pointer;
   border: 0;
   background: none;
-  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.1s ease, background 0.15s ease, opacity 0.15s ease;
 }
+button:active { transform: scale(0.96); }
 
 .btn-icon {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: var(--card);
   border: 1px solid var(--line);
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
-.btn-icon:active { transform: scale(0.92); }
 
 .btn-pwa {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: var(--ac-light);
-  color: var(--ac);
-  border: 1px solid var(--ac);
+  gap: 4px;
+  background: var(--ac);
+  color: var(--ac-ink);
   border-radius: 99px;
-  padding: 6px 12px;
-  font-size: 0.85rem;
+  padding: 5px 11px;
+  font-size: 0.8rem;
   font-weight: 600;
-  animation: pulse-slow 3s infinite;
 }
-.btn-pwa:active { transform: scale(0.94); }
 
 .me {
-  display: flex;
-  gap: 8px;
+  display: inline-flex;
+  gap: 6px;
   align-items: center;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 99px;
-  padding: 5px 14px 5px 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 4px 10px 4px 6px;
+  box-shadow: var(--shadow-sm);
+  max-width: 130px;
 }
-.me:active { transform: scale(0.96); }
-.me span:first-child { font-size: 1.35rem; }
-.me-name-wrap { font-weight: 500; font-size: 0.95rem; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.me span:first-child { font-size: 1.2rem; line-height: 1; }
+.me-name-wrap {
+  font-weight: 500;
+  font-size: 0.88rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-/* Tabs / Segment */
+/* Tab Switcher */
 .seg {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 99px;
-  padding: 4px;
-  margin: 16px 0 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  padding: 3px;
+  margin: 12px 0 10px;
+  box-shadow: var(--shadow-sm);
 }
 .seg i {
   position: absolute;
-  inset: 4px 50% 4px 4px;
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  border-radius: 99px;
-  transition: transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1);
+  inset: 3px 50% 3px 3px;
+  background: var(--ac);
+  border-radius: 9px;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 .seg[data-t=qr] i { transform: translateX(100%); }
 .seg button {
   position: relative;
   z-index: 1;
-  background: none;
   font-weight: 600;
-  padding: 10px;
+  font-size: 0.9rem;
+  padding: 8px;
   color: var(--mut);
-  transition: color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  border-radius: 9px;
 }
-.seg button.on { color: var(--acink); }
+.seg button.on { color: var(--ac-ink); }
 
-/* Radar View */
+/* Radar Section (Responsive & Clean) */
+#v-near {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radar-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 6px;
+}
+
 .radar {
   position: relative;
-  aspect-ratio: 1;
-  max-width: 380px;
-  margin: 12px auto 6px;
+  width: min(290px, 78vw);
+  height: min(290px, 78vw);
+  border-radius: 50%;
+  margin: 0 auto;
 }
+
 .ring {
   position: absolute;
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   border-radius: 50%;
   pointer-events: none;
 }
 .r1 { inset: 0; }
-.r2 { inset: 17%; }
-.r3 { inset: 34%; }
+.r2 { inset: 20%; }
+.r3 { inset: 40%; }
 
 .pulse {
   position: absolute;
-  inset: 36%;
+  inset: 40%;
   border-radius: 50%;
-  border: 2px solid var(--ac);
+  border: 1.5px solid var(--ac);
   opacity: 0;
-  animation: pulse-wave 3s ease-out infinite;
+  animation: pulse-wave 3.2s ease-out infinite;
   pointer-events: none;
 }
-.pulse + .pulse { animation-delay: 1.5s; }
+.pulse + .pulse { animation-delay: 1.6s; }
 @keyframes pulse-wave {
-  0% { transform: scale(0.7); opacity: 0.65; }
-  100% { transform: scale(2.8); opacity: 0; }
-}
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.75; }
+  0% { transform: scale(0.6); opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
 .you {
@@ -249,124 +282,136 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+  font-size: 1.9rem;
   background: var(--card);
-  border: 3px solid var(--ac);
+  border: 2px solid var(--ac);
   border-radius: 50%;
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 18px rgba(79, 70, 229, 0.2);
   z-index: 2;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
-.you:hover { transform: scale(1.05); }
-.you-sub { font-size: 0.75rem; font-weight: 600; color: var(--ac); margin-top: -4px; }
+.you-sub {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--ac);
+  margin-top: -3px;
+}
 
-/* Peers Bubble */
+/* Bubbles (Found Peers) */
 .bubble {
   position: absolute;
   left: var(--x);
   top: var(--y);
   translate: -50% -50%;
-  width: 90px;
+  width: 70px;
   background: none;
   border: 0;
   padding: 0;
-  animation: pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  animation: pop 0.3s cubic-bezier(0.2, 0.8, 0.3, 1) both;
   z-index: 3;
 }
 .bubble > span {
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 3px;
-  animation: bob 4s ease-in-out infinite;
 }
 .bubble b {
   display: grid;
   place-items: center;
-  width: 62px;
-  height: 62px;
-  font-size: 2rem;
+  width: 52px;
+  height: 52px;
+  font-size: 1.7rem;
   border-radius: 50%;
-  background: hsl(var(--h) 85% var(--bl));
-  border: 3px solid var(--card);
-  box-shadow: 0 6px 18px rgba(40, 20, 120, 0.18);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--card);
+  border: 2px solid var(--ac);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.15s ease;
 }
-.bubble:hover b { transform: scale(1.1); }
+.bubble:hover b, .bubble:active b { transform: scale(1.08); }
 .bubble em {
   font-style: normal;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  max-width: 86px;
+  max-width: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   background: var(--card);
-  padding: 2px 8px;
+  padding: 1px 6px;
   border-radius: 99px;
   border: 1px solid var(--line);
 }
 .bubble.wait b {
   animation: wig 0.6s ease-in-out infinite;
-  outline: 3px dashed var(--ac);
-  outline-offset: 4px;
+  border-style: dashed;
 }
 
-@keyframes pop { from { scale: 0; opacity: 0; } }
-@keyframes bob { 50% { transform: translateY(-7px); } }
-@keyframes wig { 25% { rotate: -10deg; } 75% { rotate: 10deg; } }
+@keyframes pop { from { transform: scale(0.7); opacity: 0; } }
+@keyframes wig { 25% { rotate: -8deg; } 75% { rotate: 8deg; } }
 
 .hint {
   text-align: center;
   color: var(--mut);
-  margin: 12px 16px 0;
-  font-size: 0.95rem;
+  margin: 10px 12px 0;
+  font-size: 0.88rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
 }
 
-/* Card & Buttons */
+/* Cards & Generic Elements */
 .card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 22px;
-  margin-top: 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 10px;
+  box-shadow: var(--shadow-sm);
 }
-.card h2 { font-size: 1.15rem; font-weight: 600; margin: 0 0 6px; }
-.card p { margin: 0 0 16px; color: var(--mut); font-size: 0.93rem; }
+.card h2 { font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; }
+.card p { margin: 0 0 14px; color: var(--mut); font-size: 0.88rem; }
 
-.pri, .sec {
+.pri, .sec, .ghost {
   width: 100%;
-  padding: 13px 18px;
-  border-radius: 14px;
+  padding: 11px 16px;
+  border-radius: 12px;
   font-weight: 600;
-  border: 1px solid var(--line);
-  background: var(--card);
+  font-size: 0.92rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
+  border: 1px solid transparent;
 }
 .pri {
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  color: var(--acink);
-  border-color: transparent;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.28);
+  background: var(--ac);
+  color: var(--ac-ink);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
 }
-.pri:hover { opacity: 0.96; }
-.pri:active, .sec:active { transform: scale(0.98); }
+.pri:hover { background: var(--ac-hover); }
+
+.sec {
+  background: var(--ac-subtle);
+  color: var(--ac);
+  border-color: var(--ac-subtle);
+}
+
+.ghost {
+  background: var(--btn-ghost);
+  color: var(--mut);
+  border-color: var(--line);
+}
+.ghost:hover { background: var(--btn-ghost-hover); color: var(--ink); }
 
 .or {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: var(--mut);
-  margin: 16px 0;
-  font-size: 0.88rem;
+  margin: 14px 0;
+  font-size: 0.82rem;
 }
 .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
@@ -375,321 +420,422 @@ input {
   font: inherit;
   min-width: 0;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--bg);
   color: var(--ink);
-  padding: 12px 16px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 10px 14px;
 }
 input:focus {
   outline: none;
   border-color: var(--ac);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 0 0 2px var(--ac-subtle);
 }
 #code {
   flex: 1;
   text-align: center;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.25em;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   text-transform: uppercase;
 }
-.join .pri { width: auto; padding: 0 24px; white-space: nowrap; }
+.join .pri { width: auto; padding: 0 18px; white-space: nowrap; }
+
 .code {
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 7vw, 2.3rem);
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-align: center;
   color: var(--ac);
-  margin: 10px 0;
+  margin: 8px 0;
 }
 .qr {
-  width: 220px;
-  margin: 12px auto;
+  width: min(200px, 60vw);
+  margin: 8px auto;
   background: #fff;
-  padding: 14px;
-  border-radius: 18px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  animation: pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
 }
 .qr svg { display: block; width: 100%; height: auto; }
 
-/* Peer Connected Bar */
+/* Connected Peer Bar */
 .peerbar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 14px 18px;
-  margin-top: 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-top: 8px;
+  box-shadow: var(--shadow-sm);
 }
-.peerbar > b { font-size: 2.2rem; font-weight: 400; }
+.peerbar > b { font-size: 1.9rem; line-height: 1; }
 .peerbar div { flex: 1; min-width: 0; }
-.peerbar strong { display: block; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.peerbar small { display: flex; align-items: center; gap: 6px; color: var(--mut); font-size: 0.88rem; }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); }
-.dot.on { background: var(--ok); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25); }
+.peerbar strong { display: block; font-size: 0.98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.peerbar small { display: flex; align-items: center; gap: 6px; color: var(--mut); font-size: 0.82rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); }
+.dot.on { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-subtle); }
 .peerbar button {
   border: 1px solid var(--line);
-  background: var(--bg);
-  border-radius: 12px;
-  padding: 8px 14px;
-  font-size: 0.88rem;
+  background: var(--btn-ghost);
+  border-radius: 10px;
+  padding: 6px 11px;
+  font-size: 0.82rem;
   font-weight: 500;
 }
-.peerbar button:hover { background: var(--bad-bg); color: var(--bad); border-color: var(--bad); }
+.peerbar button:hover { color: var(--bad); }
 
 /* File Drop Area */
 .drop {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
   text-align: center;
-  margin-top: 16px;
-  padding: 38px 20px;
-  border: 2px dashed var(--ac);
-  border-radius: 24px;
-  color: var(--ac);
-  font-weight: 600;
-  cursor: pointer;
+  margin-top: 12px;
+  padding: 28px 16px;
+  border: 2px dashed var(--line);
+  border-radius: 18px;
   background: var(--card);
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
-.drop span { font-size: 2.8rem; line-height: 1; }
-.drop.over {
-  background: var(--ac-light);
-  transform: scale(1.02);
-  border-color: var(--pink);
+.drop-icon { font-size: 2.2rem; line-height: 1; margin-bottom: 2px; }
+.drop-title { font-weight: 600; font-size: 0.98rem; }
+.drop small { color: var(--mut); font-size: 0.82rem; }
+.drop:hover, .drop.over {
+  border-color: var(--ac);
+  background: var(--ac-subtle);
 }
-.drop small { color: var(--mut); font-weight: 400; font-size: 0.9rem; }
 
-/* Transfer File Items & Previews */
-.item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 14px;
+/* ====================================================
+   NEW MODERN AIRDROP-STYLE UX FOR INCOMING & TRANSFERS
+   ==================================================== */
+
+/* Floating Request Sheet (Connection or File Offer) */
+.request-sheet {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  translate: -50% 120%;
+  width: min(92vw, 420px);
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 14px;
-  margin-top: 12px;
-  animation: pop 0.35s ease both;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.item-thumb-box {
-  grid-row: span 3;
-  width: 64px;
-  height: 64px;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--bg);
+.request-sheet.active {
+  translate: -50% 0;
+}
+
+.req-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.req-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ac-subtle);
   border: 1px solid var(--line);
   display: grid;
   place-items: center;
-  align-self: center;
-  cursor: pointer;
-  position: relative;
+  font-size: 1.6rem;
+  flex-shrink: 0;
 }
-.item-thumb-box img {
+.req-info {
+  flex: 1;
+  min-width: 0;
+}
+.req-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ac);
+  background: var(--ac-subtle);
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-bottom: 2px;
+}
+.req-sender {
+  font-weight: 600;
+  font-size: 0.96rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.req-sub {
+  font-size: 0.82rem;
+  color: var(--mut);
+}
+
+/* Preview Box inside Sheet or Card */
+.req-preview-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.req-preview-media {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.req-preview-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.2s ease;
 }
-.item-thumb-box:hover img { transform: scale(1.08); }
-.item-thumb-box span { font-size: 2rem; }
-
-.item .n {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+.req-preview-meta {
+  flex: 1;
+  min-width: 0;
+}
+.req-file-name {
   font-weight: 600;
-  font-size: 0.95rem;
-}
-.item .n span:first-child {
-  word-break: break-all;
-  max-width: 260px;
-}
-.item .n span:last-child {
-  color: var(--mut);
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.88rem;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.item .st { color: var(--mut); font-size: 0.86rem; }
-.bar {
-  height: 7px;
+.req-file-size {
+  display: inline-block;
+  font-size: 0.76rem;
+  color: var(--mut);
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 2px 8px;
   border-radius: 99px;
+  margin-top: 4px;
+}
+
+.req-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+/* File Transfer List Items */
+.item-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: pop 0.25s ease both;
+}
+
+.item-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-details {
+  flex: 1;
+  min-width: 0;
+}
+.item-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--mut);
+  margin-top: 2px;
+}
+
+.item-progress-track {
+  height: 6px;
   background: var(--line);
+  border-radius: 99px;
   overflow: hidden;
 }
-.bar i {
-  display: block;
+.item-progress-bar {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, var(--ac) 0%, var(--pink) 100%);
+  background: var(--ac);
   border-radius: 99px;
   transition: width 0.15s linear;
 }
-.act { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-.act:empty { display: none; }
-.act > * {
-  padding: 8px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: var(--card);
-  text-decoration: none;
-  color: inherit;
-  font-size: 0.88rem;
+
+.item-status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--mut);
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 2px;
+}
+.item-actions:empty { display: none; }
+.btn-compact {
+  padding: 6px 13px;
+  border-radius: 9px;
+  font-size: 0.83rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  cursor: pointer;
+  gap: 5px;
+  text-decoration: none;
 }
-.act .y {
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+.btn-compact.primary {
+  background: var(--ac);
+  color: var(--ac-ink);
 }
-.act .btn-pv {
-  background: var(--ac-light);
-  color: var(--ac);
-  border-color: var(--ac);
+.btn-compact.outline {
+  background: var(--btn-ghost);
+  color: var(--ink);
+  border: 1px solid var(--line);
 }
 
-/* Dialogs */
+/* Dialogs & Lightbox */
 dialog {
   border: 0;
-  border-radius: 24px;
-  padding: 24px;
-  width: min(90vw, 400px);
+  border-radius: 20px;
+  padding: 20px;
+  width: min(90vw, 360px);
   background: var(--card);
   color: var(--ink);
-  animation: pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-lg);
+  margin: auto;
 }
 dialog::backdrop {
-  background: rgba(12, 10, 29, 0.65);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
 }
-dialog h3 { margin: 0 0 6px; font-size: 1.25rem; font-weight: 700; }
-dialog p { margin: 0 0 16px; color: var(--mut); font-size: 0.93rem; }
-dialog input { width: 100%; margin-bottom: 14px; }
-dialog .row { display: flex; gap: 10px; margin-top: 14px; }
-dialog .row button {
-  flex: 1;
-  padding: 12px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background: var(--card);
-  font-weight: 600;
-}
-dialog .row .y {
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  color: #fff;
-  border-color: transparent;
-}
+dialog h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 4px; }
+dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 
-/* Avatar Grid Picker in Dialog */
 .av-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 .av-grid button {
-  font-size: 1.8rem;
-  padding: 8px;
-  border-radius: 14px;
+  font-size: 1.6rem;
+  padding: 6px;
+  border-radius: 10px;
   border: 2px solid transparent;
   background: var(--bg);
 }
-.av-grid button:hover { background: var(--ac-light); }
 .av-grid button.sel {
   border-color: var(--ac);
-  background: var(--ac-light);
-  transform: scale(1.08);
+  background: var(--ac-subtle);
+  transform: scale(1.05);
 }
 
-/* Lightbox Image Preview Dialog */
 #lightbox {
-  width: min(92vw, 680px);
-  max-height: 90vh;
-  padding: 16px;
-  text-align: center;
+  width: min(92vw, 560px);
+  max-height: 85vh;
+  padding: 14px;
 }
 #lightbox-img {
-  max-width: 100%;
-  max-height: 65vh;
-  border-radius: 16px;
+  width: 100%;
+  max-height: 60vh;
+  border-radius: 12px;
   object-fit: contain;
   display: block;
-  margin: 0 auto 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  margin: 0 auto 10px;
+  background: #000;
 }
 #lightbox-name {
+  font-size: 0.88rem;
   font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  text-align: center;
   word-break: break-all;
 }
 
-/* Toast & Effects */
+/* Toast */
 #toast {
   position: fixed;
   left: 50%;
-  bottom: 28px;
+  bottom: 24px;
   translate: -50% 20px;
   background: var(--ink);
   color: var(--bg);
-  padding: 11px 20px;
+  padding: 8px 16px;
   border-radius: 99px;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  max-width: 90vw;
-  text-align: center;
-  font-size: 0.94rem;
+  transition: all 0.25s ease;
+  max-width: 88vw;
+  font-size: 0.88rem;
   font-weight: 500;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  z-index: 100;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
 }
 #toast.on { opacity: 1; translate: -50% 0; }
-
-#fx span {
-  position: fixed;
-  left: 50%;
-  bottom: 25%;
-  font-size: 1.8rem;
-  pointer-events: none;
-  animation: fly 1.2s ease-out forwards;
-  z-index: 99;
-}
-@keyframes fly {
-  to { transform: translate(var(--dx), var(--dy)) rotate(45deg); opacity: 0; }
-}
-
-:focus-visible { outline: 3px solid var(--ac); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-  #fx { display: none; }
-}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <!-- Minimal Clean Header -->
   <header class="top">
     <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
-      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop Logo" width="38" height="38">
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="32" height="32">
       <span class="brand-title">CatDrop</span>
+      <span class="brand-badge">P2P</span>
     </a>
     <div class="top-actions">
-      <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป CatDrop">📲 ติดตั้ง</button>
+      <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป">📲 ติดตั้ง</button>
       <button class="btn-icon" id="b-sound" title="เปิด/ปิดเสียง" aria-label="เปิดหรือปิดเสียงแจ้งเตือน">🔔</button>
       <button class="me" id="me" aria-label="เปลี่ยนชื่อและอวาตาร์แมว">
         <span id="me-av">🐱</span>
@@ -698,32 +844,35 @@ dialog .row .y {
     </div>
   </header>
 
+  <!-- Clean Segment Switcher -->
   <nav class="seg" id="seg" data-t="near">
     <i></i>
-    <button data-t="near" class="on">🐾 ใกล้ฉัน (Wi-Fi)</button>
+    <button data-t="near" class="on">🐾 Wi-Fi เดียวกัน</button>
     <button data-t="qr">⚡ QR Code / รหัส</button>
   </nav>
 
-  <!-- จับคู่ใน Wi-Fi เดียวกัน -->
+  <!-- Wi-Fi Radar View (100% Mobile Responsive) -->
   <section id="v-near">
-    <div class="radar">
-      <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-      <div class="pulse"></div><div class="pulse"></div>
-      <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
-        <span id="you-av">🐱</span>
-        <span class="you-sub">เครื่องนี้</span>
+    <div class="radar-wrap">
+      <div class="radar">
+        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+        <div class="pulse"></div><div class="pulse"></div>
+        <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
+          <span id="you-av">🐱</span>
+          <span class="you-sub">คุณ</span>
+        </div>
+        <div id="peers"></div>
       </div>
-      <div id="peers"></div>
     </div>
     <p class="hint" id="near-msg" aria-live="polite">กำลังค้นหาอุปกรณ์ใน Wi-Fi เดียวกัน…</p>
   </section>
 
-  <!-- QR Code / รหัสห้อง -->
+  <!-- QR Code Section -->
   <section id="v-qr" hidden>
     <div class="card" id="qr-home">
-      <h2>🌐 ส่งข้ามทุกเครือข่าย</h2>
-      <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ 4G/5G</p>
-      <button class="pri" id="b-host">📱 สร้างห้องและแสดง QR Code</button>
+      <h2>ส่งข้ามเครือข่าย</h2>
+      <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ</p>
+      <button class="pri" id="b-host">แสดง QR Code เชื่อมต่อ</button>
       <div class="or">หรือกรอกรหัสจากอีกเครื่อง</div>
       <div class="join">
         <input id="code" maxlength="6" placeholder="รหัส 6 หลัก" autocomplete="off" autocapitalize="characters" aria-label="รหัสห้อง">
@@ -731,15 +880,15 @@ dialog .row .y {
       </div>
     </div>
     <div class="card" id="qr-host" hidden>
-      <h2>📲 ให้อีกเครื่องสแกน QR นี้</h2>
-      <p>หรือเปิดเว็บนี้บนอีกเครื่องแล้วกรอกรหัสด้านล่าง</p>
+      <h2>ให้อีกเครื่องสแกนเพื่อส่งไฟล์</h2>
+      <p>หรือกรอกรหัส 6 หลักด้านล่าง</p>
       <div class="qr" id="h-qr"></div>
       <div class="code" id="h-code"></div>
-      <button class="sec" id="b-copy-link" style="margin-top: 10px;">📋 คัดลอกลิงก์ส่งต่อให้เพื่อน</button>
+      <button class="ghost" id="b-copy-link" style="margin-top: 8px;">📋 คัดลอกลิงก์ส่งให้เพื่อน</button>
     </div>
   </section>
 
-  <!-- ส่งไฟล์ (Peer Connected) -->
+  <!-- Connected View (Ready to Send/Receive) -->
   <section id="v-link" hidden>
     <div class="peerbar">
       <b id="l-av">🐱</b>
@@ -751,9 +900,9 @@ dialog .row .y {
     </div>
 
     <label class="drop" id="drop" tabindex="0">
-      <span>🐱 📤</span>
-      <div>แตะเพื่อเลือกไฟล์ หรือลากไฟล์มาวางที่นี่</div>
-      <small>ส่งรูปภาพ วิดีโอ หรือเอกสารได้ไม่จำกัดขนาด</small>
+      <span class="drop-icon">📤</span>
+      <div class="drop-title">แตะเพื่อเลือกไฟล์ หรือลากมาวาง</div>
+      <small>ส่งรูปภาพ วิดีโอ หรือเอกสารได้ทุกขนาด</small>
       <input type="file" id="file" multiple hidden>
     </label>
 
@@ -761,38 +910,58 @@ dialog .row .y {
   </section>
 </div>
 
-<!-- Modal เปลี่ยนชื่อ & อวาตาร์แมว -->
+<!-- ==========================================================
+     AIRDROP-STYLE FLOATING REQUEST SHEET (MODERN & INTUITIVE)
+     ========================================================== -->
+<div id="request-sheet" class="request-sheet" role="dialog" aria-modal="true" aria-labelledby="req-sender">
+  <div class="req-header">
+    <div class="req-av" id="req-av">🐱</div>
+    <div class="req-info">
+      <span class="req-badge" id="req-badge">คำขอเชื่อมต่อ</span>
+      <div class="req-sender" id="req-sender">ชื่อเครื่อง</div>
+      <div class="req-sub" id="req-sub">ต้องการเชื่อมต่อกับคุณ</div>
+    </div>
+  </div>
+
+  <div class="req-preview-box" id="req-file-box" hidden>
+    <div class="req-preview-media" id="req-media">📁</div>
+    <div class="req-preview-meta">
+      <div class="req-file-name" id="req-filename">filename.jpg</div>
+      <div class="req-file-size" id="req-filesize">2.4 MB</div>
+    </div>
+  </div>
+
+  <div class="req-actions">
+    <button type="button" class="ghost" id="req-decline">ปฏิเสธ</button>
+    <button type="button" class="pri" id="req-accept">ยอมรับ</button>
+  </div>
+</div>
+
+<!-- Modal แต่งตัวน้องแมว -->
 <dialog id="dlg-me">
   <form method="dialog">
-    <h3>🐾 แต่งตัวน้องแมวของคุณ</h3>
-    <p>เลือกอวาตาร์แมวและตั้งชื่อเครื่องสำหรับส่งไฟล์</p>
+    <h3>🐾 ตั้งชื่อและเลือกแมว</h3>
+    <p>เพื่อนในเครือข่ายจะมองเห็นชื่อนี้</p>
     <div class="av-grid" id="av-grid"></div>
     <input id="me-input" maxlength="20" placeholder="ชื่อน้องแมวของคุณ" aria-label="ชื่อน้องแมว">
-    <div class="row">
-      <button value="n" type="button" id="dlg-me-cancel">ยกเลิก</button>
-      <button value="y" class="y" id="dlg-me-save">บันทึก</button>
+    <div style="display:flex; gap:8px; margin-top:14px;">
+      <button value="n" type="button" class="ghost" id="dlg-me-cancel" style="flex:1;">ยกเลิก</button>
+      <button value="y" class="pri" id="dlg-me-save" style="flex:1;">บันทึก</button>
     </div>
   </form>
 </dialog>
 
-<!-- Modal ยืนยันทั่วไป -->
-<dialog id="dlg"><form method="dialog">
-  <h3 id="d-t"></h3><p id="d-p"></p><input id="d-i" maxlength="20">
-  <div class="row"><button value="n" id="d-no"></button><button value="y" id="d-yes" class="y"></button></div>
-</form></dialog>
-
 <!-- Lightbox Modal พรีวิวรูปภาพ -->
 <dialog id="lightbox">
-  <img id="lightbox-img" src="" alt="ภาพพรีวิว">
+  <img id="lightbox-img" src="" alt="พรีวิว">
   <div id="lightbox-name"></div>
-  <div class="row">
-    <button type="button" id="lightbox-close">ปิด</button>
-    <a id="lightbox-dl" class="y pri" download>💾 บันทึกรูปภาพ</a>
+  <div style="display:flex; gap:8px;">
+    <button type="button" class="ghost" id="lightbox-close" style="flex:1;">ปิด</button>
+    <a id="lightbox-dl" class="pri" download style="flex:1.4; text-decoration:none;">💾 บันทึกรูปภาพ</a>
   </div>
 </dialog>
 
 <div id="toast" role="status"></div>
-<div id="fx" aria-hidden="true"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -804,9 +973,9 @@ const $ = s => document.querySelector(s);
 const SLOTS = 8, CHUNK = 65536, MAXBUF = 4194304;
 const CAT_AVATARS = ['🐱', '😸', '😹', '😻', '😼', '😽', '🙀', '🐈‍⬛', '🐾', '🦁'];
 const CAT_NAMES = [
-  'แมวส้มจอมซน', 'แมวสามสีนำโชค', 'แมวขาวมณี', 'แมวดำตาหวาน', 
-  'สก็อตติชขี้อ้อน', 'เปอร์เซียขนฟู', 'วิเชียรมาศสุดเท่', 'แร็กดอลล์นุ่มนิ่ม', 
-  'ชินชิลล่าตัวกลม', 'แมวจรยอดนักสู้'
+  'แมวส้ม', 'แมวสามสี', 'แมวขาวมณี', 'แมวดำตาหวาน', 
+  'สก็อตติช', 'เปอร์เซีย', 'วิเชียรมาศ', 'แร็กดอลล์', 
+  'ชินชิลล่า', 'แมวจร'
 ];
 const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
@@ -815,7 +984,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const hue = s => Math.abs([...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7)) % 360;
 const fmt = n => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : n < 1073741824 ? (n / 1048576).toFixed(1) + ' MB' : (n / 1073741824).toFixed(2) + ' GB';
 
-/* ---------- เสียงสังเคราะห์ (Web Audio API Synthesizer) ---------- */
+/* ---------- ระบบเสียงแบบนุ่มนวล เรียบหรู (Apple/iOS Style Haptic Tones) ---------- */
 let soundEnabled = localStorage.getItem('catdrop_sound') !== 'off';
 let audioCtx = null;
 
@@ -825,51 +994,54 @@ function getAudioCtx() {
   return audioCtx;
 }
 
-function playSound(type) {
+function playTone(type) {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioCtx();
     const now = ctx.currentTime;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
 
-    if (type === 'meow' || type === 'offer') {
-      // เสียงเหมียวน่ารักเวลามีไฟล์เข้ามา
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(560, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-      osc.frequency.exponentialRampToValueAtTime(620, now + 0.35);
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-      osc.start(now);
-      osc.stop(now + 0.4);
-    } else if (type === 'success') {
-      // เสียงกริ๊งยินดีเมื่อส่งเสร็จ
-      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = 'triangle';
-        o.frequency.value = freq;
-        o.connect(g);
-        g.connect(ctx.destination);
-        const t = now + i * 0.08;
-        g.gain.setValueAtTime(0.001, t);
-        g.gain.linearRampToValueAtTime(0.18, t + 0.02);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
-        o.start(t);
-        o.stop(t + 0.35);
+    if (type === 'incoming') {
+      // Soft, elegant double chime (AirDrop style ping)
+      [740, 932].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+        gain.gain.setValueAtTime(0.001, now + idx * 0.1);
+        gain.gain.linearRampToValueAtTime(0.12, now + idx * 0.1 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.28);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.1);
+        osc.stop(now + idx * 0.1 + 0.3);
       });
-    } else if (type === 'pop') {
+    } else if (type === 'success') {
+      // Gentle satisfaction chime
+      [1046.5, 1318.5].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+        gain.gain.setValueAtTime(0.001, now + idx * 0.09);
+        gain.gain.linearRampToValueAtTime(0.14, now + idx * 0.09 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.09);
+        osc.stop(now + idx * 0.09 + 0.36);
+      });
+    } else if (type === 'tap') {
+      // Subtle haptic click
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(750, now);
-      osc.frequency.exponentialRampToValueAtTime(280, now + 0.08);
-      gain.gain.setValueAtTime(0.15, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      osc.frequency.setValueAtTime(400, now);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
       osc.start(now);
-      osc.stop(now + 0.09);
+      osc.stop(now + 0.05);
     }
   } catch (e) {}
 }
@@ -881,12 +1053,12 @@ $('#b-sound').onclick = () => {
   soundEnabled = !soundEnabled;
   localStorage.setItem('catdrop_sound', soundEnabled ? 'on' : 'off');
   updateSoundButton();
-  toast(soundEnabled ? 'เปิดเสียงแจ้งเตือนแล้ว 🐾' : 'ปิดเสียงแจ้งเตือนแล้ว');
-  if (soundEnabled) playSound('pop');
+  toast(soundEnabled ? 'เปิดเสียงแจ้งเตือนแล้ว' : 'ปิดเสียงแจ้งเตือนแล้ว');
+  if (soundEnabled) playTone('tap');
 };
 updateSoundButton();
 
-/* ---------- การแจ้งเตือนเบราว์เซอร์ (System Notification) ---------- */
+/* ---------- การแจ้งเตือนเบราว์เซอร์ ---------- */
 function notifyUser(title, body) {
   if (document.hidden && 'Notification' in window && Notification.permission === 'granted') {
     try {
@@ -923,7 +1095,7 @@ function paintMe() {
   $('#me-name').textContent = me.name;
 }
 
-/* Custom Avatar & Name Picker Dialog */
+/* Modal แต่งตัวน้องแมว */
 let selectedAv = me.av;
 function openMeDialog() {
   selectedAv = me.av;
@@ -938,7 +1110,7 @@ function openMeDialog() {
       grid.querySelectorAll('button').forEach(b => b.classList.remove('sel'));
       btn.classList.add('sel');
       selectedAv = emoji;
-      playSound('pop');
+      playTone('tap');
     };
     grid.append(btn);
   });
@@ -955,17 +1127,14 @@ $('#dlg-me-save').onclick = (e) => {
   saveMe();
   paintMe();
   $('#dlg-me').close();
-  toast('บันทึกข้อมูลน้องแมวแล้ว 🐾');
-  playSound('pop');
-  if (peer && !peer.destroyed) {
-    // รีสตาร์ตการค้นหาเพื่อกระจายชื่อใหม่
-    if (mode === 'near') near();
-  }
+  toast('บันทึกข้อมูลเรียบร้อย');
+  playTone('tap');
+  if (peer && !peer.destroyed && mode === 'near') near();
 };
 $('#me').onclick = openMeDialog;
 $('#you').onclick = openMeDialog;
 
-/* ---------- PWA Setup & Install Prompt ---------- */
+/* ---------- PWA Setup ---------- */
 let deferredPrompt = null;
 const installBtn = $('#b-install');
 
@@ -980,14 +1149,14 @@ installBtn.onclick = async () => {
   deferredPrompt.prompt();
   const { outcome } = await deferredPrompt.userChoice;
   if (outcome === 'accepted') {
-    toast('กำลังติดตั้ง CatDrop… ขอบคุณครับ! 🐾');
+    toast('กำลังติดตั้ง CatDrop…');
   }
   deferredPrompt = null;
   installBtn.hidden = true;
 };
 
 window.addEventListener('appinstalled', () => {
-  toast('ติดตั้ง CatDrop เรียบร้อยแล้ว! 🐾');
+  toast('ติดตั้ง CatDrop เรียบร้อยแล้ว!');
   installBtn.hidden = true;
 });
 
@@ -1012,41 +1181,10 @@ function toast(m) {
   t.textContent = m;
   t.classList.add('on');
   clearTimeout(tt);
-  tt = setTimeout(() => t.classList.remove('on'), 3400);
+  tt = setTimeout(() => t.classList.remove('on'), 3000);
 }
 
 const msg = t => $('#near-msg').textContent = t;
-
-function burst() {
-  for (let i = 0; i < 18; i++) {
-    const s = document.createElement('span');
-    s.textContent = rnd(['🐾', '🐱', '✨', '💜', '🐟', '🧶', '💖']);
-    s.style.setProperty('--dx', (Math.random() * 280 - 140) + 'px');
-    s.style.setProperty('--dy', -(120 + Math.random() * 220) + 'px');
-    s.style.animationDelay = Math.random() * 0.15 + 's';
-    $('#fx').append(s);
-    setTimeout(() => s.remove(), 1600);
-  }
-}
-
-function ask(t, p, yes, no, inp) {
-  const d = $('#dlg');
-  if (d.open) return Promise.resolve(false);
-  return new Promise(r => {
-    $('#d-t').textContent = t;
-    $('#d-p').textContent = p || '';
-    const i = $('#d-i');
-    i.hidden = inp == null;
-    i.value = inp || '';
-    i.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); d.close('y'); } };
-    const n = $('#d-no');
-    n.hidden = !no;
-    n.textContent = no || '';
-    $('#d-yes').textContent = yes;
-    d.onclose = () => r(d.returnValue === 'y' ? (inp != null ? i.value.trim() : true) : false);
-    d.showModal();
-  });
-}
 
 async function keepAwake() {
   try { if (navigator.wakeLock) wl = await navigator.wakeLock.request('screen'); } catch {}
@@ -1055,13 +1193,13 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden && ac
 
 /* ---------- Helper พรีวิวไฟล์ & ประเภทไฟล์ ---------- */
 function getFileCat(mime, name) {
-  if (mime.startsWith('image/')) return { icon: '🖼️', type: 'image' };
-  if (mime.startsWith('video/')) return { icon: '🎬', type: 'video' };
-  if (mime.startsWith('audio/')) return { icon: '🎵', type: 'audio' };
-  if (mime.includes('pdf')) return { icon: '📄', type: 'pdf' };
-  if (mime.includes('zip') || mime.includes('rar') || mime.includes('tar') || mime.includes('7z')) return { icon: '📦', type: 'archive' };
-  if (/\.(docx?|xlsx?|pptx?|txt|md|csv)$/i.test(name)) return { icon: '📝', type: 'doc' };
-  return { icon: '📁', type: 'file' };
+  if (mime.startsWith('image/')) return { icon: '🖼️', type: 'image', label: 'รูปภาพ' };
+  if (mime.startsWith('video/')) return { icon: '🎬', type: 'video', label: 'วิดีโอ' };
+  if (mime.startsWith('audio/')) return { icon: '🎵', type: 'audio', label: 'เสียง' };
+  if (mime.includes('pdf')) return { icon: '📄', type: 'pdf', label: 'เอกสาร PDF' };
+  if (mime.includes('zip') || mime.includes('rar') || mime.includes('tar') || mime.includes('7z')) return { icon: '📦', type: 'archive', label: 'ไฟล์บีบอัด' };
+  if (/\.(docx?|xlsx?|pptx?|txt|md|csv)$/i.test(name)) return { icon: '📝', type: 'doc', label: 'เอกสาร' };
+  return { icon: '📁', type: 'file', label: 'ไฟล์' };
 }
 
 function makeThumb(file) {
@@ -1103,6 +1241,55 @@ function openLightbox(src, name, blobUrl) {
   lb.showModal();
 }
 $('#lightbox-close').onclick = () => $('#lightbox').close();
+
+/* ========================================================
+   AIRDROP-STYLE REQUEST SHEET CONTROLLER (CONNECTION & FILE)
+   ======================================================== */
+let activeRequestResolve = null;
+
+function promptRequestSheet({ avatar, name, badge, subtitle, file }) {
+  const sheet = $('#request-sheet');
+  $('#req-av').textContent = avatar || '🐱';
+  $('#req-sender').textContent = name || 'อุปกรณ์';
+  $('#req-badge').textContent = badge || 'คำขอ';
+  $('#req-sub').textContent = subtitle || '';
+
+  const fileBox = $('#req-file-box');
+  if (file) {
+    fileBox.hidden = false;
+    $('#req-filename').textContent = file.name;
+    $('#req-filesize').textContent = fmt(file.size);
+    const media = $('#req-media');
+    if (file.thumb) {
+      media.innerHTML = `<img src="${file.thumb}" alt="thumb">`;
+      media.onclick = () => openLightbox(file.thumb, file.name);
+    } else {
+      media.innerHTML = `<span>${file.icon || '📁'}</span>`;
+      media.onclick = null;
+    }
+    $('#req-accept').textContent = '↓ รับไฟล์';
+  } else {
+    fileBox.hidden = true;
+    $('#req-accept').textContent = 'ยอมรับ';
+  }
+
+  playTone('incoming');
+  sheet.classList.add('active');
+
+  return new Promise(resolve => {
+    activeRequestResolve = resolve;
+    $('#req-accept').onclick = () => {
+      playTone('tap');
+      sheet.classList.remove('active');
+      resolve(true);
+    };
+    $('#req-decline').onclick = () => {
+      playTone('tap');
+      sheet.classList.remove('active');
+      resolve(false);
+    };
+  });
+}
 
 /* ---------- เริ่ม / หยุด โหมด ---------- */
 function stop() {
@@ -1173,7 +1360,6 @@ function addBubble(c) {
   if (peers[c.peer]) peers[c.peer].el.remove();
   const el = document.createElement('button');
   el.className = 'bubble';
-  el.style.setProperty('--h', hue(c.info.name));
   el.innerHTML = '<span><b></b><em></em></span>';
   el.querySelector('b').textContent = c.info.av;
   el.querySelector('em').textContent = c.info.name;
@@ -1181,8 +1367,8 @@ function addBubble(c) {
     if (el.classList.contains('wait')) return;
     el.classList.add('wait');
     c.send({ type: 'pair' });
-    playSound('pop');
-    toast('ส่งคำขอจับคู่ไปที่ ' + c.info.name + ' แล้ว 🐾');
+    playTone('tap');
+    toast('ส่งคำขอเชื่อมต่อไปที่ ' + c.info.name + ' แล้ว');
     setTimeout(() => el.classList.remove('wait'), 30000);
   };
   $('#peers').append(el);
@@ -1190,16 +1376,17 @@ function addBubble(c) {
   lay();
 }
 
+/* คำนวณตำแหน่ง Bubble ให้พอดีกับหน้าจอมือถือ ไม่ล้นขอบเด็ดขาด */
 function lay() {
   const k = Object.values(peers);
   k.forEach((p, i) => {
     const a = i / k.length * 2 * Math.PI - Math.PI / 2;
-    p.el.style.setProperty('--x', 50 + 38 * Math.cos(a) + '%');
-    p.el.style.setProperty('--y', 50 + 38 * Math.sin(a) + '%');
-    p.el.style.animationDelay = p.el.firstChild.style.animationDelay = (i * -0.7) + 's';
+    // ใช้รัศมี 33% เพื่อให้อยู่ข้างในกรอบ Radar เสมอ
+    p.el.style.setProperty('--x', (50 + 33 * Math.cos(a)) + '%');
+    p.el.style.setProperty('--y', (50 + 33 * Math.sin(a)) + '%');
   });
   if (mode === 'near' && peer) {
-    msg(k.length ? 'แตะที่น้องแมวของเพื่อนเพื่อเชื่อมต่อและส่งไฟล์ 🐾' : 'ยังไม่พบใคร เปิดเว็บนี้บนอีกเครื่องที่ต่อ Wi-Fi เดียวกัน');
+    msg(k.length ? 'แตะที่อุปกรณ์เพื่อเริ่มเชื่อมต่อและส่งไฟล์' : 'ยังไม่พบอุปกรณ์ เปิดหน้านี้บนอีกเครื่องที่ต่อ Wi-Fi เดียวกัน');
   }
 }
 
@@ -1219,7 +1406,7 @@ function host() {
     $('#qr-home').hidden = true;
     $('#qr-host').hidden = false;
     $('#b-copy-link').onclick = () => {
-      navigator.clipboard.writeText(roomUrl).then(() => toast('คัดลอกลิงก์ห้องแล้ว! 🐾'));
+      navigator.clipboard.writeText(roomUrl).then(() => toast('คัดลอกลิงก์เรียบร้อย!'));
     };
   });
   p.on('connection', c => {
@@ -1254,7 +1441,7 @@ function gone(c) {
   if (c === active) {
     $('#l-dot').classList.remove('on');
     $('#l-st').textContent = 'การเชื่อมต่อหลุด';
-    toast('การเชื่อมต่อหลุดจากอีกเครื่อง 😿');
+    toast('การเชื่อมต่อหลุดจากอีกเครื่อง');
   }
 }
 
@@ -1262,7 +1449,7 @@ function onData(c, m) {
   if (!m || !m.type) return;
 
   if (m.type === 'hello') {
-    c.info = { name: String(m.name || 'น้องแมว').slice(0, 24), av: String(m.av || '🐱').slice(0, 4) };
+    c.info = { name: String(m.name || 'อุปกรณ์').slice(0, 24), av: String(m.av || '🐱').slice(0, 4) };
     if (mode === 'qrhost' && !active) {
       c.send({ type: 'paired' });
       enter(c);
@@ -1271,9 +1458,15 @@ function onData(c, m) {
     }
   } else if (m.type === 'pair') {
     if (mode !== 'near' || active || !c.info) return;
-    playSound('meow');
-    notifyUser('CatDrop 🐾 มีคำขอเชื่อมต่อ', c.info.name + ' ต้องการส่งไฟล์กับคุณ');
-    ask(c.info.av + ' ' + c.info.name, 'ต้องการเชื่อมต่อเพื่อส่งไฟล์กับเครื่องนี้ไหม?', 'รับเชื่อมต่อ 🐾', 'ปฏิเสธ').then(ok => {
+    notifyUser('CatDrop มีคำขอเชื่อมต่อ', c.info.name + ' ต้องการเชื่อมต่อกับคุณ');
+
+    // เรียกใช้ Sheet ยอมรับการเชื่อมต่อดีไซน์ใหม่สไตล์ AirDrop
+    promptRequestSheet({
+      avatar: c.info.av,
+      name: c.info.name,
+      badge: 'คำขอเชื่อมต่อ',
+      subtitle: 'ต้องการเชื่อมต่อเพื่อส่งไฟล์กับเครื่องนี้'
+    }).then(ok => {
       if (ok && !active) {
         c.send({ type: 'paired' });
         enter(c);
@@ -1281,6 +1474,7 @@ function onData(c, m) {
         c.send({ type: 'declined' });
       }
     });
+
   } else if (m.type === 'paired') {
     if (!active) enter(c);
   } else if (m.type === 'declined') {
@@ -1303,67 +1497,76 @@ function enter(c) {
   $('#l-av').textContent = c.info.av;
   $('#l-name').textContent = c.info.name;
   $('#l-dot').classList.add('on');
-  $('#l-st').textContent = 'เชื่อมต่อสำเร็จ';
+  $('#l-st').textContent = 'เชื่อมต่อแล้ว';
   show('link');
   keepAwake();
-  burst();
-  playSound('success');
-  toast('เชื่อมต่อกับ ' + c.info.name + ' แล้ว! 🐾');
+  playTone('success');
+  toast('เชื่อมต่อกับ ' + c.info.name + ' แล้ว');
 }
 
-/* ---------- การส่งไฟล์ และระบบพรีวิว (File Transfer & Preview) ---------- */
+/* ---------- ระบบการส่งไฟล์ และ Render Card ดีไซน์ใหม่ ---------- */
 function renderItemCard(icon, name, size, text, thumb) {
   const d = document.createElement('div');
-  d.className = 'item';
-  
-  let thumbHtml = '';
+  d.className = 'item-card';
+
+  let mediaHtml = '';
   if (thumb) {
-    thumbHtml = `<div class="item-thumb-box" title="คลิกเพื่อขยายดูพรีวิว"><img src="${thumb}" alt="${name}"></div>`;
+    mediaHtml = `<div class="item-thumb" title="คลิกดูพรีวิว"><img src="${thumb}" alt="${name}"></div>`;
   } else {
-    thumbHtml = `<div class="item-thumb-box"><span>${icon}</span></div>`;
+    mediaHtml = `<div class="item-thumb"><span>${icon}</span></div>`;
   }
 
   d.innerHTML = `
-    ${thumbHtml}
-    <div class="n"><span>${name}</span><span>${size}</span></div>
-    <div class="bar"><i></i></div>
-    <div class="st">${text}</div>
-    <div class="act"></div>
+    <div class="item-main">
+      ${mediaHtml}
+      <div class="item-details">
+        <div class="item-name">${name}</div>
+        <div class="item-meta">
+          <span>${size}</span>
+          <span>•</span>
+          <span class="st">${text}</span>
+        </div>
+      </div>
+    </div>
+    <div class="item-progress-track">
+      <div class="item-progress-bar"></div>
+    </div>
+    <div class="item-actions"></div>
   `;
 
   if (thumb) {
-    d.querySelector('.item-thumb-box').onclick = () => openLightbox(thumb, name);
+    d.querySelector('.item-thumb').onclick = () => openLightbox(thumb, name);
   }
 
   $('#list').prepend(d);
   return {
-    fill: d.querySelector('.bar i'),
+    bar: d.querySelector('.item-progress-bar'),
     st: d.querySelector('.st'),
-    act: d.querySelector('.act'),
-    thumbBox: d.querySelector('.item-thumb-box')
+    act: d.querySelector('.item-actions'),
+    thumbBox: d.querySelector('.item-thumb')
   };
 }
 
 const prog = (u, r, t) => {
-  if (r != null) u.fill.style.width = Math.round(r * 100) + '%';
+  if (r != null) u.bar.style.width = Math.round(r * 100) + '%';
   u.st.textContent = t;
 };
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
 async function queue(files) {
   if (!active || !active.open) { toast('ยังไม่ได้เชื่อมต่อกับอีกเครื่อง'); return; }
-  
+
   for (const f of files) {
     const id = uid();
     const cat = getFileCat(f.type, f.name);
     const thumb = await makeThumb(f);
-    
+
     out[id] = {
       f,
       thumb,
-      u: renderItemCard(cat.icon, f.name, fmt(f.size), 'รออีกเครื่องกดรับไฟล์…', thumb)
+      u: renderItemCard(cat.icon, f.name, fmt(f.size), 'รออีกเครื่องตอบรับ…', thumb)
     };
-    
+
     active.send({
       type: 'offer',
       id,
@@ -1386,12 +1589,11 @@ async function stream(id) {
       while (active.dataChannel && active.dataChannel.bufferedAmount > MAXBUF) await sleep(25);
       active.send({ type: 'chunk', id, data: buf });
       off += buf.byteLength;
-      prog(o.u, off / o.f.size, 'กำลังส่ง ' + Math.round(off / o.f.size * 100) + '%');
+      prog(o.u, off / o.f.size, Math.round(off / o.f.size * 100) + '%');
     }
     active.send({ type: 'done', id });
-    prog(o.u, 1, 'ส่งเสร็จเรียบร้อยแล้ว ✓');
-    playSound('success');
-    burst();
+    prog(o.u, 1, 'ส่งเสร็จเรียบร้อย ✓');
+    playTone('success');
   } catch {
     prog(o.u, null, 'ส่งไม่สำเร็จ');
   }
@@ -1400,43 +1602,42 @@ async function stream(id) {
 function transfer(m) {
   if (m.type === 'offer') {
     const cat = getFileCat(m.mime || '', m.name);
-    playSound('offer');
-    notifyUser('CatDrop 🐾 มีไฟล์ส่งมา', `${m.name} (${fmt(m.size)})`);
+    notifyUser('มีไฟล์ส่งมา', `${m.name} (${fmt(m.size)})`);
 
-    const u = renderItemCard(cat.icon, m.name, fmt(m.size), 'มีไฟล์ส่งมา ต้องการรับไหม?', m.thumb);
-    inc[m.id] = { name: m.name, size: m.size, mime: m.mime, thumb: m.thumb, parts: [], got: 0, u };
-
-    const y = document.createElement('button');
-    const n = document.createElement('button');
-    y.className = 'y';
-    y.textContent = 'รับไฟล์ 🐾';
-    n.textContent = 'ไม่รับ';
-
-    y.onclick = () => {
-      u.act.textContent = '';
-      prog(u, 0, 'กำลังรับ 0%');
-      active.send({ type: 'accept', id: m.id });
-      playSound('pop');
-    };
-    n.onclick = () => {
-      u.act.textContent = '';
-      prog(u, null, 'ปฏิเสธไฟล์นี้แล้ว');
-      delete inc[m.id];
-      active.send({ type: 'decline', id: m.id });
-    };
-
-    u.act.append(y, n);
+    // แสดง AirDrop-Style Request Sheet ที่ด้านล่างจอ สวยงาม ชัดเจน และใช้งานง่าย
+    promptRequestSheet({
+      avatar: active && active.info ? active.info.av : '🐱',
+      name: active && active.info ? active.info.name : 'อีกเครื่อง',
+      badge: 'มีไฟล์ส่งเข้ามา',
+      subtitle: 'ต้องการส่งไฟล์มายังเครื่องนี้',
+      file: {
+        name: m.name,
+        size: m.size,
+        thumb: m.thumb,
+        icon: cat.icon
+      }
+    }).then(accepted => {
+      if (accepted) {
+        const u = renderItemCard(cat.icon, m.name, fmt(m.size), 'กำลังเตรียมรับ…', m.thumb);
+        inc[m.id] = { name: m.name, size: m.size, mime: m.mime, thumb: m.thumb, parts: [], got: 0, u };
+        prog(u, 0, '0%');
+        active.send({ type: 'accept', id: m.id });
+      } else {
+        active.send({ type: 'decline', id: m.id });
+        toast('ปฏิเสธไฟล์นี้แล้ว');
+      }
+    });
 
   } else if (m.type === 'accept') {
     stream(m.id);
   } else if (m.type === 'decline') {
-    if (out[m.id]) prog(out[m.id].u, null, 'อีกเครื่องปฏิเสธไม่รับไฟล์นี้');
+    if (out[m.id]) prog(out[m.id].u, null, 'อีกเครื่องปฏิเสธไฟล์นี้');
   } else if (m.type === 'chunk') {
     const r = inc[m.id];
     if (!r) return;
     r.parts.push(m.data);
     r.got += m.data.byteLength;
-    prog(r.u, r.got / r.size, 'กำลังรับ ' + Math.round(r.got / r.size * 100) + '%');
+    prog(r.u, r.got / r.size, Math.round(r.got / r.size * 100) + '%');
   } else if (m.type === 'done') {
     const r = inc[m.id];
     if (!r) return;
@@ -1445,34 +1646,32 @@ function transfer(m) {
     const blobUrl = URL.createObjectURL(blob);
     r.parts = [];
 
-    // อัปเดตการแสดงผลเมื่อรับเสร็จ
+    // ปุ่ม Action หลังรับเสร็จ: สะอาด ชัดเจน ไม่เกะกะ
     const dlBtn = document.createElement('a');
-    dlBtn.className = 'y';
+    dlBtn.className = 'btn-compact primary';
     dlBtn.textContent = '💾 บันทึกไฟล์';
     dlBtn.download = r.name;
     dlBtn.href = blobUrl;
     r.u.act.append(dlBtn);
 
-    // หากเป็นรูปภาพ เพิ่มปุ่มพรีวิวรูปภาพขยายเต็มตา
     if ((r.mime && r.mime.startsWith('image/')) || /\.(jpe?g|png|gif|webp|svg|bmp)$/i.test(r.name)) {
       const pvBtn = document.createElement('button');
-      pvBtn.className = 'btn-pv';
-      pvBtn.textContent = '👁️ พรีวิวรูปภาพ';
+      pvBtn.className = 'btn-compact outline';
+      pvBtn.textContent = '👁️ ดูรูปภาพ';
       pvBtn.onclick = () => openLightbox(blobUrl, r.name, blobUrl);
       r.u.act.append(pvBtn);
-      // เปลี่ยนกล่อง thumbnail ให้กดดู lightbox ภาพเต็มได้ทันที
+
       r.u.thumbBox.innerHTML = `<img src="${blobUrl}" alt="${r.name}">`;
       r.u.thumbBox.onclick = () => openLightbox(blobUrl, r.name, blobUrl);
     }
 
-    prog(r.u, 1, 'รับเสร็จสมบูรณ์แล้ว ✓');
-    playSound('success');
-    burst();
-    notifyUser('CatDrop 🐾 ดาวน์โหลดเสร็จแล้ว', `รับไฟล์ ${r.name} สำเร็จแล้ว`);
+    prog(r.u, 1, 'เสร็จสมบูรณ์ ✓');
+    playTone('success');
+    notifyUser('CatDrop รับไฟล์เสร็จแล้ว', r.name);
   }
 }
 
-/* ---------- ผูกเหตุการณ์ต่าง ๆ (Event Listeners) ---------- */
+/* ---------- ผูกเหตุการณ์ต่าง ๆ ---------- */
 document.querySelectorAll('#seg button').forEach(b => b.onclick = () => tab(b.dataset.t));
 $('#b-host').onclick = host;
 $('#b-join').onclick = () => join($('#code').value);
