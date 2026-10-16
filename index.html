@@ -116,7 +116,6 @@ html, body {
   transition: max-width 0.2s ease, padding 0.2s ease;
 }
 
-/* Desktop Expansion: Scale up for PC monitors */
 @media (min-width: 768px) {
   .wrap {
     max-width: 860px;
@@ -806,9 +805,10 @@ input:focus {
 
 .item-actions {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
   justify-content: flex-end;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 .item-actions:empty { display: none; }
 
@@ -841,7 +841,7 @@ input:focus {
   background: var(--btn-ghost-hover);
 }
 
-/* Dialogs & Lightbox */
+/* Dialogs & Lightbox Gallery */
 dialog {
   border: 0;
   border-radius: 22px;
@@ -880,17 +880,50 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 
 #lightbox {
   width: min(92vw, 680px);
-  max-height: 85vh;
+  max-height: 88vh;
   padding: 18px;
 }
+.lb-gallery-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.lb-nav-btn {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.lb-nav-btn:hover { background: rgba(0, 0, 0, 0.9); transform: translateY(-50%) scale(1.08); }
+.lb-nav-btn.prev { left: 8px; }
+.lb-nav-btn.next { right: 8px; }
+
 #lightbox-img {
   width: 100%;
   max-height: 60vh;
   border-radius: 14px;
   object-fit: contain;
   display: block;
-  margin: 0 auto 14px;
+  margin: 0 auto;
   background: #000;
+}
+.lb-counter {
+  font-size: 0.84rem;
+  color: var(--mut);
+  text-align: center;
+  margin: 8px 0 2px;
+  font-weight: 600;
 }
 #lightbox-name {
   font-size: 0.95rem;
@@ -1008,7 +1041,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     <label class="drop" id="drop" tabindex="0">
       <span class="drop-icon">🐱 📤</span>
       <div class="drop-title">แตะเพื่อเลือกไฟล์ หรือลากมาวาง</div>
-      <small>ส่งรูปภาพ วิดีโอ หรือเอกสารข้ามเครื่องได้ไม่จำกัด</small>
+      <small>ส่งรูปภาพหลายรูป หรือเอกสารได้ไม่จำกัดในครั้งเดียว</small>
       <input type="file" id="file" multiple hidden>
     </label>
 
@@ -1021,7 +1054,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 </div>
 
 <!-- ==========================================================
-     CENTERED POPUP MODAL (CONFIRM & RECEIVE FILE)
+     CENTERED POPUP MODAL (CONFIRM & RECEIVE BATCH)
      ========================================================== -->
 <div id="request-overlay" class="request-overlay" role="dialog" aria-modal="true" aria-labelledby="req-sender">
   <div id="request-sheet" class="request-sheet">
@@ -1037,7 +1070,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     <div class="req-preview-box" id="req-file-box" hidden>
       <div class="req-preview-media" id="req-media">📁</div>
       <div class="req-preview-meta">
-        <div class="req-file-name" id="req-filename">filename.jpg</div>
+        <div class="req-file-name" id="req-filename">5 files</div>
         <div class="req-file-size" id="req-filesize">2.4 MB</div>
       </div>
     </div>
@@ -1063,9 +1096,18 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   </form>
 </dialog>
 
-<!-- Lightbox Modal พรีวิวรูปภาพ -->
+<!-- Lightbox Gallery Modal -->
 <dialog id="lightbox">
-  <img id="lightbox-img" src="" alt="พรีวิว">
+  <div class="lb-gallery-wrap">
+    <button type="button" class="lb-nav-btn prev" id="lb-prev" title="รูปก่อนหน้า">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="พรีวิว">
+    <button type="button" class="lb-nav-btn next" id="lb-next" title="รูปถัดไป">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+  <div id="lightbox-counter" class="lb-counter">1 / 1</div>
   <div id="lightbox-name"></div>
   <div style="display:flex; gap:10px;">
     <button type="button" class="ghost" id="lightbox-close" style="flex:1;">ปิด</button>
@@ -1075,7 +1117,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
-      <span>บันทึกรูปภาพ</span>
+      <span>บันทึกรูปนี้</span>
     </a>
   </div>
 </dialog>
@@ -1098,7 +1140,6 @@ const CAT_NAMES = [
 ];
 const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
-/* Google Public STUN Configuration for robust NAT traversal */
 const PEER_CONFIG = {
   config: {
     iceServers: [
@@ -1242,7 +1283,6 @@ function paintMe() {
   $('#me-name').textContent = me.name;
 }
 
-/* Modal แต่งตัวน้องแมว */
 let selectedAv = me.av;
 function openMeDialog() {
   selectedAv = me.av;
@@ -1378,19 +1418,43 @@ function makeThumb(file) {
   });
 }
 
-function openLightbox(src, name, blobUrl) {
-  const lb = $('#lightbox');
-  $('#lightbox-img').src = src;
-  $('#lightbox-name').textContent = name;
-  const dl = $('#lightbox-dl');
-  dl.href = blobUrl || src;
-  dl.download = name;
-  lb.showModal();
+/* ---------- Lightbox Gallery Controller ---------- */
+let galleryItems = [];
+let galleryCurrentIdx = 0;
+
+function openGallery(items, startIdx = 0) {
+  galleryItems = items;
+  galleryCurrentIdx = startIdx;
+  updateGalleryView();
+  $('#lightbox').showModal();
 }
+
+function updateGalleryView() {
+  if (!galleryItems.length) return;
+  const current = galleryItems[galleryCurrentIdx];
+  $('#lightbox-img').src = current.url;
+  $('#lightbox-name').textContent = current.name;
+  $('#lightbox-counter').textContent = `${galleryCurrentIdx + 1} / ${galleryItems.length}`;
+  const dl = $('#lightbox-dl');
+  dl.href = current.url;
+  dl.download = current.name;
+
+  $('#lb-prev').style.display = galleryItems.length > 1 ? 'grid' : 'none';
+  $('#lb-next').style.display = galleryItems.length > 1 ? 'grid' : 'none';
+}
+
+$('#lb-prev').onclick = () => {
+  galleryCurrentIdx = (galleryCurrentIdx - 1 + galleryItems.length) % galleryItems.length;
+  updateGalleryView();
+};
+$('#lb-next').onclick = () => {
+  galleryCurrentIdx = (galleryCurrentIdx + 1) % galleryItems.length;
+  updateGalleryView();
+};
 $('#lightbox-close').onclick = () => $('#lightbox').close();
 
 /* ========================================================
-   CENTERED POPUP MODAL CONTROLLER (CONFIRM & RECEIVE FILE)
+   CENTERED POPUP MODAL CONTROLLER (CONFIRM & RECEIVE BATCH)
    ======================================================== */
 function promptRequestSheet({ avatar, name, badge, subtitle, file }) {
   const overlay = $('#request-overlay');
@@ -1407,10 +1471,8 @@ function promptRequestSheet({ avatar, name, badge, subtitle, file }) {
     const media = $('#req-media');
     if (file.thumb) {
       media.innerHTML = `<img src="${file.thumb}" alt="thumb">`;
-      media.onclick = () => openLightbox(file.thumb, file.name);
     } else {
       media.innerHTML = `<span>${file.icon || '📁'}</span>`;
-      media.onclick = null;
     }
     $('#req-accept').innerHTML = `
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -1418,7 +1480,7 @@ function promptRequestSheet({ avatar, name, badge, subtitle, file }) {
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
-      <span>รับไฟล์</span>
+      <span>รับทั้งหมด</span>
     `;
   } else {
     fileBox.hidden = true;
@@ -1466,10 +1528,7 @@ function tab(t) {
 }
 
 /* ========================================================
-   ปรับปรุงโหมด 1: Wi-Fi เดียวกัน ให้เสถียร 100%
-   - ค้นหาแบบ Bidirectional ทั้งช่องต่ำและช่องสูง
-   - เพิ่ม STUN ICE Servers
-   - เพิ่ม Heartbeat ป้องกันการหลุด
+   โหมด 1: Wi-Fi เดียวกัน เสถียรสูง (Bidirectional + STUN + Heartbeat)
    ======================================================== */
 async function near() {
   mode = 'near';
@@ -1495,9 +1554,7 @@ function claim(i) {
   p.on('open', () => {
     if (mode !== 'near') { p.destroy(); return; }
     peer = p; slot = i;
-    // สแกนทุก 2.5 วินาที
     scanT = setInterval(scan, 2500);
-    // Heartbeat ping ทุก 4 วินาทีเพื่อรักษาการเชื่อมต่อ
     heartbeatT = setInterval(heartbeat, 4000);
     scan(); lay();
   });
@@ -1512,13 +1569,11 @@ function claim(i) {
   });
 }
 
-/* สแกนแบบรอบทิศทาง (ทุกช่อง ยกเว้นช่องตัวเอง) */
 function scan() {
   if (!peer || active) return;
   for (let j = 0; j < SLOTS; j++) {
     if (j === slot) continue;
     const o = conns[j];
-    // ถ้ามีการเชื่อมต่อที่เปิดอยู่ หรือกำลังเชื่อมต่ออยู่ ไม่เกิน 5 วินาที ให้ข้าม
     if (o && (o.open || Date.now() - o._t < 5000)) continue;
     if (o) try { o.close(); } catch {}
 
@@ -1647,7 +1702,6 @@ function onData(c, m) {
     if (mode !== 'near' || active || !c.info) return;
     notifyUser('CatDrop มีคำขอเชื่อมต่อ', c.info.name + ' ต้องการเชื่อมต่อกับคุณ');
 
-    // Pop-up ยืนยันเด้งขึ้นมาตรงกลางหน้าจอ
     promptRequestSheet({
       avatar: c.info.av,
       name: c.info.name,
@@ -1691,14 +1745,16 @@ function enter(c) {
   toast('เชื่อมต่อกับ ' + c.info.name + ' แล้ว');
 }
 
-/* ---------- ระบบการส่งไฟล์ และ Render Card ดีไซน์ใหม่ ---------- */
+/* ========================================================
+   AIRDROP-STYLE BATCH TRANSFER ENGINE (MULTI-FILE/PHOTOS)
+   ======================================================== */
 function renderItemCard(icon, name, size, text, thumb) {
   const d = document.createElement('div');
   d.className = 'item-card';
 
   let mediaHtml = '';
   if (thumb) {
-    mediaHtml = `<div class="item-thumb" title="คลิกดูพรีวิว"><img src="${thumb}" alt="${name}"></div>`;
+    mediaHtml = `<div class="item-thumb"><img src="${thumb}" alt="${name}"></div>`;
   } else {
     mediaHtml = `<div class="item-thumb"><span>${icon}</span></div>`;
   }
@@ -1721,10 +1777,6 @@ function renderItemCard(icon, name, size, text, thumb) {
     <div class="item-actions"></div>
   `;
 
-  if (thumb) {
-    d.querySelector('.item-thumb').onclick = () => openLightbox(thumb, name);
-  }
-
   $('#list').prepend(d);
   return {
     card: d,
@@ -1732,7 +1784,8 @@ function renderItemCard(icon, name, size, text, thumb) {
     bar: d.querySelector('.item-progress-bar'),
     st: d.querySelector('.st'),
     act: d.querySelector('.item-actions'),
-    thumbBox: d.querySelector('.item-thumb')
+    thumbBox: d.querySelector('.item-thumb'),
+    nameEl: d.querySelector('.item-name')
   };
 }
 
@@ -1742,145 +1795,274 @@ const prog = (u, r, t) => {
 };
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
+/* ผู้ส่ง: รวบรวมไฟล์ทั้งหมดส่งเป็น Batch เดียวเหมือน AirDrop */
 async function queue(files) {
   if (!active || !active.open) { toast('ยังไม่ได้เชื่อมต่อกับอีกเครื่อง'); return; }
+  const fileList = [...files];
+  if (!fileList.length) return;
 
-  for (const f of files) {
-    const id = uid();
-    const cat = getFileCat(f.type, f.name);
-    const thumb = await makeThumb(f);
+  const batchId = uid();
+  const totalSize = fileList.reduce((acc, f) => acc + f.size, 0);
+  const isAllImages = fileList.every(f => f.type.startsWith('image/'));
+  
+  // สร้าง Thumbnail สำหรับไฟล์รูปแรก
+  let firstThumb = null;
+  const firstImg = fileList.find(f => f.type.startsWith('image/'));
+  if (firstImg) firstThumb = await makeThumb(firstImg);
 
-    out[id] = {
-      f,
-      thumb,
-      u: renderItemCard(cat.icon, f.name, fmt(f.size), 'รออีกเครื่องตอบรับ…', thumb)
-    };
+  const batchLabel = fileList.length === 1 
+    ? fileList[0].name 
+    : (isAllImages ? `รูปภาพ ${fileList.length} รายการ` : `ไฟล์ ${fileList.length} รายการ`);
 
-    active.send({
-      type: 'offer',
-      id,
+  const primaryIcon = isAllImages ? '🖼️' : getFileCat(fileList[0].type, fileList[0].name).icon;
+  const u = renderItemCard(primaryIcon, batchLabel, fmt(totalSize), 'รออีกเครื่องตอบรับ…', firstThumb);
+
+  const metaList = [];
+  for (let i = 0; i < fileList.length; i++) {
+    const f = fileList[i];
+    metaList.push({
       name: f.name,
       size: f.size,
       mime: f.type,
-      thumb: thumb
+      thumb: (i === 0 ? firstThumb : null)
     });
   }
+
+  out[batchId] = {
+    id: batchId,
+    files: fileList,
+    totalSize,
+    u,
+    metaList
+  };
+
+  active.send({
+    type: 'batch_offer',
+    id: batchId,
+    count: fileList.length,
+    totalSize,
+    label: batchLabel,
+    icon: primaryIcon,
+    thumb: firstThumb,
+    files: metaList
+  });
 }
 
-async function stream(id) {
-  const o = out[id];
+/* ผู้ส่ง: ทำการส่งไฟล์ทีละไฟล์จนครบชุด */
+async function streamBatch(batchId) {
+  const o = out[batchId];
   if (!o) return;
-  let off = 0;
-  try {
-    while (off < o.f.size) {
-      if (!active.open) throw 0;
-      const buf = await o.f.slice(off, off + CHUNK).arrayBuffer();
-      while (active.dataChannel && active.dataChannel.bufferedAmount > MAXBUF) await sleep(25);
-      active.send({ type: 'chunk', id, data: buf });
-      off += buf.byteLength;
-      prog(o.u, off / o.f.size, Math.round(off / o.f.size * 100) + '%');
-    }
-    active.send({ type: 'done', id });
+  const files = o.files;
+  let totalSentBytes = 0;
 
-    // เมื่อส่งเสร็จ: ลบแถบสถานะ progress track ออกตามคำขอ
+  try {
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      if (!active.open) throw 0;
+
+      active.send({
+        type: 'batch_file_start',
+        batchId,
+        idx: i,
+        name: f.name,
+        size: f.size,
+        mime: f.type
+      });
+
+      let off = 0;
+      while (off < f.size) {
+        if (!active.open) throw 0;
+        const buf = await f.slice(off, off + CHUNK).arrayBuffer();
+        while (active.dataChannel && active.dataChannel.bufferedAmount > MAXBUF) await sleep(25);
+        active.send({ type: 'batch_chunk', batchId, idx: i, data: buf });
+        off += buf.byteLength;
+        totalSentBytes += buf.byteLength;
+
+        const ratio = totalSentBytes / o.totalSize;
+        prog(o.u, ratio, `กำลังส่งไฟล์ที่ ${i + 1}/${files.length} (${Math.round(ratio * 100)}%)`);
+      }
+
+      active.send({ type: 'batch_file_end', batchId, idx: i });
+    }
+
+    active.send({ type: 'batch_done', batchId });
     if (o.u.track) o.u.track.remove();
-    prog(o.u, 1, 'ส่งเสร็จเรียบร้อย ✓');
+    prog(o.u, 1, `ส่งเสร็จเรียบร้อย (${files.length} ไฟล์) ✓`);
     playTone('success');
   } catch {
     prog(o.u, null, 'ส่งไม่สำเร็จ');
   }
 }
 
+/* ผู้รับ: จัดการคำขอแบบชุด รับไฟล์ และเซฟลงแกลเลอรี */
 function transfer(m) {
-  if (m.type === 'offer') {
-    const cat = getFileCat(m.mime || '', m.name);
-    notifyUser('มีไฟล์ส่งมา', `${m.name} (${fmt(m.size)})`);
+  if (m.type === 'batch_offer') {
+    notifyUser('มีไฟล์ส่งมา', `${m.label} (${fmt(m.totalSize)})`);
 
-    // Pop-up ยืนยันรับไฟล์เด้งขึ้นมาตรงกลางหน้าจอ
     promptRequestSheet({
       avatar: active && active.info ? active.info.av : '🐱',
       name: active && active.info ? active.info.name : 'อีกเครื่อง',
-      badge: 'มีไฟล์ส่งเข้ามา',
-      subtitle: 'ต้องการส่งไฟล์มายังเครื่องนี้',
+      badge: `ส่ง ${m.count} ไฟล์`,
+      subtitle: 'ต้องการส่งชุดไฟล์มายังเครื่องนี้',
       file: {
-        name: m.name,
-        size: m.size,
+        name: m.label,
+        size: m.totalSize,
         thumb: m.thumb,
-        icon: cat.icon
+        icon: m.icon
       }
     }).then(accepted => {
       if (accepted) {
-        const u = renderItemCard(cat.icon, m.name, fmt(m.size), 'กำลังเตรียมรับ…', m.thumb);
-        inc[m.id] = { name: m.name, size: m.size, mime: m.mime, thumb: m.thumb, parts: [], got: 0, u };
+        const u = renderItemCard(m.icon, m.label, fmt(m.totalSize), 'กำลังเตรียมรับ…', m.thumb);
+        inc[m.id] = {
+          id: m.id,
+          count: m.count,
+          totalSize: m.totalSize,
+          label: m.label,
+          filesMeta: m.files,
+          receivedFiles: [],
+          currentParts: [],
+          currentFile: null,
+          totalReceivedBytes: 0,
+          u
+        };
         prog(u, 0, '0%');
-        active.send({ type: 'accept', id: m.id });
+        active.send({ type: 'batch_accept', id: m.id });
       } else {
-        active.send({ type: 'decline', id: m.id });
+        active.send({ type: 'batch_decline', id: m.id });
         toast('ปฏิเสธไฟล์นี้แล้ว');
       }
     });
 
-  } else if (m.type === 'accept') {
-    stream(m.id);
-  } else if (m.type === 'decline') {
+  } else if (m.type === 'batch_accept') {
+    streamBatch(m.id);
+
+  } else if (m.type === 'batch_decline') {
     if (out[m.id]) {
       if (out[m.id].u.track) out[m.id].u.track.remove();
       prog(out[m.id].u, null, 'อีกเครื่องปฏิเสธไฟล์นี้');
     }
-  } else if (m.type === 'chunk') {
-    const r = inc[m.id];
-    if (!r) return;
-    r.parts.push(m.data);
-    r.got += m.data.byteLength;
-    prog(r.u, r.got / r.size, Math.round(r.got / r.size * 100) + '%');
-  } else if (m.type === 'done') {
-    const r = inc[m.id];
-    if (!r) return;
 
-    const blob = new Blob(r.parts, { type: r.mime || 'application/octet-stream' });
+  } else if (m.type === 'batch_file_start') {
+    const b = inc[m.batchId];
+    if (!b) return;
+    b.currentFile = { name: m.name, size: m.size, mime: m.mime };
+    b.currentParts = [];
+
+  } else if (m.type === 'batch_chunk') {
+    const b = inc[m.batchId];
+    if (!b) return;
+    b.currentParts.push(m.data);
+    b.totalReceivedBytes += m.data.byteLength;
+    const ratio = b.totalReceivedBytes / b.totalSize;
+    prog(b.u, ratio, `กำลังรับไฟล์ที่ ${m.idx + 1}/${b.count} (${Math.round(ratio * 100)}%)`);
+
+  } else if (m.type === 'batch_file_end') {
+    const b = inc[m.batchId];
+    if (!b || !b.currentFile) return;
+
+    const blob = new Blob(b.currentParts, { type: b.currentFile.mime || 'application/octet-stream' });
     const blobUrl = URL.createObjectURL(blob);
-    r.parts = [];
+    const fileObj = new File([blob], b.currentFile.name, { type: b.currentFile.mime });
 
-    // เมื่อดาวน์โหลดเสร็จ: ลบแถบสถานะ (Progress Bar) ออกอย่างสะอาดตา
-    if (r.u.track) r.u.track.remove();
-    prog(r.u, 1, 'ดาวน์โหลดเสร็จสิ้น ✓');
+    b.receivedFiles.push({
+      name: b.currentFile.name,
+      size: b.currentFile.size,
+      mime: b.currentFile.mime,
+      blob,
+      blobUrl,
+      fileObj
+    });
+    b.currentParts = [];
 
-    // ปุ่ม "บันทึกไฟล์" พร้อม SVG ไอคอน
-    const dlBtn = document.createElement('a');
-    dlBtn.className = 'btn-compact primary';
-    dlBtn.download = r.name;
-    dlBtn.href = blobUrl;
-    dlBtn.innerHTML = `
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      <span>บันทึกไฟล์</span>
-    `;
-    r.u.act.append(dlBtn);
+  } else if (m.type === 'batch_done') {
+    const b = inc[m.batchId];
+    if (!b) return;
 
-    // หากเป็นรูปภาพ: ปุ่ม "ดูรูปภาพ" พร้อม SVG ไอคอน
-    if ((r.mime && r.mime.startsWith('image/')) || /\.(jpe?g|png|gif|webp|svg|bmp)$/i.test(r.name)) {
-      const pvBtn = document.createElement('button');
-      pvBtn.className = 'btn-compact outline';
-      pvBtn.innerHTML = `
+    // 1. ลบแถบสถานะ (Progress Bar) ออกอย่างสะอาดตา
+    if (b.u.track) b.u.track.remove();
+    prog(b.u, 1, `ดาวน์โหลดเสร็จสิ้น (${b.receivedFiles.length} ไฟล์) ✓`);
+
+    const imageFiles = b.receivedFiles.filter(f => f.mime && f.mime.startsWith('image/'));
+
+    // 2. ปุ่ม Action 1: "บันทึกรูปทั้งหมด / บันทึกลงคลังรูปภาพ"
+    // ถ้าเป็นมือถือที่รองรับ Web Share API (เช่น iPhone / Android) จะเรียกหน้าต่างเซฟลง Photos/Gallery โดยตรง
+    const canShareFiles = typeof navigator.canShare === 'function' && navigator.canShare({ files: [b.receivedFiles[0].fileObj] });
+
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn-compact primary';
+
+    if (canShareFiles && imageFiles.length > 0) {
+      saveBtn.innerHTML = `
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+          <circle cx="9" cy="9" r="2"/>
+          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+        </svg>
+        <span>บันทึกลงคลังภาพ</span>
+      `;
+      saveBtn.onclick = async () => {
+        try {
+          await navigator.share({
+            files: b.receivedFiles.map(f => f.fileObj),
+            title: 'CatDrop'
+          });
+        } catch (e) {
+          // หากผู้ใช้กดยกเลิกหรือไม่สำเร็จ ให้ดาวน์โหลดลงเครื่องตามปกติ
+          downloadAllSequential(b.receivedFiles);
+        }
+      };
+    } else {
+      // สำหรับคอมพิวเตอร์ หรือไฟล์ทั่วไป: ดาวน์โหลดลงเครื่อง
+      saveBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>บันทึกไฟล์ทั้งหมด</span>
+      `;
+      saveBtn.onclick = () => downloadAllSequential(b.receivedFiles);
+    }
+    b.u.act.append(saveBtn);
+
+    // 3. ปุ่ม Action 2: "ดูรูปภาพทั้งหมด" (เปิด Lightbox Gallery เลื่อนดูได้ทุกรูป)
+    if (imageFiles.length > 0) {
+      const galleryBtn = document.createElement('button');
+      galleryBtn.className = 'btn-compact outline';
+      galleryBtn.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
           <circle cx="12" cy="12" r="3"/>
         </svg>
-        <span>ดูรูปภาพ</span>
+        <span>ดูรูปภาพ (${imageFiles.length})</span>
       `;
-      pvBtn.onclick = () => openLightbox(blobUrl, r.name, blobUrl);
-      r.u.act.append(pvBtn);
+      const galleryData = imageFiles.map(img => ({ name: img.name, url: img.blobUrl }));
+      galleryBtn.onclick = () => openGallery(galleryData, 0);
+      b.u.act.append(galleryBtn);
 
-      r.u.thumbBox.innerHTML = `<img src="${blobUrl}" alt="${r.name}">`;
-      r.u.thumbBox.onclick = () => openLightbox(blobUrl, r.name, blobUrl);
+      // อัปเดตรูปหน้าการ์ดให้คลิกดูรูปแรกได้ทันที
+      b.u.thumbBox.innerHTML = `<img src="${imageFiles[0].blobUrl}" alt="thumb">`;
+      b.u.thumbBox.onclick = () => openGallery(galleryData, 0);
     }
 
     playTone('success');
-    notifyUser('CatDrop รับไฟล์เสร็จแล้ว', r.name);
+    notifyUser('CatDrop รับไฟล์เสร็จแล้ว', `${b.receivedFiles.length} ไฟล์พร้อมใช้งาน`);
   }
+}
+
+/* ฟังก์ชันดาวน์โหลดไฟล์ทั้งหมดลงเครื่องแบบเป็นลำดับ */
+function downloadAllSequential(fileList) {
+  fileList.forEach((item, index) => {
+    setTimeout(() => {
+      const a = document.createElement('a');
+      a.href = item.blobUrl;
+      a.download = item.name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }, index * 160);
+  });
+  toast(`กำลังดาวน์โหลด ${fileList.length} ไฟล์ลงเครื่อง…`);
 }
 
 /* ---------- ผูกเหตุการณ์ต่าง ๆ ---------- */
