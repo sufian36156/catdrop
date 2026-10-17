@@ -49,37 +49,37 @@
   --bad-subtle: #fef2f2;
   --btn-ghost: #f1eff9;
   --btn-ghost-hover: #e5e1f5;
-  --shadow-sm: 0 1px 3px rgba(30, 27, 75, 0.05);
-  --shadow-md: 0 4px 16px rgba(124, 58, 237, 0.08);
-  --shadow-lg: 0 14px 40px rgba(124, 58, 237, 0.16);
+  --shadow-sm: 0 2px 8px rgba(124, 58, 237, 0.06);
+  --shadow-md: 0 8px 24px rgba(124, 58, 237, 0.1);
+  --shadow-lg: 0 16px 44px rgba(124, 58, 237, 0.16);
   --radar-glow: rgba(124, 58, 237, 0.18);
   color-scheme: light;
 }
 
 [data-theme="dark"] {
   --theme: dark;
-  --bg: #0c0a1e;
-  --bg-glow: radial-gradient(circle at 85% -10%, rgba(139, 92, 246, 0.22), transparent 600px);
-  --ink: #f3f4f6;
-  --mut: #9ca3af;
-  --card: #161334;
-  --card-hover: #1e1a44;
-  --line: #2a2556;
-  --line-subtle: #201c44;
+  --bg: #070a14;
+  --bg-glow: radial-gradient(ellipse at 50% 0%, #151d38 0%, #0c1021 55%, #050711 100%);
+  --ink: #f8fafc;
+  --mut: #94a3b8;
+  --card: rgba(18, 24, 48, 0.78);
+  --card-hover: rgba(26, 34, 68, 0.88);
+  --line: rgba(139, 92, 246, 0.22);
+  --line-subtle: rgba(139, 92, 246, 0.12);
   --ac: #8b5cf6;
   --ac-hover: #a78bfa;
-  --ac-subtle: #271f54;
+  --ac-subtle: rgba(139, 92, 246, 0.18);
   --ac-ink: #ffffff;
-  --pink: #f472b6;
+  --pink: #ec4899;
   --ok: #34d399;
   --ok-subtle: #064e3b;
   --bad: #f87171;
   --bad-subtle: #450a0a;
-  --btn-ghost: #231e4a;
-  --btn-ghost-hover: #2f2863;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 16px 44px rgba(0, 0, 0, 0.7);
+  --btn-ghost: rgba(30, 38, 74, 0.7);
+  --btn-ghost-hover: rgba(40, 50, 96, 0.85);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 26px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.65);
   --radar-glow: rgba(139, 92, 246, 0.35);
   color-scheme: dark;
 }
@@ -162,41 +162,59 @@ html, body {
 }
 
 /* Header & Brand */
+/* Header & Brand */
 .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  padding: 6px 0 14px;
+  padding: 8px 0 14px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   text-decoration: none;
   color: inherit;
 }
 
 .brand-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .brand:hover .brand-icon {
-  transform: rotate(-6deg) scale(1.06);
+  transform: rotate(-6deg) scale(1.08);
 }
 
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
 .brand-title {
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  font-size: 1.38rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.brand-sub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--mut);
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+.gradient-text {
   background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .top-actions {
@@ -214,20 +232,45 @@ button {
   background: none;
   transition: transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
 }
-button:active { transform: scale(0.95); }
+button:active { transform: scale(0.96); }
 
 .btn-icon {
+  position: relative;
   display: grid;
   place-items: center;
   width: 38px;
   height: 38px;
-  border-radius: 11px;
+  border-radius: 50%;
   background: var(--card);
   border: 1px solid var(--line);
-  font-size: 1.05rem;
+  color: var(--ink);
   box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
 }
-.btn-icon:hover { background: var(--card-hover); }
+.btn-icon:hover {
+  background: var(--card-hover);
+  border-color: var(--ac);
+  transform: translateY(-1px);
+}
+[data-theme="light"] .icon-sun { display: block; color: #f59e0b; }
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-moon { display: block; color: #c4b5fd; }
+
+.icon-bell {
+  color: var(--mut);
+}
+[data-theme="light"] .icon-bell { color: #d97706; }
+.bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  background: #f43f5e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #f43f5e;
+}
 
 .btn-pwa {
   display: inline-flex;
@@ -244,96 +287,186 @@ button:active { transform: scale(0.95); }
 
 .me {
   display: inline-flex;
-  gap: 6px;
+  gap: 7px;
   align-items: center;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 99px;
-  padding: 5px 12px 5px 8px;
+  padding: 4px 12px 4px 5px;
   box-shadow: var(--shadow-sm);
-  max-width: 140px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.me span:first-child { font-size: 1.25rem; line-height: 1; }
+.me:hover {
+  border-color: var(--ac);
+  background: var(--card-hover);
+}
+#me-av {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ac-subtle);
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+}
 .me-name-wrap {
-  font-weight: 500;
-  font-size: 0.88rem;
+  font-weight: 600;
+  font-size: 0.86rem;
+  max-width: 95px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.me-arrow {
+  color: var(--mut);
+  flex-shrink: 0;
+}
 
-/* Tab Switcher */
+/* Tab Switcher (Segmented Control matching Screenshot 1 & 2) */
 .seg {
-  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 8px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 4px;
-  margin: 10px 0 14px;
+  border-radius: 20px;
+  padding: 6px;
+  margin: 10px 0 18px;
   box-shadow: var(--shadow-sm);
   width: 100%;
 }
-.seg i {
-  position: absolute;
-  inset: 4px 50% 4px 4px;
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  border-radius: 10px;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
-}
-.seg[data-t=qr] i { transform: translateX(100%); }
-.seg button {
-  position: relative;
-  z-index: 1;
-  font-weight: 600;
-  font-size: 0.92rem;
-  padding: 9px;
-  color: var(--mut);
+.seg-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border-radius: 10px;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 15px;
+  border: 0;
+  background: transparent;
+  color: var(--mut);
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+  text-align: left;
 }
-.seg button.on { color: var(--ac-ink); }
+.seg-btn.on {
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+}
+.seg-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+[data-theme="light"] .seg-btn:not(.on) .seg-icon-wrap {
+  background: var(--btn-ghost);
+  color: var(--ac);
+}
+.seg-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.seg-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.seg-sub {
+  font-size: 0.72rem;
+  opacity: 0.88;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+.dot-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  display: inline-block;
+  box-shadow: 0 0 6px #34d399;
+}
+.seg-arrow {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
 
-/* Radar Section */
+/* Radar Section (Screenshot 2 Match) */
 #v-near {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+.radar-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+}
+
+.peeking-cat-wrap {
+  width: 135px;
+  margin-bottom: -28px;
+  position: relative;
+  z-index: 4;
+  pointer-events: none;
+}
+.peeking-cat-qr {
+  width: 125px;
+  margin-bottom: -22px;
+  position: relative;
+  z-index: 4;
+  pointer-events: none;
+}
+.peeking-cat {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
 }
 
 .radar-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 12px 0 8px;
+  padding: 4px 0 12px;
 }
 
 .radar {
   position: relative;
-  width: min(290px, 78vw);
-  height: min(290px, 78vw);
+  width: min(295px, 80vw);
+  height: min(295px, 80vw);
   border-radius: 50%;
   margin: 0 auto;
 }
 
 .ring {
   position: absolute;
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: 50%;
   pointer-events: none;
+  transition: border-color 0.25s ease;
 }
 .r1 { inset: 0; }
-.r2 { inset: 20%; }
-.r3 { inset: 40%; }
+.r2 { inset: 22%; }
+.r3 { inset: 44%; }
 
 .pulse {
   position: absolute;
-  inset: 40%;
+  inset: 44%;
   border-radius: 50%;
   border: 2px solid var(--ac);
   opacity: 0;
@@ -342,41 +475,41 @@ button:active { transform: scale(0.95); }
 }
 .pulse + .pulse { animation-delay: 1.6s; }
 @keyframes pulse-wave {
-  0% { transform: scale(0.6); opacity: 0.65; }
-  100% { transform: scale(2.6); opacity: 0; }
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 
 .you {
   position: absolute;
-  inset: 38%;
+  inset: 36%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.1rem;
   background: var(--card);
-  border: 2.5px solid var(--ac);
+  border: 2px solid var(--ac);
   border-radius: 50%;
-  box-shadow: 0 6px 20px var(--radar-glow);
+  box-shadow: 0 0 24px var(--radar-glow);
   z-index: 2;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.you:hover { transform: scale(1.05); }
+.you:hover { transform: scale(1.08); }
 .you-sub {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--ac);
-  margin-top: -3px;
+  margin-top: -2px;
 }
 
-/* Bubbles (Found Peers) */
+/* Bubbles (Found Peers on Radar) */
 .bubble {
   position: absolute;
   left: var(--x);
   top: var(--y);
   translate: -50% -50%;
-  width: 72px;
+  width: 68px;
   background: none;
   border: 0;
   padding: 0;
@@ -387,25 +520,29 @@ button:active { transform: scale(0.95); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
 }
 .bubble b {
   display: grid;
   place-items: center;
   width: 54px;
   height: 54px;
-  font-size: 1.8rem;
-  border-radius: 50%;
+  font-size: 1.7rem;
+  border-radius: 17px;
   background: var(--card);
-  border: 2px solid var(--ac);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--line);
   box-shadow: var(--shadow-md);
-  transition: transform 0.15s ease;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.bubble:hover b, .bubble:active b { transform: scale(1.08); }
+.bubble:hover b, .bubble:active b {
+  transform: scale(1.1);
+  border-color: var(--ac);
+}
 .bubble em {
   font-style: normal;
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.76rem;
+  font-weight: 600;
   max-width: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -415,70 +552,326 @@ button:active { transform: scale(0.95); }
   border-radius: 99px;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
+  color: var(--ink);
 }
 .bubble.wait b {
   animation: wig 0.6s ease-in-out infinite;
   border-style: dashed;
+  border-color: var(--ac);
 }
 
-@keyframes pop { from { transform: scale(0.7); opacity: 0; } }
+@keyframes pop { from { transform: scale(0.6); opacity: 0; } }
 @keyframes wig { 25% { rotate: -8deg; } 75% { rotate: 8deg; } }
 
-.hint {
+/* Radar Text & Action Section (Screenshot 2 Match) */
+.scan-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  margin: 16px 0 20px;
+}
+.scan-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.scan-desc {
+  font-size: 0.88rem;
   color: var(--mut);
-  margin: 12px 12px 0;
-  font-size: 0.9rem;
+  margin-top: 4px;
+  max-width: 330px;
+  line-height: 1.45;
+}
+.scan-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ac-subtle);
+  color: var(--ac);
+  border-radius: 99px;
+  padding: 6px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  margin-top: 14px;
+}
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ac);
+  box-shadow: 0 0 8px var(--ac);
+  animation: pulse-dot-anim 1.5s ease-in-out infinite;
+}
+@keyframes pulse-dot-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.radar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+/* Modern Gradient Buttons */
+.btn-gradient-full {
+  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
+  color: #ffffff;
+  border-radius: 99px;
+  padding: 13px 24px;
+  font-size: 0.96rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
+  width: 100%;
+  border: 0;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-gradient-full:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45);
+}
+.btn-gradient-full:active {
+  transform: scale(0.98);
+}
+.btn-circle-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+}
+
+.btn-outline-pill {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  border-radius: 99px;
+  padding: 13px 24px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.btn-outline-pill:hover {
+  background: var(--card-hover);
+  border-color: var(--ac);
+  transform: translateY(-1px);
+}
+
+.btn-glass-outline {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 99px;
+  padding: 13px 24px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+.btn-glass-outline:hover {
+  background: var(--card-hover);
+  border-color: var(--ac);
 }
 
 /* Cards & Generic Elements */
 .card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 24px;
   padding: 22px;
   margin-top: 10px;
   box-shadow: var(--shadow-sm);
   width: 100%;
 }
-.card h2 { font-size: 1.15rem; font-weight: 600; margin: 0 0 4px; }
-.card p { margin: 0 0 16px; color: var(--mut); font-size: 0.9rem; }
+.card h2 { font-size: 1.25rem; font-weight: 700; margin: 0 0 4px; }
+.card p { margin: 0 0 16px; color: var(--mut); font-size: 0.88rem; }
 
-.pri, .sec, .ghost {
-  width: 100%;
-  padding: 12px 18px;
-  border-radius: 13px;
-  font-weight: 600;
-  font-size: 0.93rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: 1px solid transparent;
+/* QR Code Section (Screenshot 1 Match) */
+.qr-glass-card {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 26px 20px;
+  box-shadow: var(--shadow-lg);
+  animation: pop 0.25s ease both;
 }
-.pri {
+.qr-card-header {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.qr-badge-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  color: var(--ac-ink);
-  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.28);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
 }
-.pri:hover { opacity: 0.95; }
+.qr-header-text h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.qr-header-text p {
+  font-size: 0.84rem;
+  color: var(--mut);
+  margin-top: 4px;
+  line-height: 1.45;
+}
 
-.sec {
+.qr-box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 16px;
+}
+.qr-glow-frame {
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 26px;
+  box-shadow: 0 0 28px rgba(139, 92, 246, 0.35), 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 3px solid var(--ac);
+  width: min(230px, 64vw);
+  display: grid;
+  place-items: center;
+}
+.qr-glow-frame .qr {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+}
+.qr svg { display: block; width: 100%; height: auto; }
+
+/* Code Capsule */
+.code-capsule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(26, 33, 66, 0.88);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 99px;
+  padding: 8px 16px;
+  margin: 12px auto 20px;
+  width: 100%;
+  max-width: 320px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+}
+[data-theme="light"] .code-capsule {
+  background: #ede9fe;
+  border-color: #c4b5fd;
+}
+.code-capsule:hover {
+  border-color: var(--pink);
+  transform: translateY(-1px);
+}
+.capsule-icon-btn {
+  color: var(--mut);
+  display: grid;
+  place-items: center;
+  padding: 6px;
+}
+.capsule-code-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.capsule-label {
+  font-size: 0.72rem;
+  color: var(--mut);
+  font-weight: 500;
+}
+.capsule-code {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #ffffff;
+  margin-left: 0.22em;
+}
+[data-theme="light"] .capsule-code {
+  color: var(--ac);
+}
+
+/* 3 Feature Highlights */
+.features-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin: 16px 0 24px;
+  padding: 14px 6px;
+  border-top: 1px solid var(--line-subtle);
+  border-bottom: 1px solid var(--line-subtle);
+}
+.feature-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+.feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   background: var(--ac-subtle);
   color: var(--ac);
-  border-color: var(--ac-subtle);
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+.feature-col strong {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.feature-col small {
+  font-size: 0.7rem;
+  color: var(--mut);
+  line-height: 1.25;
 }
 
-.ghost {
-  background: var(--btn-ghost);
-  color: var(--mut);
-  border-color: var(--line);
+.qr-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
-.ghost:hover { background: var(--btn-ghost-hover); color: var(--ink); }
 
 .or {
   display: flex;
@@ -520,27 +913,6 @@ input:focus {
   font-size: 1.18rem;
   text-transform: uppercase;
 }
-.join .pri {
-  width: auto;
-  padding: 0 20px;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.qr-action-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  font-size: 1rem;
-  padding: 13px 20px;
-  border-radius: 14px;
-  transition: all 0.2s ease;
-}
 
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -550,53 +922,6 @@ input:focus {
   animation: spin 0.75s linear infinite;
   display: inline-block;
   flex-shrink: 0;
-}
-
-.qr-code-box {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 10px 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 12px auto 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.qr-code-box:hover {
-  border-color: var(--ac);
-  background: var(--card-hover);
-}
-
-.code {
-  font-size: clamp(1.6rem, 6vw, 2.2rem);
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-align: center;
-  color: var(--ac);
-  margin: 0;
-  font-variant-numeric: tabular-nums;
-}
-.qr {
-  width: min(220px, 62vw);
-  margin: 12px auto;
-  background: #fff;
-  padding: 14px;
-  border-radius: 20px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  animation: pop 0.25s ease both;
-}
-.qr svg { display: block; width: 100%; height: auto; }
-
-.qr-host-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 14px;
-  flex-wrap: wrap;
 }
 
 /* Connected Peer Bar */
@@ -1233,8 +1558,34 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   color: var(--mut);
   font-size: 0.82rem;
   margin-top: auto;
-  padding-top: 32px;
+  padding: 32px 0 16px;
+  position: relative;
+  z-index: 1;
 }
+.footer-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 0.85;
+}
+.paw-icon {
+  color: var(--ac);
+  opacity: 0.8;
+}
+
+.corner-paw {
+  position: fixed;
+  bottom: -15px;
+  width: 100px;
+  height: 100px;
+  opacity: 0.05;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a78bfa'%3E%3Ccircle cx='5.5' cy='8.5' r='2.5'/%3E%3Ccircle cx='10.5' cy='5.5' r='2.5'/%3E%3Ccircle cx='15.5' cy='5.5' r='2.5'/%3E%3Ccircle cx='18.5' cy='8.5' r='2.5'/%3E%3Cpath d='M7 16c0-2.2 2.2-4 5-4s5 1.8 5 4c0 1.7-1.3 3-3 3h-4c-1.7 0-3-1.3-3-3z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  z-index: 0;
+}
+.corner-paw.left { left: -10px; transform: rotate(15deg); }
+.corner-paw.right { right: -10px; transform: rotate(-25deg); }
 
 /* Toast */
 #toast {
@@ -1263,107 +1614,258 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   <!-- Header Bar -->
   <header class="top">
     <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
-      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="34" height="34">
-      <span class="brand-title">CatDrop</span>
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="42" height="42">
+      <div class="brand-text">
+        <span class="brand-title">Cat<span class="gradient-text">Drop</span></span>
+        <span class="brand-sub">Drop · Share · Make a Difference</span>
+      </div>
     </a>
     <div class="top-actions">
       <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป">📲 ติดตั้ง</button>
-      <button class="btn-icon" id="b-theme" title="สลับโหมดมืด/สว่าง" aria-label="สลับโหมดมืดหรือสว่าง">🌙</button>
-      <button class="btn-icon" id="b-sound" title="เปิด/ปิดเสียง" aria-label="เปิดหรือปิดเสียงแจ้งเตือน">🔔</button>
+      <button class="btn-icon" id="b-theme" title="สลับโหมดมืด/สว่าง" aria-label="สลับโหมดมืดหรือสว่าง">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button class="btn-icon" id="b-sound" title="เปิด/ปิดเสียง" aria-label="เปิดหรือปิดเสียงแจ้งเตือน">
+        <svg class="icon-bell" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        <span class="bell-dot"></span>
+      </button>
       <button class="me" id="me" aria-label="เปลี่ยนชื่อและอวาตาร์แมว">
         <span id="me-av">🐱</span>
         <span class="me-name-wrap" id="me-name"></span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-arrow"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
     </div>
   </header>
 
-  <!-- Segment Switcher -->
+  <!-- Segment Switcher (Screenshot 1 & 2 Match) -->
   <nav class="seg" id="seg" data-t="near">
-    <i></i>
-    <button data-t="near" class="on">🐾 Wi-Fi เดียวกัน</button>
-    <button data-t="qr">⚡ QR Code / รหัส</button>
+    <button type="button" data-t="near" class="seg-btn on">
+      <div class="seg-icon-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
+      </div>
+      <div class="seg-content">
+        <span class="seg-title">Wi-Fi เดียวกัน</span>
+        <span class="seg-sub"><i class="dot-live"></i> พร้อมใช้งาน</span>
+      </div>
+    </button>
+    <button type="button" data-t="qr" class="seg-btn">
+      <div class="seg-icon-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="seg-content">
+        <span class="seg-title">QR Code / รหัส</span>
+        <span class="seg-sub">สแกนเพื่อเชื่อมต่อ</span>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="seg-arrow"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
   </nav>
 
-  <!-- Wi-Fi Radar View -->
+  <!-- Wi-Fi Radar View (Screenshot 2 Match) -->
   <section id="v-near">
-    <div class="radar-wrap">
-      <div class="radar">
-        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-        <div class="pulse"></div><div class="pulse"></div>
-        <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
-          <span id="you-av">🐱</span>
-          <span class="you-sub">คุณ</span>
+    <div class="radar-container">
+      <!-- Peeking Cat on top of radar -->
+      <div class="peeking-cat-wrap">
+        <svg class="peeking-cat" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 36L6 28M20 48L4 52M142 36L154 28M140 48L156 52" stroke="#A78BFA" stroke-width="3" stroke-linecap="round"/>
+          <path d="M42 45L34 16C33 12 39 10 43 14L62 38Z" fill="#FFFFFF"/>
+          <path d="M41 40L37 20C36 17 40 16 42 18L56 35Z" fill="#F472B6"/>
+          <path d="M118 45L126 16C127 12 121 10 117 14L98 38Z" fill="#FFFFFF"/>
+          <path d="M119 40L123 20C124 17 120 16 118 18L104 35Z" fill="#F472B6"/>
+          <ellipse cx="80" cy="52" rx="46" ry="32" fill="#FFFFFF"/>
+          <path d="M62 48C64 45 68 45 70 48" stroke="#1E1B4B" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          <path d="M90 48C92 45 96 45 98 48" stroke="#1E1B4B" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          <path d="M78 54L82 54L80 56Z" fill="#F43F5E"/>
+          <path d="M76 58C78 61 80 61 80 58C80 61 82 61 84 58" stroke="#F43F5E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <ellipse cx="56" cy="54" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.8"/>
+          <ellipse cx="104" cy="54" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.8"/>
+          <ellipse cx="58" cy="74" rx="10" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          <ellipse cx="102" cy="74" rx="10" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="radar-wrap">
+        <div class="radar">
+          <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+          <div class="pulse"></div><div class="pulse"></div>
+          <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
+            <span id="you-av">🐱</span>
+            <span class="you-sub">คุณ</span>
+          </div>
+          <div id="peers"></div>
         </div>
-        <div id="peers"></div>
       </div>
     </div>
-    <p class="hint" id="near-msg" aria-live="polite">กำลังค้นหาอุปกรณ์ใน Wi-Fi เดียวกัน…</p>
+
+    <div class="scan-info">
+      <h2 class="scan-title">กำลังค้นหาอุปกรณ์ใกล้เคียง...</h2>
+      <p class="scan-desc">หากค้นหาไม่เจอ สามารถใช้ QR Code เพื่อเชื่อมต่อได้ทันที</p>
+      <div class="scan-status-pill">
+        <span class="pulse-dot"></span>
+        <span id="near-msg">กำลังสแกน</span>
+      </div>
+    </div>
+
+    <div class="radar-actions">
+      <button type="button" class="btn-gradient-full" id="b-radar-qr">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>ใช้ QR Code แทน</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <button type="button" class="btn-outline-pill" id="b-radar-rescan">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+        <span>ค้นหาอีกครั้ง</span>
+      </button>
+    </div>
   </section>
 
-  <!-- QR Code Section -->
+  <!-- QR Code Section (Screenshot 1 Match) -->
   <section id="v-qr" hidden>
-    <div class="card" id="qr-home">
-      <h2>ส่งข้ามทุกเครือข่าย</h2>
-      <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ 4G/5G</p>
-      
-      <button class="pri qr-action-btn" id="b-host">
+    <!-- View A: QR Host (Shown when QR code is active, matching Screenshot 1) -->
+    <div class="card qr-glass-card" id="qr-host">
+      <div class="qr-card-header">
+        <div class="qr-badge-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/>
+          </svg>
+        </div>
+        <div class="qr-header-text">
+          <h2>ให้อีกเครื่องสแกนเพื่อ<span class="gradient-text">ส่งไฟล์</span></h2>
+          <p>เปิดกล้องมือถือสแกน QR Code หรือกรอกรหัส 6 หลัก เพื่อเชื่อมต่อและส่งไฟล์ได้ทันที</p>
+        </div>
+      </div>
+
+      <!-- QR Box with Peeking Cat -->
+      <div class="qr-box-container">
+        <div class="peeking-cat-qr">
+          <svg class="peeking-cat" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 36L6 28M20 48L4 52M142 36L154 28M140 48L156 52" stroke="#A78BFA" stroke-width="3" stroke-linecap="round"/>
+            <path d="M42 45L34 16C33 12 39 10 43 14L62 38Z" fill="#FFFFFF"/>
+            <path d="M41 40L37 20C36 17 40 16 42 18L56 35Z" fill="#F472B6"/>
+            <path d="M118 45L126 16C127 12 121 10 117 14L98 38Z" fill="#FFFFFF"/>
+            <path d="M119 40L123 20C124 17 120 16 118 18L104 35Z" fill="#F472B6"/>
+            <ellipse cx="80" cy="52" rx="46" ry="32" fill="#FFFFFF"/>
+            <path d="M62 48C64 45 68 45 70 48" stroke="#1E1B4B" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+            <path d="M90 48C92 45 96 45 98 48" stroke="#1E1B4B" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+            <path d="M78 54L82 54L80 56Z" fill="#F43F5E"/>
+            <path d="M76 58C78 61 80 61 80 58C80 61 82 61 84 58" stroke="#F43F5E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <ellipse cx="56" cy="54" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.8"/>
+            <ellipse cx="104" cy="54" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.8"/>
+            <ellipse cx="58" cy="74" rx="10" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+            <ellipse cx="102" cy="74" rx="10" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="qr-glow-frame">
+          <div class="qr" id="h-qr"></div>
+        </div>
+      </div>
+
+      <!-- Code Capsule with copy buttons -->
+      <div class="code-capsule" id="b-copy-code" title="แตะเพื่อคัดลอกรหัส">
+        <button type="button" class="capsule-icon-btn" aria-label="คัดลอกรหัส">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        </button>
+        <div class="capsule-code-wrap">
+          <span class="capsule-label">รหัส 6 หลัก</span>
+          <span class="capsule-code" id="h-code">------</span>
+        </div>
+        <button type="button" class="capsule-icon-btn" aria-label="คัดลอกรหัส">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        </button>
+      </div>
+
+      <!-- 3 Feature Badges -->
+      <div class="features-row">
+        <div class="feature-col">
+          <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <strong>เร็ว</strong>
+          <small>ไม่ต้องโหลดแอป</small>
+        </div>
+        <div class="feature-col">
+          <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <strong>ปลอดภัย</strong>
+          <small>ข้อมูลไม่ถูกเก็บ</small>
+        </div>
+        <div class="feature-col">
+          <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <strong>ใช้งานง่าย</strong>
+          <small>แค่สแกนหรือกรอก</small>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="qr-bottom-actions">
+        <button type="button" class="btn-gradient-full" id="b-back-host">
+          <span class="btn-circle-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </span>
+          <span>ย้อนกลับ</span>
+        </button>
+        <button type="button" class="btn-glass-outline" id="b-copy-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span>คัดลอกลิงก์</span>
+        </button>
+      </div>
+
+      <div style="text-align:center; margin-top:14px;">
+        <button type="button" id="b-toggle-join" style="background:none; border:none; color:var(--text-sec); font-size:0.86rem; font-weight:500; cursor:pointer; text-decoration:underline;">
+          มีรหัส 6 หลักจากอีกเครื่อง? แตะที่นี่เพื่อกรอกรหัส
+        </button>
+      </div>
+    </div>
+
+    <!-- View B: QR Home / Join (Code Input Form) -->
+    <div class="card qr-glass-card" id="qr-home" hidden>
+      <div class="qr-card-header">
+        <div class="qr-badge-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div class="qr-header-text">
+          <h2>ส่งไฟล์<span class="gradient-text">ข้ามทุกเครือข่าย</span></h2>
+          <p>เหมาะเมื่อเครื่องอยู่คนละ Wi-Fi หรือเครื่องหนึ่งใช้เน็ตมือถือ 4G/5G</p>
+        </div>
+      </div>
+
+      <button type="button" class="btn-gradient-full" id="b-host" style="margin-top:14px;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect width="5" height="5" x="3" y="3" rx="1"/>
-          <rect width="5" height="5" x="16" y="3" rx="1"/>
-          <rect width="5" height="5" x="3" y="16" rx="1"/>
-          <path d="M21 16h-3a2 2 0 0 0-2 2v3"/>
-          <path d="M21 21v.01"/>
-          <path d="M12 7v3a2 2 0 0 1-2 2H7"/>
-          <path d="M3 12h.01"/>
-          <path d="M12 3h.01"/>
-          <path d="M12 16v.01"/>
-          <path d="M16 12h1"/>
-          <path d="M21 12v.01"/>
-          <path d="M12 21v-1"/>
+          <rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>
         </svg>
-        <span id="b-host-text">สร้าง QR Code เพื่อเชื่อมต่อ</span>
+        <span id="b-host-text">แสดง QR Code เพื่อส่งไฟล์</span>
       </button>
+
+      <div style="text-align:center; margin-top:12px;">
+        <button type="button" id="b-toggle-host" style="background:none; border:none; color:var(--text-sec); font-size:0.86rem; font-weight:500; cursor:pointer; text-decoration:underline;">
+          ← กลับไปหน้าแสดง QR Code
+        </button>
+      </div>
 
       <div class="or">หรือกรอกรหัสจากอีกเครื่อง</div>
       <div class="join">
         <input id="code" maxlength="6" placeholder="รหัส 6 หลัก" autocomplete="off" autocapitalize="characters" aria-label="รหัสห้อง">
-        <button class="pri" id="b-join">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"/>
-            <path d="m12 5 7 7-7 7"/>
-          </svg>
+        <button type="button" class="btn-gradient-full" id="b-join" style="width:auto; padding:0 22px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           <span id="b-join-text">เข้าร่วม</span>
         </button>
       </div>
-    </div>
 
-    <div class="card" id="qr-host" hidden>
-      <h2>ให้อีกเครื่องสแกนเพื่อส่งไฟล์</h2>
-      <p>เปิดกล้องมือถือสแกน QR Code หรือกรอกรหัส 6 หลัก</p>
-      <div class="qr" id="h-qr"></div>
-      
-      <div class="qr-code-box" id="b-copy-code" title="แตะเพื่อคัดลอกรหัส">
-        <span class="code" id="h-code">------</span>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--mut);">
-          <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-        </svg>
-      </div>
-
-      <div class="qr-host-actions">
-        <button type="button" class="ghost" id="b-back-host">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
-          <span>ย้อนกลับ</span>
-        </button>
-        <button type="button" class="ghost" id="b-copy-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-          </svg>
-          <span>คัดลอกลิงก์</span>
-        </button>
+      <div class="features-row" style="margin-top:24px;">
+        <div class="feature-col">
+          <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <strong>เร็ว</strong>
+          <small>ไม่ต้องโหลดแอป</small>
+        </div>
+        <div class="feature-col">
+          <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <strong>ปลอดภัย</strong>
+          <small>ข้อมูลไม่ถูกเก็บ</small>
+        </div>
+        <div class="feature-col">
+          <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <strong>ใช้งานง่าย</strong>
+          <small>แค่สแกนหรือกรอก</small>
+        </div>
       </div>
     </div>
   </section>
@@ -1389,8 +1891,14 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     <div id="list"></div>
   </section>
 
+  <!-- Web Footer Note (Screenshot 1 & 2 Match) -->
   <footer class="web-footer">
-    <span>🐾 CatDrop · ส่งไฟล์ข้ามอุปกรณ์โดยตรงผ่าน WebRTC</span>
+    <div class="footer-content">
+      <svg class="paw-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="8.5" r="2.5"/><circle cx="10.5" cy="5.5" r="2.5"/><circle cx="15.5" cy="5.5" r="2.5"/><circle cx="18.5" cy="8.5" r="2.5"/><path d="M7 16c0-2.2 2.2-4 5-4s5 1.8 5 4c0 1.7-1.3 3-3 3h-4c-1.7 0-3-1.3-3-3z"/></svg>
+      <span>CatDrop · ส่งไฟล์ข้ามอุปกรณ์โดยตรงผ่าน WebRTC</span>
+    </div>
+    <div class="corner-paw left"></div>
+    <div class="corner-paw right"></div>
   </footer>
 </div>
 
@@ -1944,14 +2452,16 @@ function stop() {
   mode = ''; hostConn = null;
 }
 
-function tab(t) {
+function tab(t, skipHost = false) {
   stop();
   $('#seg').dataset.t = t;
   document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
   show(t);
-  $('#qr-home').hidden = false;
-  $('#qr-host').hidden = true;
-  if (t === 'near') near();
+  if (t === 'near') {
+    near();
+  } else if (t === 'qr') {
+    if (!skipHost) host();
+  }
 }
 
 /* ========================================================
@@ -2111,10 +2621,7 @@ function host() {
       navigator.clipboard.writeText(code).then(() => toast('✓ คัดลอกรหัสห้อง ' + code + ' แล้ว'));
     };
     $('#b-back-host').onclick = () => {
-      stop();
-      $('#qr-host').hidden = true;
-      $('#qr-home').hidden = false;
-      tab('qr');
+      tab('near');
     };
   });
 
@@ -2781,6 +3288,20 @@ async function downloadAllSequential(fileList) {
 
 /* ---------- ผูกเหตุการณ์ต่าง ๆ ---------- */
 document.querySelectorAll('#seg button').forEach(b => b.onclick = () => tab(b.dataset.t));
+if ($('#b-radar-qr')) $('#b-radar-qr').onclick = () => tab('qr');
+if ($('#b-radar-rescan')) $('#b-radar-rescan').onclick = () => {
+  if (mode === 'near') {
+    scan();
+    toast('กำลังค้นหาอุปกรณ์อีกครั้ง…');
+  }
+};
+if ($('#b-toggle-join')) $('#b-toggle-join').onclick = () => {
+  $('#qr-host').hidden = true;
+  $('#qr-home').hidden = false;
+};
+if ($('#b-toggle-host')) $('#b-toggle-host').onclick = () => {
+  host();
+};
 $('#b-host').onclick = host;
 $('#b-join').onclick = () => join($('#code').value);
 $('#code').onkeydown = e => { if (e.key === 'Enter') join(e.target.value); };
@@ -2802,7 +3323,7 @@ addEventListener('beforeunload', e => {
 paintMe();
 const room = new URLSearchParams(location.search).get('room');
 if (room) {
-  tab('qr');
+  tab('qr', true);
   join(room);
 } else {
   tab('near');
