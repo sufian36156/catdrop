@@ -107,9 +107,9 @@ html, body {
    ========================================== */
 .wrap {
   width: 100%;
-  max-width: 480px;
+  max-width: 430px;
   margin: 0 auto;
-  padding: 12px 16px 40px;
+  padding: 10px 16px 32px;
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
@@ -118,8 +118,8 @@ html, body {
 
 @media (min-width: 768px) {
   .wrap {
-    max-width: 860px;
-    padding: 24px 32px 64px;
+    max-width: 540px;
+    padding: 24px 28px 48px;
   }
   .brand-icon {
     width: 40px !important;
@@ -323,84 +323,50 @@ button:active { transform: scale(0.96); }
   flex-shrink: 0;
 }
 
-/* Tab Switcher (Segmented Control matching Screenshot 1 & 2) */
+/* Tab Switcher (Segmented Control matching Screenshot: Slim 1-Row Pill) */
 .seg {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  display: flex;
+  gap: 6px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 6px;
-  margin: 10px 0 18px;
-  box-shadow: var(--shadow-sm);
+  border-radius: 9999px;
+  padding: 5px;
+  margin: 6px 0 16px;
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.04);
   width: 100%;
 }
 .seg-btn {
-  display: flex;
+  flex: 1;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 12px;
-  border-radius: 15px;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 9999px;
   border: 0;
   background: transparent;
   color: var(--mut);
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.22s ease;
-  position: relative;
-  text-align: left;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.seg-btn svg {
+  flex-shrink: 0;
 }
 .seg-btn.on {
   background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
   color: #ffffff;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
 }
-.seg-icon-wrap {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-[data-theme="light"] .seg-btn:not(.on) .seg-icon-wrap {
+.seg-btn:not(.on):hover {
+  color: var(--ink);
   background: var(--btn-ghost);
-  color: var(--ac);
-}
-.seg-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-}
-.seg-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.25;
-}
-.seg-sub {
-  font-size: 0.72rem;
-  opacity: 0.88;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 2px;
-}
-.dot-live {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #34d399;
-  display: inline-block;
-  box-shadow: 0 0 6px #34d399;
-}
-.seg-arrow {
-  flex-shrink: 0;
-  opacity: 0.85;
 }
 
-/* Radar Section (Screenshot 2 Match) */
+/* Radar Section (Screenshot Match: Self-Contained Rounded Card) */
 #v-near {
   display: flex;
   flex-direction: column;
@@ -408,102 +374,160 @@ button:active { transform: scale(0.96); }
   width: 100%;
 }
 
-.radar-container {
-  width: 100%;
+.radar-card {
+  background: var(--card);
+  border-radius: 32px;
+  padding: 22px 18px 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   position: relative;
-  margin-top: 10px;
+  overflow: hidden;
 }
 
-.peeking-cat-wrap {
-  width: 135px;
-  margin-bottom: -28px;
-  position: relative;
-  z-index: 4;
-  pointer-events: none;
+.scan-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ac-subtle);
+  color: var(--ac);
+  border-radius: 9999px;
+  padding: 5px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
-.peeking-cat-qr {
-  width: 125px;
-  margin-bottom: -22px;
-  position: relative;
-  z-index: 4;
-  pointer-events: none;
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ac);
+  box-shadow: 0 0 8px var(--ac);
+  animation: pulse-dot-anim 1.5s ease-in-out infinite;
 }
-.peeking-cat {
-  width: 100%;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+@keyframes pulse-dot-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 .radar-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 4px 0 12px;
+  position: relative;
+  margin: 4px 0 6px;
 }
 
 .radar {
   position: relative;
-  width: min(295px, 80vw);
-  height: min(295px, 80vw);
+  width: min(230px, 62vw);
+  height: min(230px, 62vw);
   border-radius: 50%;
   margin: 0 auto;
 }
 
 .ring {
   position: absolute;
-  border: 1.5px solid var(--line);
   border-radius: 50%;
   pointer-events: none;
-  transition: border-color 0.25s ease;
 }
-.r1 { inset: 0; }
-.r2 { inset: 22%; }
-.r3 { inset: 44%; }
+.r1 {
+  inset: 0;
+  border: 1.5px dashed rgba(168, 85, 247, 0.35);
+}
+.r2 {
+  inset: 18%;
+  border: 1px solid rgba(168, 85, 247, 0.22);
+}
+.r3 {
+  inset: 38%;
+  border: 1px solid rgba(168, 85, 247, 0.22);
+}
 
-.pulse {
+.radar-sweep {
   position: absolute;
-  inset: 44%;
+  inset: 0;
   border-radius: 50%;
-  border: 2px solid var(--ac);
-  opacity: 0;
-  animation: pulse-wave 3.2s ease-out infinite;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(168, 85, 247, 0.2) 360deg);
+  animation: radar-sweep-rot 3.2s linear infinite;
   pointer-events: none;
 }
-.pulse + .pulse { animation-delay: 1.6s; }
-@keyframes pulse-wave {
-  0% { transform: scale(0.6); opacity: 0.7; }
-  100% { transform: scale(2.4); opacity: 0; }
+@keyframes radar-sweep-rot {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .you {
   position: absolute;
-  inset: 36%;
+  inset: 34%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2.1rem;
   background: var(--card);
   border: 2px solid var(--ac);
   border-radius: 50%;
-  box-shadow: 0 0 24px var(--radar-glow);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.28);
   z-index: 2;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .you:hover { transform: scale(1.08); }
+#you-av {
+  font-size: 1.65rem;
+  line-height: 1;
+}
 .you-sub {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--ac);
-  margin-top: -2px;
+  background: var(--ac-subtle);
+  padding: 1px 7px;
+  border-radius: 99px;
+  margin-top: 1px;
 }
 
-/* Bubbles (Found Peers on Radar) */
+/* Faint Decorative Devices Around Radar */
+.faint-device {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.dev-tl { left: -10px; top: 16%; }
+.dev-tr { right: -10px; top: 16%; }
+.dev-bl { left: -10px; bottom: 16%; }
+.dev-br { right: -10px; bottom: 16%; }
+
+.faint-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--ac);
+  box-shadow: var(--shadow-sm);
+  opacity: 0.85;
+}
+.faint-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ac);
+  display: block;
+  margin: 4px auto 0;
+  box-shadow: 0 0 4px var(--ac);
+  opacity: 0.8;
+}
+
+/* Dynamic Bubbles (Found Peers on Radar) */
 .bubble {
   position: absolute;
   left: var(--x);
@@ -525,9 +549,9 @@ button:active { transform: scale(0.96); }
 .bubble b {
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  font-size: 1.7rem;
+  width: 52px;
+  height: 52px;
+  font-size: 1.65rem;
   border-radius: 17px;
   background: var(--card);
   backdrop-filter: blur(10px);
@@ -541,7 +565,7 @@ button:active { transform: scale(0.96); }
 }
 .bubble em {
   font-style: normal;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 600;
   max-width: 72px;
   overflow: hidden;
@@ -563,50 +587,55 @@ button:active { transform: scale(0.96); }
 @keyframes pop { from { transform: scale(0.6); opacity: 0; } }
 @keyframes wig { 25% { rotate: -8deg; } 75% { rotate: 8deg; } }
 
-/* Radar Text & Action Section (Screenshot 2 Match) */
+/* Peeking Kitten Below Radar with Sound Waves */
+.peeking-cat-radar {
+  width: 155px;
+  margin: -6px auto 2px;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+}
+.peeking-cat-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+}
+
+.peeking-cat-qr {
+  width: 125px;
+  margin-bottom: -22px;
+  position: relative;
+  z-index: 4;
+  pointer-events: none;
+}
+.peeking-cat {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+}
+
+/* Radar Titles & Text */
 .scan-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 16px 0 20px;
+  margin: 6px 0 16px;
 }
 .scan-title {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
 .scan-desc {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--mut);
   margin-top: 4px;
-  max-width: 330px;
+  max-width: 290px;
   line-height: 1.45;
-}
-.scan-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--ac-subtle);
-  color: var(--ac);
-  border-radius: 99px;
-  padding: 6px 16px;
-  font-size: 0.84rem;
-  font-weight: 700;
-  margin-top: 14px;
-}
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--ac);
-  box-shadow: 0 0 8px var(--ac);
-  animation: pulse-dot-anim 1.5s ease-in-out infinite;
-}
-@keyframes pulse-dot-anim {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 .radar-actions {
@@ -614,19 +643,26 @@ button:active { transform: scale(0.96); }
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 380px;
-  margin: 0 auto;
+}
+.btn-arrow-right {
+  margin-left: auto;
 }
 
-/* Modern Gradient Buttons */
-.btn-gradient-full {
-  background: linear-gradient(135deg, var(--ac) 0%, var(--pink) 100%);
-  color: #ffffff;
-  border-radius: 99px;
-  padding: 13px 24px;
+/* ==========================================================
+   VIBRANT & COLORFUL ACTION BUTTONS
+   ========================================================== */
+/* Primary Action Buttons (Gradient Purple-Pink) */
+.btn-gradient-full,
+.pri,
+button.pri {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%) !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  height: 50px;
+  padding: 0 24px;
   font-size: 0.96rem;
   font-weight: 700;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -635,14 +671,99 @@ button:active { transform: scale(0.96); }
   box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
 }
-.btn-gradient-full:hover {
+.btn-gradient-full:hover,
+.pri:hover,
+button.pri:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45);
+  box-shadow: 0 6px 22px rgba(139, 92, 246, 0.48);
 }
-.btn-gradient-full:active {
-  transform: scale(0.98);
+.btn-gradient-full:active,
+.pri:active,
+button.pri:active {
+  transform: scale(0.97);
 }
+
+/* Specific "รับ" / "ยอมรับ" / "รับทั้งหมด" Button - Brilliant Emerald Green Gradient */
+#req-accept {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45) !important;
+  border-radius: 9999px !important;
+}
+#req-accept:hover {
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6) !important;
+}
+
+/* Decline Ghost Button - Soft Danger Red */
+#req-decline {
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #ef4444 !important;
+  border: 1.5px solid rgba(239, 68, 68, 0.3) !important;
+  border-radius: 9999px !important;
+  height: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+#req-decline:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Secondary Outline Pill Button (เช่น "ค้นหาอีกครั้ง") */
+.btn-outline-pill {
+  width: 100%;
+  height: 48px;
+  border-radius: 9999px;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  font-size: 0.94rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.btn-outline-pill:hover {
+  background: var(--btn-ghost);
+  border-color: var(--ac);
+  color: var(--ac);
+}
+.btn-outline-pill:active {
+  transform: scale(0.97);
+}
+
+/* Ghost Buttons (Cancel in Dialogs) */
+.ghost,
+button.ghost {
+  background: var(--btn-ghost) !important;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--line) !important;
+  border-radius: 9999px !important;
+  height: 46px;
+  padding: 0 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ghost:hover,
+button.ghost:hover {
+  background: var(--btn-ghost-hover) !important;
+}
+
 .btn-circle-icon {
   width: 24px;
   height: 24px;
@@ -652,38 +773,16 @@ button:active { transform: scale(0.96); }
   place-items: center;
 }
 
-.btn-outline-pill {
-  background: var(--card);
-  border: 1.5px solid var(--line);
-  color: var(--ink);
-  border-radius: 99px;
-  padding: 13px 24px;
-  font-size: 0.94rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
-}
-.btn-outline-pill:hover {
-  background: var(--card-hover);
-  border-color: var(--ac);
-  transform: translateY(-1px);
-}
-
 .btn-glass-outline {
-  background: var(--card);
-  border: 1px solid var(--line);
-  color: var(--ink);
-  border-radius: 99px;
-  padding: 13px 24px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1.5px solid rgba(124, 58, 237, 0.3);
+  color: var(--ac);
+  border-radius: 9999px;
+  height: 48px;
+  padding: 0 22px;
   font-size: 0.94rem;
   font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -693,8 +792,7 @@ button:active { transform: scale(0.96); }
   backdrop-filter: blur(10px);
 }
 .btn-glass-outline:hover {
-  background: var(--card-hover);
-  border-color: var(--ac);
+  background: rgba(124, 58, 237, 0.16);
 }
 
 /* Cards & Generic Elements */
@@ -1638,84 +1736,135 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     </div>
   </header>
 
-  <!-- Segment Switcher (Screenshot 1 & 2 Match) -->
+  <!-- Segment Switcher (Screenshot Match: Slim 1-Row Capsule) -->
   <nav class="seg" id="seg" data-t="near">
     <button type="button" data-t="near" class="seg-btn on">
-      <div class="seg-icon-wrap">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
-      </div>
-      <div class="seg-content">
-        <span class="seg-title">Wi-Fi เดียวกัน</span>
-        <span class="seg-sub"><i class="dot-live"></i> พร้อมใช้งาน</span>
-      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
+      <span>Wi-Fi เดียวกัน</span>
     </button>
     <button type="button" data-t="qr" class="seg-btn">
-      <div class="seg-icon-wrap">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      </div>
-      <div class="seg-content">
-        <span class="seg-title">QR Code / รหัส</span>
-        <span class="seg-sub">สแกนเพื่อเชื่อมต่อ</span>
-      </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="seg-arrow"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>QR Code / รหัส</span>
     </button>
   </nav>
 
-  <!-- Wi-Fi Radar View (Screenshot 2 Match) -->
+  <!-- Wi-Fi Radar View (Screenshot Match: Self-Contained Rounded Card) -->
   <section id="v-near">
-    <div class="radar-container">
-      <!-- Peeking Cat on top of radar -->
-      <div class="peeking-cat-wrap">
-        <svg class="peeking-cat" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 36L6 28M20 48L4 52M142 36L154 28M140 48L156 52" stroke="#A78BFA" stroke-width="3" stroke-linecap="round"/>
-          <path d="M42 45L34 16C33 12 39 10 43 14L62 38Z" fill="#FFFFFF"/>
-          <path d="M41 40L37 20C36 17 40 16 42 18L56 35Z" fill="#F472B6"/>
-          <path d="M118 45L126 16C127 12 121 10 117 14L98 38Z" fill="#FFFFFF"/>
-          <path d="M119 40L123 20C124 17 120 16 118 18L104 35Z" fill="#F472B6"/>
-          <ellipse cx="80" cy="52" rx="46" ry="32" fill="#FFFFFF"/>
-          <path d="M62 48C64 45 68 45 70 48" stroke="#1E1B4B" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-          <path d="M90 48C92 45 96 45 98 48" stroke="#1E1B4B" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-          <path d="M78 54L82 54L80 56Z" fill="#F43F5E"/>
-          <path d="M76 58C78 61 80 61 80 58C80 61 82 61 84 58" stroke="#F43F5E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <ellipse cx="56" cy="54" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.8"/>
-          <ellipse cx="104" cy="54" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.8"/>
-          <ellipse cx="58" cy="74" rx="10" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
-          <ellipse cx="102" cy="74" rx="10" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
-        </svg>
-      </div>
-
-      <div class="radar-wrap">
-        <div class="radar">
-          <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-          <div class="pulse"></div><div class="pulse"></div>
-          <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
-            <span id="you-av">🐱</span>
-            <span class="you-sub">คุณ</span>
-          </div>
-          <div id="peers"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="scan-info">
-      <h2 class="scan-title">กำลังค้นหาอุปกรณ์ใกล้เคียง...</h2>
-      <p class="scan-desc">หากค้นหาไม่เจอ สามารถใช้ QR Code เพื่อเชื่อมต่อได้ทันที</p>
+    <div class="card radar-card">
+      <!-- Status Pill at Top of Card -->
       <div class="scan-status-pill">
         <span class="pulse-dot"></span>
         <span id="near-msg">กำลังสแกน</span>
       </div>
-    </div>
 
-    <div class="radar-actions">
-      <button type="button" class="btn-gradient-full" id="b-radar-qr">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span>ใช้ QR Code แทน</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-      <button type="button" class="btn-outline-pill" id="b-radar-rescan">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
-        <span>ค้นหาอีกครั้ง</span>
-      </button>
+      <!-- Radar Display with Sweep and Faint Devices -->
+      <div class="radar-wrap">
+        <div class="radar">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+          <div class="radar-sweep"></div>
+          <div class="you" id="you" title="แตะเพื่อเปลี่ยนชื่อแมว">
+            <span id="you-av">🐱</span>
+            <span class="you-sub">คุณ</span>
+          </div>
+
+          <!-- Faint device indicators matching screenshot -->
+          <div class="faint-device dev-tl">
+            <div class="faint-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="12" x="3" y="4" rx="2"/><line x1="2" x2="22" y1="20" y2="20"/></svg></div>
+            <span class="faint-dot"></span>
+          </div>
+          <div class="faint-device dev-tr">
+            <div class="faint-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></div>
+            <span class="faint-dot"></span>
+          </div>
+          <div class="faint-device dev-bl">
+            <div class="faint-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="12" x="3" y="3" rx="2"/><line x1="12" x2="12" y1="15" y2="19"/><line x1="8" x2="16" y1="19" y2="19"/></svg></div>
+            <span class="faint-dot"></span>
+          </div>
+          <div class="faint-device dev-br">
+            <div class="faint-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></div>
+            <span class="faint-dot"></span>
+          </div>
+
+          <!-- Dynamic peers -->
+          <div id="peers"></div>
+        </div>
+      </div>
+
+      <!-- Cute Peeking Kitten with Sound Waves (matching sticker sheet & screenshot) -->
+      <div class="peeking-cat-radar">
+        <svg class="peeking-cat-svg" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Left signal waves ((( -->
+          <path d="M38 52C34 46 34 38 38 32" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M30 56C24 47 24 35 30 26" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M22 60C14 48 14 32 22 20" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+
+          <!-- Right signal waves ))) -->
+          <path d="M162 52C166 46 166 38 162 32" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M170 56C176 47 176 35 170 26" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M178 60C186 48 186 32 178 20" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+
+          <!-- Cat Left Ear -->
+          <path d="M66 42L58 14C56 9 63 7 67 11L85 34Z" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.2"/>
+          <path d="M65 37L61 18C60 15 64 14 66 16L79 32Z" fill="#F472B6"/>
+
+          <!-- Cat Right Ear -->
+          <path d="M134 42L142 14C144 9 137 7 133 11L115 34Z" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.2"/>
+          <path d="M135 37L139 18C140 15 136 14 134 16L121 32Z" fill="#F472B6"/>
+
+          <!-- Cat Head with Furry Cheeks -->
+          <ellipse cx="100" cy="48" rx="42" ry="30" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
+
+          <!-- Eyes (Winking / Smiling like sticker sheet) -->
+          <!-- Left Eye: Large sparkly purple anime eye -->
+          <ellipse cx="86" cy="44" rx="4.5" ry="5.5" fill="#2E1065"/>
+          <circle cx="84.5" cy="42" r="2" fill="#FFFFFF"/>
+          <circle cx="88" cy="46" r="0.9" fill="#FFFFFF"/>
+
+          <!-- Right Eye: Playful wink arc -->
+          <path d="M110 44C113 41 117 41 120 44" stroke="#2E1065" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+
+          <!-- Nose & Mouth -->
+          <ellipse cx="100" cy="49" rx="2" ry="1.4" fill="#F43F5E"/>
+          <path d="M96 52C98 55 100 55 100 52C100 55 102 55 104 52" stroke="#F43F5E" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M98 53C99 56 101 56 102 53Z" fill="#FDA4AF"/>
+
+          <!-- Soft Blush Cheeks -->
+          <ellipse cx="76" cy="49" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.85"/>
+          <ellipse cx="124" cy="49" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.85"/>
+
+          <!-- Cute Paws Peeking over Bottom Edge -->
+          <ellipse cx="78" cy="68" rx="10" ry="7" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
+          <circle cx="75" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
+          <circle cx="78" cy="65" r="1.5" fill="#F472B6" opacity="0.6"/>
+          <circle cx="81" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
+
+          <ellipse cx="122" cy="68" rx="10" ry="7" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
+          <circle cx="119" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
+          <circle cx="122" cy="65" r="1.5" fill="#F472B6" opacity="0.6"/>
+          <circle cx="125" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
+        </svg>
+      </div>
+
+      <!-- Scan Titles & Description -->
+      <div class="scan-info">
+        <h2 class="scan-title">กำลังค้นหาอุปกรณ์ใกล้เคียง...</h2>
+        <p class="scan-desc">หากค้นหาไม่เจอ สามารถใช้ QR Code เพื่อเชื่อมต่อได้ทันที</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="radar-actions">
+        <button type="button" class="btn-gradient-full" id="b-radar-qr">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>ใช้ QR Code แทน</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow-right"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button type="button" class="btn-outline-pill" id="b-radar-rescan">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+          <span>ค้นหาอีกครั้ง</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -1936,8 +2085,14 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     </div>
 
     <div class="req-actions">
-      <button type="button" class="ghost" id="req-decline">ปฏิเสธ</button>
-      <button type="button" class="pri" id="req-accept">ยอมรับ</button>
+      <button type="button" class="ghost" id="req-decline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <span>ปฏิเสธ</span>
+      </button>
+      <button type="button" class="pri" id="req-accept">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>ยอมรับ</span>
+      </button>
     </div>
   </div>
 </div>
@@ -1949,9 +2104,12 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     <p>เพื่อนในเครือข่ายจะมองเห็นชื่อนี้</p>
     <div class="av-grid" id="av-grid"></div>
     <input id="me-input" maxlength="20" placeholder="ชื่อน้องแมวของคุณ" aria-label="ชื่อน้องแมว">
-    <div style="display:flex; gap:8px; margin-top:14px;">
+    <div style="display:flex; gap:10px; margin-top:16px;">
       <button value="n" type="button" class="ghost" id="dlg-me-cancel" style="flex:1;">ยกเลิก</button>
-      <button value="y" class="pri" id="dlg-me-save" style="flex:1;">บันทึก</button>
+      <button value="y" class="pri" id="dlg-me-save" style="flex:1;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>บันทึก</span>
+      </button>
     </div>
   </form>
 </dialog>
@@ -2419,7 +2577,7 @@ function promptRequestSheet({ avatar, name, badge, subtitle, file, fileList }) {
   } else {
     fileBox.hidden = true;
     detailsSection.hidden = true;
-    $('#req-accept').innerHTML = '<span>ยอมรับ</span>';
+    $('#req-accept').innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>ยอมรับ</span>';
   }
 
   playTone('incoming');
