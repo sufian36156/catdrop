@@ -2,7 +2,7 @@
 <html lang="th" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>CatDrop · ส่งไฟล์ข้ามเครื่อง</title>
 <meta name="description" content="CatDrop ส่งไฟล์ข้ามเครื่องผ่าน Wi-Fi และ QR Code สะดวก รวดเร็ว สไตล์น้องแมว 🐾">
 <meta name="theme-color" content="#7c3aed" id="meta-theme-color">
@@ -100,6 +100,8 @@ html, body {
   font: 400 15px/1.55 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100dvh;
   transition: background-color 0.25s ease, color 0.25s ease;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* ==========================================
@@ -107,9 +109,9 @@ html, body {
    ========================================== */
 .wrap {
   width: 100%;
-  max-width: 430px;
+  max-width: 420px;
   margin: 0 auto;
-  padding: 10px 16px 32px;
+  padding: 10px 16px 28px;
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
@@ -118,7 +120,7 @@ html, body {
 
 @media (min-width: 768px) {
   .wrap {
-    max-width: 540px;
+    max-width: 520px;
     padding: 24px 28px 48px;
   }
   .brand-icon {
@@ -161,53 +163,40 @@ html, body {
   }
 }
 
-/* Header & Brand */
-/* Header & Brand */
+/* Header & Brand (Restored Classic Clean Style) */
 .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  padding: 8px 0 14px;
+  padding: 6px 0 12px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
+  gap: 9px;
   text-decoration: none;
   color: inherit;
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .brand:hover .brand-icon {
   transform: rotate(-6deg) scale(1.08);
 }
 
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
 .brand-title {
   font-weight: 800;
-  font-size: 1.38rem;
+  font-size: 1.35rem;
   letter-spacing: -0.02em;
-  line-height: 1.15;
   color: var(--ink);
-}
-.brand-sub {
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: var(--mut);
-  letter-spacing: 0.02em;
-  margin-top: 2px;
 }
 
 .gradient-text {
@@ -376,8 +365,8 @@ button:active { transform: scale(0.96); }
 
 .radar-card {
   background: var(--card);
-  border-radius: 32px;
-  padding: 22px 18px 24px;
+  border-radius: 26px;
+  padding: 18px 16px 20px;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--line);
   display: flex;
@@ -385,24 +374,23 @@ button:active { transform: scale(0.96); }
   align-items: center;
   width: 100%;
   position: relative;
-  overflow: hidden;
 }
 
 .scan-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   background: var(--ac-subtle);
   color: var(--ac);
   border-radius: 9999px;
-  padding: 5px 16px;
-  font-size: 0.84rem;
+  padding: 4px 14px;
+  font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .pulse-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--ac);
   box-shadow: 0 0 8px var(--ac);
@@ -418,13 +406,13 @@ button:active { transform: scale(0.96); }
   display: flex;
   justify-content: center;
   position: relative;
-  margin: 4px 0 6px;
+  margin: 4px 0 2px;
 }
 
 .radar {
   position: relative;
-  width: min(230px, 62vw);
-  height: min(230px, 62vw);
+  width: min(210px, 58vw);
+  height: min(210px, 58vw);
   border-radius: 50%;
   margin: 0 auto;
 }
@@ -470,61 +458,24 @@ button:active { transform: scale(0.96); }
   background: var(--card);
   border: 2px solid var(--ac);
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.28);
+  box-shadow: 0 0 16px rgba(124, 58, 237, 0.25);
   z-index: 2;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .you:hover { transform: scale(1.08); }
 #you-av {
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   line-height: 1;
 }
 .you-sub {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--ac);
   background: var(--ac-subtle);
-  padding: 1px 7px;
+  padding: 1px 6px;
   border-radius: 99px;
   margin-top: 1px;
-}
-
-/* Faint Decorative Devices Around Radar */
-.faint-device {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
-  z-index: 1;
-}
-.dev-tl { left: -10px; top: 16%; }
-.dev-tr { right: -10px; top: 16%; }
-.dev-bl { left: -10px; bottom: 16%; }
-.dev-br { right: -10px; bottom: 16%; }
-
-.faint-box {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: var(--card);
-  border: 1.5px solid var(--line);
-  display: grid;
-  place-items: center;
-  color: var(--ac);
-  box-shadow: var(--shadow-sm);
-  opacity: 0.85;
-}
-.faint-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--ac);
-  display: block;
-  margin: 4px auto 0;
-  box-shadow: 0 0 4px var(--ac);
-  opacity: 0.8;
 }
 
 /* Dynamic Bubbles (Found Peers on Radar) */
@@ -589,8 +540,8 @@ button:active { transform: scale(0.96); }
 
 /* Peeking Kitten Below Radar with Sound Waves */
 .peeking-cat-radar {
-  width: 155px;
-  margin: -6px auto 2px;
+  width: 135px;
+  margin: -2px auto 0;
   position: relative;
   z-index: 3;
   pointer-events: none;
@@ -599,7 +550,7 @@ button:active { transform: scale(0.96); }
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.06));
 }
 
 .peeking-cat-qr {
@@ -622,26 +573,26 @@ button:active { transform: scale(0.96); }
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 6px 0 16px;
+  margin: 8px 0 14px;
 }
 .scan-title {
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.16rem;
+  font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
 .scan-desc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--mut);
-  margin-top: 4px;
-  max-width: 290px;
-  line-height: 1.45;
+  margin-top: 3px;
+  max-width: 280px;
+  line-height: 1.4;
 }
 
 .radar-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 .btn-arrow-right {
@@ -1712,11 +1663,8 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   <!-- Header Bar -->
   <header class="top">
     <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
-      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="42" height="42">
-      <div class="brand-text">
-        <span class="brand-title">Cat<span class="gradient-text">Drop</span></span>
-        <span class="brand-sub">Drop · Share · Make a Difference</span>
-      </div>
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="34" height="34">
+      <span class="brand-title">CatDrop</span>
     </a>
     <div class="top-actions">
       <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป">📲 ติดตั้ง</button>
@@ -1757,7 +1705,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
         <span id="near-msg">กำลังสแกน</span>
       </div>
 
-      <!-- Radar Display with Sweep and Faint Devices -->
+      <!-- Radar Display with Sweep -->
       <div class="radar-wrap">
         <div class="radar">
           <div class="ring r1"></div>
@@ -1769,81 +1717,63 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
             <span class="you-sub">คุณ</span>
           </div>
 
-          <!-- Faint device indicators matching screenshot -->
-          <div class="faint-device dev-tl">
-            <div class="faint-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="12" x="3" y="4" rx="2"/><line x1="2" x2="22" y1="20" y2="20"/></svg></div>
-            <span class="faint-dot"></span>
-          </div>
-          <div class="faint-device dev-tr">
-            <div class="faint-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></div>
-            <span class="faint-dot"></span>
-          </div>
-          <div class="faint-device dev-bl">
-            <div class="faint-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="12" x="3" y="3" rx="2"/><line x1="12" x2="12" y1="15" y2="19"/><line x1="8" x2="16" y1="19" y2="19"/></svg></div>
-            <span class="faint-dot"></span>
-          </div>
-          <div class="faint-device dev-br">
-            <div class="faint-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg></div>
-            <span class="faint-dot"></span>
-          </div>
-
           <!-- Dynamic peers -->
           <div id="peers"></div>
         </div>
       </div>
 
-      <!-- Cute Peeking Kitten with Sound Waves (matching sticker sheet & screenshot) -->
+      <!-- Cute Peeking Kitten with Sound Waves (matching sticker sheet) -->
       <div class="peeking-cat-radar">
-        <svg class="peeking-cat-svg" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="peeking-cat-svg" viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Left signal waves ((( -->
-          <path d="M38 52C34 46 34 38 38 32" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M30 56C24 47 24 35 30 26" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M22 60C14 48 14 32 22 20" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M36 48C32 42 32 36 36 30" stroke="#A855F7" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M28 52C22 44 22 34 28 26" stroke="#A855F7" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M20 56C13 46 13 32 20 22" stroke="#A855F7" stroke-width="2.4" stroke-linecap="round"/>
 
           <!-- Right signal waves ))) -->
-          <path d="M162 52C166 46 166 38 162 32" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M170 56C176 47 176 35 170 26" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M178 60C186 48 186 32 178 20" stroke="#A855F7" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M144 48C148 42 148 36 144 30" stroke="#A855F7" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M152 52C158 44 158 34 152 26" stroke="#A855F7" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M160 56C167 46 167 32 160 22" stroke="#A855F7" stroke-width="2.4" stroke-linecap="round"/>
 
           <!-- Cat Left Ear -->
-          <path d="M66 42L58 14C56 9 63 7 67 11L85 34Z" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.2"/>
-          <path d="M65 37L61 18C60 15 64 14 66 16L79 32Z" fill="#F472B6"/>
+          <path d="M58 40L50 14C48 9 55 7 59 11L76 33Z" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.2"/>
+          <path d="M57 35L53 18C52 15 56 14 58 16L70 31Z" fill="#F472B6"/>
 
           <!-- Cat Right Ear -->
-          <path d="M134 42L142 14C144 9 137 7 133 11L115 34Z" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.2"/>
-          <path d="M135 37L139 18C140 15 136 14 134 16L121 32Z" fill="#F472B6"/>
+          <path d="M122 40L130 14C132 9 125 7 121 11L104 33Z" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.2"/>
+          <path d="M123 35L127 18C128 15 124 14 122 16L110 31Z" fill="#F472B6"/>
 
           <!-- Cat Head with Furry Cheeks -->
-          <ellipse cx="100" cy="48" rx="42" ry="30" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
+          <ellipse cx="90" cy="46" rx="38" ry="28" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
 
-          <!-- Eyes (Winking / Smiling like sticker sheet) -->
-          <!-- Left Eye: Large sparkly purple anime eye -->
-          <ellipse cx="86" cy="44" rx="4.5" ry="5.5" fill="#2E1065"/>
-          <circle cx="84.5" cy="42" r="2" fill="#FFFFFF"/>
-          <circle cx="88" cy="46" r="0.9" fill="#FFFFFF"/>
+          <!-- Eyes -->
+          <!-- Left Eye: Large sparkly anime eye -->
+          <ellipse cx="78" cy="42" rx="4.2" ry="5.2" fill="#2E1065"/>
+          <circle cx="76.5" cy="40" r="1.8" fill="#FFFFFF"/>
+          <circle cx="79.8" cy="44" r="0.8" fill="#FFFFFF"/>
 
-          <!-- Right Eye: Playful wink arc -->
-          <path d="M110 44C113 41 117 41 120 44" stroke="#2E1065" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <!-- Right Eye: Playful smiling wink arc -->
+          <path d="M99 42C102 39 106 39 109 42" stroke="#2E1065" stroke-width="2.6" stroke-linecap="round" fill="none"/>
 
           <!-- Nose & Mouth -->
-          <ellipse cx="100" cy="49" rx="2" ry="1.4" fill="#F43F5E"/>
-          <path d="M96 52C98 55 100 55 100 52C100 55 102 55 104 52" stroke="#F43F5E" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path d="M98 53C99 56 101 56 102 53Z" fill="#FDA4AF"/>
+          <ellipse cx="90" cy="47" rx="1.8" ry="1.2" fill="#F43F5E"/>
+          <path d="M86 50C88 53 90 53 90 50C90 53 92 53 94 50" stroke="#F43F5E" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M88 51C89 54 91 54 92 51Z" fill="#FDA4AF"/>
 
           <!-- Soft Blush Cheeks -->
-          <ellipse cx="76" cy="49" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.85"/>
-          <ellipse cx="124" cy="49" rx="6" ry="3.5" fill="#FDA4AF" opacity="0.85"/>
+          <ellipse cx="68" cy="47" rx="5.5" ry="3.2" fill="#FDA4AF" opacity="0.85"/>
+          <ellipse cx="112" cy="47" rx="5.5" ry="3.2" fill="#FDA4AF" opacity="0.85"/>
 
           <!-- Cute Paws Peeking over Bottom Edge -->
-          <ellipse cx="78" cy="68" rx="10" ry="7" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
-          <circle cx="75" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
-          <circle cx="78" cy="65" r="1.5" fill="#F472B6" opacity="0.6"/>
-          <circle cx="81" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
+          <ellipse cx="70" cy="65" rx="9" ry="6.5" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
+          <circle cx="67" cy="63" r="1.3" fill="#F472B6" opacity="0.6"/>
+          <circle cx="70" cy="62" r="1.3" fill="#F472B6" opacity="0.6"/>
+          <circle cx="73" cy="63" r="1.3" fill="#F472B6" opacity="0.6"/>
 
-          <ellipse cx="122" cy="68" rx="10" ry="7" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
-          <circle cx="119" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
-          <circle cx="122" cy="65" r="1.5" fill="#F472B6" opacity="0.6"/>
-          <circle cx="125" cy="66" r="1.5" fill="#F472B6" opacity="0.6"/>
+          <ellipse cx="110" cy="65" rx="9" ry="6.5" fill="#FFFFFF" stroke="#EDE9FE" stroke-width="1.5"/>
+          <circle cx="107" cy="63" r="1.3" fill="#F472B6" opacity="0.6"/>
+          <circle cx="110" cy="62" r="1.3" fill="#F472B6" opacity="0.6"/>
+          <circle cx="113" cy="63" r="1.3" fill="#F472B6" opacity="0.6"/>
         </svg>
       </div>
 
@@ -1868,10 +1798,10 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
     </div>
   </section>
 
-  <!-- QR Code Section (Screenshot 1 Match) -->
+  <!-- QR Code Section -->
   <section id="v-qr" hidden>
-    <!-- View A: QR Host (Shown when QR code is active, matching Screenshot 1) -->
-    <div class="card qr-glass-card" id="qr-host">
+    <!-- View A: QR Host (Shown ONLY after clicking "สร้าง QR Code") -->
+    <div class="card qr-glass-card" id="qr-host" hidden>
       <div class="qr-card-header">
         <div class="qr-badge-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1880,7 +1810,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
         </div>
         <div class="qr-header-text">
           <h2>ให้อีกเครื่องสแกนเพื่อ<span class="gradient-text">ส่งไฟล์</span></h2>
-          <p>เปิดกล้องมือถือสแกน QR Code หรือกรอกรหัส 6 หลัก เพื่อเชื่อมต่อและส่งไฟล์ได้ทันที</p>
+          <p>เปิดกล้องมือถือสแกน QR Code หรือกรอกรหัส 6 หลัก เพื่อเชื่อมต่อ</p>
         </div>
       </div>
 
@@ -1955,20 +1885,14 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
           <span>คัดลอกลิงก์</span>
         </button>
       </div>
-
-      <div style="text-align:center; margin-top:14px;">
-        <button type="button" id="b-toggle-join" style="background:none; border:none; color:var(--text-sec); font-size:0.86rem; font-weight:500; cursor:pointer; text-decoration:underline;">
-          มีรหัส 6 หลักจากอีกเครื่อง? แตะที่นี่เพื่อกรอกรหัส
-        </button>
-      </div>
     </div>
 
-    <!-- View B: QR Home / Join (Code Input Form) -->
-    <div class="card qr-glass-card" id="qr-home" hidden>
+    <!-- View B: QR Home / Join (Default Screen when switching to QR Tab) -->
+    <div class="card qr-glass-card" id="qr-home">
       <div class="qr-card-header">
         <div class="qr-badge-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            <rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/>
           </svg>
         </div>
         <div class="qr-header-text">
@@ -1981,14 +1905,8 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>
         </svg>
-        <span id="b-host-text">แสดง QR Code เพื่อส่งไฟล์</span>
+        <span id="b-host-text">สร้าง QR Code เพื่อเชื่อมต่อ</span>
       </button>
-
-      <div style="text-align:center; margin-top:12px;">
-        <button type="button" id="b-toggle-host" style="background:none; border:none; color:var(--text-sec); font-size:0.86rem; font-weight:500; cursor:pointer; text-decoration:underline;">
-          ← กลับไปหน้าแสดง QR Code
-        </button>
-      </div>
 
       <div class="or">หรือกรอกรหัสจากอีกเครื่อง</div>
       <div class="join">
@@ -1999,7 +1917,7 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
         </button>
       </div>
 
-      <div class="features-row" style="margin-top:24px;">
+      <div class="features-row" style="margin-top:22px;">
         <div class="feature-col">
           <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <strong>เร็ว</strong>
@@ -2610,7 +2528,7 @@ function stop() {
   mode = ''; hostConn = null;
 }
 
-function tab(t, skipHost = false) {
+function tab(t) {
   stop();
   $('#seg').dataset.t = t;
   document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
@@ -2618,7 +2536,8 @@ function tab(t, skipHost = false) {
   if (t === 'near') {
     near();
   } else if (t === 'qr') {
-    if (!skipHost) host();
+    $('#qr-host').hidden = true;
+    $('#qr-home').hidden = false;
   }
 }
 
@@ -2779,7 +2698,9 @@ function host() {
       navigator.clipboard.writeText(code).then(() => toast('✓ คัดลอกรหัสห้อง ' + code + ' แล้ว'));
     };
     $('#b-back-host').onclick = () => {
-      tab('near');
+      stop();
+      $('#qr-host').hidden = true;
+      $('#qr-home').hidden = false;
     };
   });
 
@@ -3453,13 +3374,6 @@ if ($('#b-radar-rescan')) $('#b-radar-rescan').onclick = () => {
     toast('กำลังค้นหาอุปกรณ์อีกครั้ง…');
   }
 };
-if ($('#b-toggle-join')) $('#b-toggle-join').onclick = () => {
-  $('#qr-host').hidden = true;
-  $('#qr-home').hidden = false;
-};
-if ($('#b-toggle-host')) $('#b-toggle-host').onclick = () => {
-  host();
-};
 $('#b-host').onclick = host;
 $('#b-join').onclick = () => join($('#code').value);
 $('#code').onkeydown = e => { if (e.key === 'Enter') join(e.target.value); };
@@ -3472,6 +3386,9 @@ drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefau
 ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
 drop.addEventListener('drop', e => queue(e.dataTransfer.files));
 
+// ป้องกันการ Pinch-zoom บนอุปกรณ์มือถือ
+document.addEventListener('gesturestart', e => e.preventDefault());
+
 addEventListener('beforeunload', e => {
   if (active && active.open) { e.preventDefault(); e.returnValue = ''; }
   if (peer) { try { peer.destroy(); } catch {} }
@@ -3481,7 +3398,7 @@ addEventListener('beforeunload', e => {
 paintMe();
 const room = new URLSearchParams(location.search).get('room');
 if (room) {
-  tab('qr', true);
+  tab('qr');
   join(room);
 } else {
   tab('near');
