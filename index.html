@@ -105,6 +105,11 @@ html, body {
   transition: background-color 0.25s ease, color 0.25s ease;
   touch-action: manipulation;
   -webkit-text-size-adjust: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
 }
 
 /* ==========================================
@@ -114,9 +119,10 @@ html, body {
   width: 100%;
   max-width: 420px;
   margin: 0 auto;
-  padding: 10px 16px 28px;
+  padding: 8px 14px 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 100dvh;
   transition: max-width 0.2s ease, padding 0.2s ease;
 }
@@ -124,33 +130,39 @@ html, body {
 @media (min-width: 768px) {
   .wrap {
     max-width: 520px;
-    padding: 24px 28px 48px;
+    padding: 24px 28px 36px;
   }
   .brand-icon {
     width: 40px !important;
     height: 40px !important;
   }
   .brand-title {
-    font-size: 1.6rem !important;
+    font-size: 1.55rem !important;
   }
   .seg {
     max-width: 440px;
-    margin: 16px auto 18px !important;
+    margin: 14px auto 16px !important;
+    height: 44px !important;
+  }
+  .seg-btn {
+    height: 40px !important;
+    font-size: 0.92rem !important;
+  }
+  .radar-card {
+    padding: 22px 24px 24px !important;
   }
   .radar {
-    width: 360px !important;
-    height: 360px !important;
+    width: 300px !important;
+    height: 300px !important;
   }
-  .you {
-    font-size: 2.6rem !important;
+  .peeking-cat-radar {
+    width: 135px !important;
   }
-  .bubble {
-    width: 84px !important;
+  .btn-gradient-full, .pri, button.pri, .btn-outline-pill {
+    height: 48px !important;
   }
-  .bubble b {
-    width: 66px !important;
-    height: 66px !important;
-    font-size: 2.2rem !important;
+  .web-footer {
+    padding: 24px 0 12px !important;
   }
   .drop {
     padding: 44px 24px !important;
@@ -171,24 +183,26 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  padding: 6px 0 12px;
+  gap: 10px;
+  padding: 4px 0 8px;
+  width: 100%;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   color: inherit;
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 3px 10px rgba(124, 58, 237, 0.25);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .brand:hover .brand-icon {
@@ -202,18 +216,15 @@ html, body {
 
 .brand-title {
   font-weight: 800;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   letter-spacing: -0.01em;
-  line-height: 1.15;
+  line-height: 1.1;
   color: var(--ink);
+  white-space: nowrap;
 }
 
 .brand-sub {
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: var(--mut);
-  letter-spacing: 0.02em;
-  margin-top: 1px;
+  display: none;
 }
 
 .gradient-text {
@@ -336,8 +347,8 @@ button:active { transform: scale(0.96); }
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 9999px;
-  padding: 5px;
-  margin: 6px 0 16px;
+  padding: 4px;
+  margin: 4px 0 10px;
   box-shadow: 0 2px 10px rgba(124, 58, 237, 0.04);
   width: 100%;
 }
@@ -346,14 +357,14 @@ button:active { transform: scale(0.96); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  height: 42px;
-  padding: 0 16px;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
   border-radius: 9999px;
   border: 0;
   background: transparent;
   color: var(--mut);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -382,8 +393,8 @@ button:active { transform: scale(0.96); }
 
 .radar-card {
   background: var(--card);
-  border-radius: 26px;
-  padding: 18px 16px 20px;
+  border-radius: 24px;
+  padding: 12px 14px 14px;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--line);
   display: flex;
@@ -396,14 +407,14 @@ button:active { transform: scale(0.96); }
 .scan-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   background: var(--ac-subtle);
   color: var(--ac);
   border-radius: 9999px;
-  padding: 4px 14px;
-  font-size: 0.8rem;
+  padding: 3px 12px;
+  font-size: 0.74rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .pulse-dot {
   width: 7px;
@@ -423,13 +434,13 @@ button:active { transform: scale(0.96); }
   display: flex;
   justify-content: center;
   position: relative;
-  margin: 4px 0 2px;
+  margin: 2px 0 0;
 }
 
 .radar {
   position: relative;
-  width: min(210px, 58vw);
-  height: min(210px, 58vw);
+  width: min(180px, 48vw);
+  height: min(180px, 48vw);
   border-radius: 50%;
   margin: 0 auto;
 }
@@ -557,7 +568,7 @@ button:active { transform: scale(0.96); }
 
 /* Peeking Kitten Below Radar with Sound Waves */
 .peeking-cat-radar {
-  width: 135px;
+  width: 110px;
   margin: -2px auto 0;
   position: relative;
   z-index: 3;
@@ -571,8 +582,8 @@ button:active { transform: scale(0.96); }
 }
 
 .peeking-cat-qr {
-  width: 125px;
-  margin-bottom: -22px;
+  width: 110px;
+  margin-bottom: -18px;
   position: relative;
   z-index: 4;
   pointer-events: none;
@@ -590,26 +601,26 @@ button:active { transform: scale(0.96); }
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 8px 0 14px;
+  margin: 4px 0 10px;
 }
 .scan-title {
-  font-size: 1.16rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
 .scan-desc {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--mut);
-  margin-top: 3px;
-  max-width: 280px;
-  line-height: 1.4;
+  margin-top: 2px;
+  max-width: 260px;
+  line-height: 1.35;
 }
 
 .radar-actions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
   width: 100%;
 }
 .btn-arrow-right {
@@ -626,17 +637,17 @@ button.pri {
   background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%) !important;
   color: #ffffff !important;
   border-radius: 9999px !important;
-  height: 50px;
-  padding: 0 24px;
-  font-size: 0.96rem;
+  height: 44px;
+  padding: 0 20px;
+  font-size: 0.92rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
   border: 0;
-  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
@@ -645,7 +656,7 @@ button.pri {
 .pri:hover,
 button.pri:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(139, 92, 246, 0.48);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.48);
 }
 .btn-gradient-full:active,
 .pri:active,
@@ -657,11 +668,11 @@ button.pri:active {
 #req-accept {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45) !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45) !important;
   border-radius: 9999px !important;
 }
 #req-accept:hover {
-  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6) !important;
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.6) !important;
 }
 
 /* Decline Ghost Button - Soft Danger Red */
@@ -670,9 +681,9 @@ button.pri:active {
   color: #ef4444 !important;
   border: 1.5px solid rgba(239, 68, 68, 0.3) !important;
   border-radius: 9999px !important;
-  height: 50px;
+  height: 44px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -686,12 +697,12 @@ button.pri:active {
 /* Secondary Outline Pill Button (เช่น "ค้นหาอีกครั้ง") */
 .btn-outline-pill {
   width: 100%;
-  height: 48px;
+  height: 44px;
   border-radius: 9999px;
   background: var(--card);
   border: 1.5px solid var(--line);
   color: var(--ink);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -1563,6 +1574,73 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   transform: scale(1.06);
 }
 
+/* Sound & Preferences Row inside Profile Dialog */
+.dlg-setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin: 12px 0 6px;
+  gap: 12px;
+}
+.dlg-setting-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlg-setting-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--ac-subtle);
+  color: var(--ac);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.dlg-setting-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.dlg-setting-desc {
+  font-size: 0.74rem;
+  color: var(--mut);
+  margin-top: 2px;
+}
+/* iOS-style Switch Toggle */
+.btn-switch-toggle {
+  width: 48px;
+  height: 28px;
+  border-radius: 99px;
+  background: var(--line);
+  border: 0;
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.25s ease;
+  flex-shrink: 0;
+}
+.btn-switch-toggle.on {
+  background: linear-gradient(135deg, var(--ac), var(--pink));
+}
+.switch-toggle-knob {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-switch-toggle.on .switch-toggle-knob {
+  transform: translateX(20px);
+}
+
 #lightbox {
   width: min(92vw, 680px);
   max-height: 88vh;
@@ -1622,9 +1700,9 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 .web-footer {
   text-align: center;
   color: var(--mut);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   margin-top: auto;
-  padding: 32px 0 16px;
+  padding: 10px 0 4px;
   position: relative;
   z-index: 1;
 }
@@ -1680,21 +1758,14 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   <!-- Header Bar -->
   <header class="top">
     <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
-      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="38" height="38">
-      <div class="brand-text">
-        <span class="brand-title">Cat <span class="gradient-text">Drop</span></span>
-        <span class="brand-sub">Drop · Share · Make a Difference</span>
-      </div>
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="34" height="34">
+      <span class="brand-title">Cat&nbsp;<span class="gradient-text">Drop</span></span>
     </a>
     <div class="top-actions">
       <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป">📲 ติดตั้ง</button>
       <button class="btn-icon" id="b-theme" title="สลับโหมดมืด/สว่าง" aria-label="สลับโหมดมืดหรือสว่าง">
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 0 1 1-9-9Z"/></svg>
         <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      </button>
-      <button class="btn-icon" id="b-sound" title="เปิด/ปิดเสียง" aria-label="เปิดหรือปิดเสียงแจ้งเตือน">
-        <svg class="icon-bell" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="bell-dot"></span>
       </button>
       <button class="me" id="me" aria-label="เปลี่ยนชื่อและอวาตาร์แมว">
         <span id="me-av">🐱</span>
@@ -2039,9 +2110,26 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
 <dialog id="dlg-me">
   <form method="dialog">
     <h3>🐾 ตั้งชื่อและเลือกแมว</h3>
-    <p>เพื่อนในเครือข่ายจะมองเห็นชื่อนี้</p>
+    <p>เพื่อนในเครือข่ายจะมองเห็นชื่อและอวาตาร์นี้</p>
     <div class="av-grid" id="av-grid"></div>
     <input id="me-input" maxlength="20" placeholder="ชื่อน้องแมวของคุณ" aria-label="ชื่อน้องแมว">
+
+    <!-- Sound Toggle inside Dialog -->
+    <div class="dlg-setting-item">
+      <div class="dlg-setting-info">
+        <div class="dlg-setting-icon">
+          <svg class="icon-bell" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        </div>
+        <div>
+          <div class="dlg-setting-title">เสียงเอฟเฟกต์ / แจ้งเตือน</div>
+          <div class="dlg-setting-desc" id="sound-status-desc">เปิดใช้งานอยู่</div>
+        </div>
+      </div>
+      <button type="button" class="btn-switch-toggle" id="b-sound" aria-label="เปิดหรือปิดเสียง" aria-checked="true">
+        <span class="switch-toggle-knob"></span>
+      </button>
+    </div>
+
     <div style="display:flex; gap:10px; margin-top:16px;">
       <button value="n" type="button" class="ghost" id="dlg-me-cancel" style="flex:1;">ยกเลิก</button>
       <button value="y" class="pri" id="dlg-me-save" style="flex:1;">
@@ -2118,7 +2206,6 @@ function getActiveTheme() {
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('catdrop_theme', theme);
-  $('#b-theme').textContent = theme === 'dark' ? '☀️' : '🌙';
   $('#meta-theme-color').setAttribute('content', theme === 'dark' ? '#0c0a1e' : '#7c3aed');
 }
 
@@ -2129,7 +2216,6 @@ $('#b-theme').onclick = () => {
   playTone('tap');
   toast(next === 'dark' ? 'เปลี่ยนเป็นโหมดมืด 🌙' : 'เปลี่ยนเป็นโหมดสว่าง ☀️');
 };
-$('#b-theme').textContent = getActiveTheme() === 'dark' ? '☀️' : '🌙';
 
 /* ---------- ระบบเสียงแจ้งเตือนนุ่มนวล (Soft Chimes) ---------- */
 let soundEnabled = localStorage.getItem('catdrop_sound') !== 'off';
@@ -2191,15 +2277,25 @@ function playTone(type) {
 }
 
 function updateSoundButton() {
-  $('#b-sound').textContent = soundEnabled ? '🔔' : '🔕';
+  const btn = $('#b-sound');
+  const desc = $('#sound-status-desc');
+  if (btn) {
+    btn.classList.toggle('on', soundEnabled);
+    btn.setAttribute('aria-checked', soundEnabled ? 'true' : 'false');
+  }
+  if (desc) {
+    desc.textContent = soundEnabled ? 'เปิดใช้งาน (มีเสียงแจ้งเตือน)' : 'ปิดเสียงอยู่ (เงียบ)';
+  }
 }
-$('#b-sound').onclick = () => {
-  soundEnabled = !soundEnabled;
-  localStorage.setItem('catdrop_sound', soundEnabled ? 'on' : 'off');
-  updateSoundButton();
-  toast(soundEnabled ? 'เปิดเสียงแจ้งเตือนแล้ว' : 'ปิดเสียงแจ้งเตือนแล้ว');
-  if (soundEnabled) playTone('tap');
-};
+if ($('#b-sound')) {
+  $('#b-sound').onclick = () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('catdrop_sound', soundEnabled ? 'on' : 'off');
+    updateSoundButton();
+    toast(soundEnabled ? 'เปิดเสียงแจ้งเตือนแล้ว 🔔' : 'ปิดเสียงแจ้งเตือนแล้ว 🔕');
+    if (soundEnabled) playTone('tap');
+  };
+}
 updateSoundButton();
 
 /* ---------- การแจ้งเตือนระบบ ---------- */
@@ -2242,6 +2338,7 @@ function paintMe() {
 let selectedAv = me.av;
 function openMeDialog() {
   selectedAv = me.av;
+  updateSoundButton();
   const grid = $('#av-grid');
   grid.innerHTML = '';
   CAT_AVATARS.forEach(emoji => {
