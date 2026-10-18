@@ -10,8 +10,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="CatDrop">
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,7 +166,7 @@ html, body {
   }
 }
 
-/* Header & Brand (Restored Classic Clean Style) */
+/* Header & Brand */
 .top {
   display: flex;
   justify-content: space-between;
@@ -175,15 +178,15 @@ html, body {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   text-decoration: none;
   color: inherit;
 }
 
 .brand-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -192,11 +195,25 @@ html, body {
   transform: rotate(-6deg) scale(1.08);
 }
 
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
 .brand-title {
   font-weight: 800;
   font-size: 1.35rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
   color: var(--ink);
+}
+
+.brand-sub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--mut);
+  letter-spacing: 0.02em;
+  margin-top: 1px;
 }
 
 .gradient-text {
@@ -1663,8 +1680,11 @@ dialog p { font-size: 0.88rem; color: var(--mut); margin-bottom: 14px; }
   <!-- Header Bar -->
   <header class="top">
     <a href="/" class="brand" aria-label="หน้าหลัก CatDrop">
-      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="34" height="34">
-      <span class="brand-title">CatDrop</span>
+      <img src="/icons/icon.svg" class="brand-icon" alt="CatDrop" width="38" height="38">
+      <div class="brand-text">
+        <span class="brand-title">Cat <span class="gradient-text">Drop</span></span>
+        <span class="brand-sub">Drop · Share · Make a Difference</span>
+      </div>
     </a>
     <div class="top-actions">
       <button class="btn-pwa" id="b-install" hidden aria-label="ติดตั้งแอป">📲 ติดตั้ง</button>
